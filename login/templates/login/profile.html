@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script>
+        function toggleEdit(fieldName) {
+            const displayDiv = document.getElementById(fieldName + '-display');
+            const editDiv = document.getElementById(fieldName + '-edit');
+            displayDiv.style.display = displayDiv.style.display === 'none' ? 'block' : 'none';
+            editDiv.style.display = editDiv.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+<body>
+    <h2>User Profile</h2>
+
+    <div id="username-display">
+        <strong>Username:</strong> {{ user.username }} <button onclick="toggleEdit('username')">Edit</button>
+    </div>
+    <div id="username-edit" style="display:none">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ user.username }}">
+    </div>
+
+    <div id="email-display">
+        <strong>Email:</strong> {{ user.email }} <button onclick="toggleEdit('email')">Edit</button>
+    </div>
+    <div id="email-edit" style="display:none">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" value="{{ user.email }}">
+    </div>
+
+    <button onclick="saveChanges()">Save Changes</button>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+    <script>
+        function saveChanges() {
+            // Implement AJAX request to send updated information to Django
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            
+            fetch('/path/to/update-profile/', { // Update this path to your Django view
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({username, email})
+            }).then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Optionally refresh the page or update the display fields with the new values
+                window.location.reload(); // Simple way to refresh and show the updated info
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

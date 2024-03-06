@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <title>Register</title>
+  </head>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    
+    .container {
+      width: 100%; /* Make the container fill its parent */
+      max-width: 400px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .one {
+      background: linear-gradient(to bottom right, #fd116a, #832fb6, #6295c4);
+    }
+    
+    .btn-primary {
+      background-color: black;
+      border-color: black;
+      width: 100%;
+    }
+    
+    .btn-primary:hover {
+      background-color: #333;
+      border-color: #333;
+    }
+    
+    .div1 {
+      background-color: black;
+    }
+    
+    .text-container {
+      text-align: center;
+    }
+    
+    #text {
+      color: whitesmoke;
+      font-size: 2em;
+      overflow: hidden;
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+    
+      .row {
+        flex-direction: column;
+      }
+    
+      .form-control, .btn-primary {
+        font-size: 16px;
+      }
+    
+      #text {
+        font-size: 1.5em;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .form-control, .btn-primary {
+        font-size: 14px;
+      }
+    
+      #text {
+        font-size: 1.2em;
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden;
+      }
+    }
+
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      box-sizing: border-box;
+    }
+    .container-fluid{
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: #FFF;
+    }
+    /* ============= Animation background ========= */
+    .background {
+      background: linear-gradient(132deg, #FC415A, #591BC5, #212335);
+      background-size: 400% 400%;
+      animation: Gradient 15s ease infinite;
+      position: absolute;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      padding:0;
+      margin:0px;
+    }
+    .cube {
+      position: relative;
+      top: 80vh;
+      left: 45vw;
+      width: 10px;
+      height: 10px;
+      border: solid 1px #D7D4E4;
+      transform-origin: top left;
+      transform: scale(0) rotate(0deg) translate(-50%, -50%);
+      animation: cube 12s ease-in forwards infinite;
+    }
+    .cube:nth-child(2n) {
+      border-color: #FFF ;
+    }
+    .cube:nth-child(2) {
+      animation-delay: 2s;
+      left: 25vw;
+      top: 40vh;
+    }
+    .cube:nth-child(3) {
+      animation-delay: 4s;
+      left: 75vw;
+      top: 50vh;
+    }
+    .cube:nth-child(4) {
+      animation-delay: 6s;
+      left: 90vw;
+      top: 10vh;
+    }
+    .cube:nth-child(5) {
+      animation-delay: 8s;
+      left: 10vw;
+      top: 85vh;
+    }
+    .cube:nth-child(6) {
+      animation-delay: 10s;
+      left: 50vw;
+      top: 10vh;
+    }
+    /* Animate Background*/
+    @keyframes Gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    @keyframes cube {
+      from {
+        transform: scale(0) rotate(0deg) translate(-50%, -50%);
+        opacity: 1;
+      }
+      to {
+        transform: scale(20) rotate(960deg) translate(-50%, -50%);
+        opacity: 0;
+      }
+    }
+    
+    
+    </style>
+    <div class="container-fluid">
+
+      <div class="background">
+         <div class="cube"></div>
+         <div class="cube"></div>
+         <div class="cube"></div>
+         <div class="cube"></div>
+        <div class="cube"></div>
+    
+<div class="d-flex justify-content-center align-items-center" >
+  <div class="row g-0">
+    <div class="col saadbharwa one " style="padding: 50px;" > <form method="post">
+      {% csrf_token %}
+      <div class="form-group pb-2 ">
+          <label for="username" style="font-size: 20px;"  >Full Name</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Enter your full name" style="margin-right: 200px;" >
+      </div>
+      <div class="form-group pb-2 ">
+          <label for="email" style="font-size: 20px;" >Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+      </div>
+      <div class="form-group pb-2 ">
+          <label for="password" style="font-size: 20px;" >Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
+      </div>
+      <button type="submit" class="btn btn-primary">Create Account</button>
+  </form>
+  <p>Already have account? <a href="{% url 'login' %}">Sign in</a></p> </div>
+    <div class="col div1 text-container " style="padding: 40px;  ;" > <h1 id="text" ></h1> </div>
+  </div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+ 
+    </div>
+
+<script>
+ const text = "Text Writing\nAnimation";
+let index = 0;
+let intervalId;
+
+function writeText() {
+  document.getElementById('text').innerText = text.slice(0, index);
+
+  index++;
+
+  if (index > text.length) {
+    clearInterval(intervalId);
+  }
+}
+
+intervalId = setInterval(writeText, 150); // Adjust the speed of animation here (in milliseconds)
+
+
+</script>
+
+  </body>
+</html>
