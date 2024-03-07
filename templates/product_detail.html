@@ -45,8 +45,23 @@
     </select>
 </div>
 
-<button onclick="placePrintfulOrder()">Place Order</button>
 
+
+<!-- The card for collecting recipient information -->
+<div id="orderForm" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:20px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); z-index:1000; width:300px; border-radius:5px;">
+    <h2>Shipping Information</h2>
+    <input type="text" id="name" placeholder="Name" required><br><br>
+    <input type="text" id="address1" placeholder="Address" required><br><br>
+    <input type="text" id="city" placeholder="City" required><br><br>
+    <input type="text" id="state_code" placeholder="State Code" required><br><br>
+    <input type="text" id="country_code" placeholder="Country Code" required><br><br>
+    <input type="text" id="zip" placeholder="ZIP Code" required><br><br>
+    <button onclick="placePrintfulOrder()">Place Order</button>
+    <button onclick="document.getElementById('orderForm').style.display='none'">Cancel</button>
+</div>
+
+<!-- Button to show the order form -->
+<button onclick="document.getElementById('orderForm').style.display='block'">Order Now</button>
 
 
 <div class="container-fluid bg-dark  text-center fixed-bottom "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
@@ -64,6 +79,7 @@ function updateVariantDetails() {
 }
 
 var selectedVariantId; // Global variable to hold the selected variant ID
+var selectedImageUrl; // Global variable to hold the selected variant's image URL
 
 function updateVariantDetails() {
     var selector = document.getElementById('variantSelector');
@@ -71,46 +87,82 @@ function updateVariantDetails() {
     var imgSrc = selectedOption.getAttribute('data-img');
     var price = selectedOption.getAttribute('data-price');
 
-    // Set the selected variant ID
+    // Set the global variables
     selectedVariantId = selectedOption.value;
+    selectedImageUrl = imgSrc; // Assuming data-img stores the URL to the variant's image
 
+    // Update the product image and price display
     document.getElementById('productImage').src = imgSrc;
     document.getElementById('productPrice').innerText = 'Price: ' + price;
 }
 
 function placePrintfulOrder() {
-    const orderDetails = {
-        recipient: {
-            name: "John Doe",
-            address1: "123 Main St",
-            city: "Los Angeles",
-            state_code: "CA",
-            country_code: "US",
-            zip: "90001"
-        },
-        items: [
-            {
-                variant_id: selectedVariantId, // Use the global variable for variant_id
-                quantity: 1,
-                files: [
-                    {type: "default"}
-                ]
-            }
-        ]
+    // Gather recipient details
+    const recipient = {
+        name: document.getElementById('name').value,
+        address1: document.getElementById('address1').value,
+        city: document.getElementById('city').value,
+        state_code: document.getElementById('state_code').value,
+        country_code: document.getElementById('country_code').value,
+        zip: document.getElementById('zip').value
     };
 
+    // Details of the order
+    const orderDetails = {
+        recipient: recipient, // Including the recipient object
+        variant_id: selectedVariantId.toString(),
+        quantity: "1", // Assuming quantity is static, but can be made dynamic as needed
+        image_url: selectedImageUrl // Assuming this is a global variable set elsewhere
+    };
+
+    console.log("Order Details:", orderDetails);
+
+    // Sending the AJAX request
     fetch('/place-order/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            // Ensure to include CSRF token if needed for Django CSRF protection
+            'X-CSRFToken': getCookie('csrftoken') // Assuming getCookie function is defined to fetch CSRF token
         },
         body: JSON.stringify(orderDetails),
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Server responded with status ${response.status}`);
+        }
+        return response.json(); // Assuming the server will always return JSON response
+    })
+    .then(data => {
+        console.log("Response Data:", data);
+        // Handle success or error messages from the server here
+        if(data.status === 'success') {
+            alert(data.message); // or any other success handling
+        } else {
+            throw new Error(data.message);
+        }
+    })
     .catch((error) => {
         console.error('Error:', error);
+        alert(error.message); // Displaying error message to the user
     });
+}
+
+// Helper function to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 

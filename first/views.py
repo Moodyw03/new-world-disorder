@@ -2,9 +2,12 @@ from django.http import Http404
 import requests
 from django.shortcuts import render
 import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-
+from django.views.decorators.http import require_POST
 def fetch_product_data(api_url, headers):
     response = requests.get(api_url, headers=headers)
     if response.status_code == 200:
@@ -99,37 +102,64 @@ def product_detail(request, productId):
 
     return render(request, 'product_detail.html', {'product': product})
 
-import requests
-from django.http import JsonResponse, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-
 @csrf_exempt
+
+@require_POST
 def place_order(request):
-    if request.method == 'POST':
-        # Extracting recipient and item details from the request body
-        body_unicode = request.body.decode('utf-8')
-        order_data = json.loads(body_unicode)
+    print("Request received")
+    
+    api_url = 'https://api.printful.com/orders'
+    api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
 
-        # Prepare the API request payload
-        payload = {
-            "recipient": order_data['recipient'],
-            "items": order_data['items']
-        }
+    # Parse JSON data from the request body
+    data = json.loads(request.body)
+    
+    variant_id = data.get('variant_id')
+    quantity = data.get('quantity')
+    image_url = data.get('image_url')
+    
+    # Recipient details coming from the AJAX request
+    recipient_details = data.get('recipient', {})
 
-        # Set up the API endpoint and headers
-        api_url = 'https://api.printful.com/orders'
-        headers = {
-            'Authorization': 'Bearer PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy',
-            'Content-Type': 'application/json'
-        }
+    # Forming the order details
+    order_data = {
+        "recipient": {
+            "name": recipient_details.get('name', ''),
+            "address1": recipient_details.get('address1', ''),
+            "city": recipient_details.get('city', ''),
+            "state_code": recipient_details.get('state_code', ''),
+            "country_code": recipient_details.get('country_code', ''),
+            "zip": recipient_details.get('zip', '')
+        },
+        "items": [
+            {
+                "variant_id": variant_id,
+                "quantity": int(quantity),
+                "files": [
+                    {
+                        "type": "default",
+                        "url": image_url
+                    }
+                ]
+            }
+        ]
+    }
 
-        # Make the POST request to Printful API
-        response = requests.post(api_url, json=payload, headers=headers)
+    headers = {
+        'Authorization': f'Bearer {api_key}',
+        'Content-Type': 'application/json'
+    }
 
-        # Check if the request was successful
-        if response.status_code == 200:
-            return JsonResponse(response.json(), safe=False)
-        else:
-            return HttpResponse(response.text, status=response.status_code)
+    response = requests.post(api_url, json=order_data, headers=headers)
+    print(response.status_code)
+   
+    if response.status_code == 200 or response.status_code == 201:
+        # Handle success
+        return JsonResponse({'status': 'success', 'message': 'Order placed successfully.'})
     else:
-        return HttpResponse('Method not allowed', status=405)
+        # Handle error
+        response_data = response.json()
+        error_message = response_data.get('error', {}).get('message', 'Unknown error occurred.')
+        return JsonResponse({'status': 'error', 'message': error_message}, status=400)
+
+print
