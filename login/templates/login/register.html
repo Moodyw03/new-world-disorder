@@ -33,6 +33,7 @@
     
     .form-group {
       margin-bottom: 20px;
+      position: relative;
     }
     
     .one {
@@ -94,122 +95,103 @@
       }
     }
 
-    body {
-      font-family: 'Josefin Sans', sans-serif;
-      box-sizing: border-box;
+    body{
+        background-color: black;
     }
-    .container-fluid{
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      background: #FFF;
+     head {
+      display: block;
+      
+      color: transparent;
+      
     }
-    /* ============= Animation background ========= */
-    .background {
-      background: linear-gradient(132deg, #FC415A, #591BC5, #212335);
-      background-size: 400% 400%;
-      animation: Gradient 15s ease infinite;
+    
+    head::before, head::after,
+    body::before, body::after {
       position: absolute;
-      height: 100vh;
-      width: 100%;
-      overflow: hidden;
-      padding:0;
-      margin:0px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 3em;
+      height: 3em;
+      content: ".";
+      
+      animation: 44s -27s move infinite ease-in-out alternate;
     }
-    .cube {
-      position: relative;
-      top: 80vh;
-      left: 45vw;
-      width: 10px;
-      height: 10px;
-      border: solid 1px #D7D4E4;
-      transform-origin: top left;
-      transform: scale(0) rotate(0deg) translate(-50%, -50%);
-      animation: cube 12s ease-in forwards infinite;
+    
+    body::before {
+      position: absolute;
+      text-shadow: 2.3144931488em -0.1569527888em 7px rgba(0, 83, 255, 0.9), -0.1790141092em 2.0734291174em 7px rgba(0, 255, 162, 0.9), -0.4669774791em -0.3192525537em 7px rgba(0, 146, 255, 0.9), 1.1635271543em 0.7873421117em 7px rgba(0, 23, 255, 0.9), -0.4113716606em 0.9129154148em 7px rgba(119, 0, 255, 0.9), 1.6155381611em 1.9313948529em 7px rgba(0, 255, 115, 0.9), 0.498600703em 0.3187712922em 7px rgba(129, 0, 255, 0.9), -0.0433400971em 1.0170450468em 7px rgba(255, 0, 134, 0.9), 0.639926328em 2.1089086548em 7px rgba(255, 0, 144, 0.9), 2.218585087em -0.1330583734em 7px rgba(0, 255, 97, 0.9), 0.5918357931em 0.3904345454em 7px rgba(242, 255, 0, 0.9), 2.4512255em 0.0105066251em 7px rgba(255, 0, 101, 0.9), 0.9017505763em 1.2091851365em 7px rgba(255, 0, 186, 0.9), 0.5179327091em 0.8040188013em 7px rgba(0, 255, 4, 0.9), 1.4701492433em 0.7716562412em 7px rgba(154, 255, 0, 0.9), 2.172743213em 0.1157360976em 7px rgba(0, 136, 255, 0.9), 2.3346548097em 0.8867947147em 7px rgba(146, 255, 0, 0.9), 2.4181317217em 0.4489257035em 7px rgba(19, 0, 255, 0.9), 1.3948137863em 2.0424733748em 7px rgba(255, 0, 124, 0.9), 2.2849157581em 1.2722969899em 7px rgba(255, 0, 34, 0.9), 0.2600114984em -0.2495129036em 7px rgba(0, 129, 255, 0.9), 0.2229997188em 2.2999895601em 7px rgba(167, 255, 0, 0.9), 0.878673184em 1.9310525112em 7px rgba(249, 255, 0, 0.9), 1.1497485899em 0.3738955007em 7px rgba(0, 45, 255, 0.9), 0.6342194808em 1.3256728689em 7px rgba(0, 120, 255, 0.9), -0.1847592261em 2.2640319126em 7px rgba(0, 255, 233, 0.9), 0.3687688825em 0.13309753em 7px rgba(0, 70, 255, 0.9), 1.4668106053em 1.9436418699em 7px rgba(0, 255, 106, 0.9), 0.8636571521em 2.140908341em 7px rgba(0, 148, 255, 0.9), 0.084738465em -0.0542613779em 7px rgba(106, 0, 255, 0.9), 0.6206332826em 1.5565824385em 7px rgba(255, 0, 61, 0.9), 0.4612623327em 1.0923871251em 7px rgba(0, 242, 255, 0.9), 0.2585845964em -0.2856293383em 7px rgba(31, 255, 0, 0.9), 2.161261903em -0.1188056792em 7px rgba(84, 255, 0, 0.9), -0.471553422em 2.4884842851em 7px rgba(0, 227, 255, 0.9), 1.099828583em -0.2460598588em 7px rgba(255, 45, 0, 0.9), 1.4017694077em 0.7804822148em 7px rgba(230, 255, 0, 0.9), 1.8964073285em 1.6049601973em 7px rgba(0, 255, 31, 0.9), 2.1802066751em 0.6873530833em 7px rgba(15, 255, 0, 0.9), -0.0721958609em 2.2739243288em 7px rgba(255, 0, 96, 0.9), 2.0578878573em 0.1560540231em 7px rgba(0, 255, 183, 0.9);
+      animation-duration: 44s;
+      animation-delay: -27s;
     }
-    .cube:nth-child(2n) {
-      border-color: #FFF ;
+    
+    body::after {
+      position: absolute;
+      text-shadow: 2.0240297639em 1.6239982991em 7px rgba(0, 255, 254, 0.9), 1.6949605145em 2.3199630513em 7px rgba(0, 255, 81, 0.9), 1.4231389328em 1.7169961274em 7px rgba(255, 0, 27, 0.9), 2.0412777492em -0.4408060965em 7px rgba(75, 0, 255, 0.9), 2.1989836679em 0.7539392334em 7px rgba(251, 255, 0, 0.9), -0.0073799794em 0.2149300225em 7px rgba(255, 39, 0, 0.9), 2.0780519998em 2.2247600117em 7px rgba(255, 0, 239, 0.9), 0.4983444443em 2.2848133006em 7px rgba(0, 255, 66, 0.9), 1.3523414412em 1.8617552109em 7px rgba(27, 0, 255, 0.9), 1.857702739em 0.6812101643em 7px rgba(100, 255, 0, 0.9), 0.9576977587em 0.3361761723em 7px rgba(0, 255, 212, 0.9), -0.11940451em -0.0693257502em 7px rgba(255, 143, 0, 0.9), 1.1579673565em 1.2186218615em 7px rgba(0, 255, 210, 0.9), 0.1441363789em 0.3644656046em 7px rgba(0, 255, 230, 0.9), 0.2198956224em 1.114978722em 7px rgba(255, 55, 0, 0.9), 2.0260430603em 2.0486317984em 7px rgba(0, 255, 78, 0.9), 0.4137391918em 0.5048232594em 7px rgba(255, 10, 0, 0.9), 0.705836844em 1.0341144433em 7px rgba(44, 0, 255, 0.9), 2.3819015421em 1.4759289946em 7px rgba(255, 123, 0, 0.9), 1.8504857262em 0.6553460638em 7px rgba(255, 0, 197, 0.9), 0.9974024626em 0.3511997132em 7px rgba(0, 154, 255, 0.9), -0.223572679em 1.8572269582em 7px rgba(163, 255, 0, 0.9), 0.6509235742em 1.8920854014em 7px rgba(255, 0, 105, 0.9), 0.9985656854em 1.1978794356em 7px rgba(0, 255, 110, 0.9), 2.40796592em 0.7132128366em 7px rgba(255, 84, 0, 0.9), -0.4206601017em 1.5415843672em 7px rgba(255, 55, 0, 0.9), 0.4713433835em 0.7314708941em 7px rgba(255, 63, 0, 0.9), 0.9199539795em 1.0967501345em 7px rgba(41, 0, 255, 0.9), -0.1231363649em 1.0435480131em 7px rgba(0, 211, 255, 0.9), 0.0466961262em 0.9812538061em 7px rgba(208, 255, 0, 0.9), 1.9225327404em 0.5157281159em 7px rgba(0, 240, 255, 0.9), 1.6782925461em 2.2601510808em 7px rgba(0, 255, 64, 0.9), 1.3547212487em 1.7044194308em 7px rgba(255, 248, 0, 0.9), 1.1123388205em 2.202709416em 7px rgba(255, 196, 0, 0.9), 0.1893849327em 2.2465777178em 7px rgba(0, 76, 255, 0.9), 2.0423088138em 0.3686022969em 7px rgba(255, 0, 106, 0.9), 1.6178593872em 1.1979079685em 7px rgba(255, 0, 204, 0.9), 0.5700887755em 0.8123562021em 7px rgba(255, 0, 24, 0.9), 0.8603162429em 2.1794396966em 7px rgba(0, 43, 255, 0.9), -0.3962320177em 2.4044773678em 7px rgba(149, 255, 0, 0.9), 0.8707313825em 2.1459228974em 7px rgba(0, 255, 139, 0.9);
+      animation-duration: 43s;
+      animation-delay: -32s;
     }
-    .cube:nth-child(2) {
-      animation-delay: 2s;
-      left: 25vw;
-      top: 40vh;
+    
+    head::before {
+      position: absolute;
+      text-shadow: 1.1300659716em 1.9391898473em 7px rgba(255, 0, 229, 0.9), 0.5026234483em 0.4812120938em 7px rgba(153, 0, 255, 0.9), 2.178728026em -0.0630144991em 7px rgba(153, 255, 0, 0.9), 1.8081531em 0.0749278565em 7px rgba(255, 0, 51, 0.9), 1.3534752177em 0.2312228714em 7px rgba(255, 0, 188, 0.9), 1.2948714306em -0.1465490803em 7px rgba(0, 255, 156, 0.9), 2.4050460551em 2.0619742602em 7px rgba(31, 255, 0, 0.9), 1.5837006205em 2.1965173592em 7px rgba(0, 255, 135, 0.9), 0.836173892em -0.4088795956em 7px rgba(0, 255, 124, 0.9), 1.7218281556em 1.349757656em 7px rgba(255, 203, 0, 0.9), 2.0573151346em 0.5632943978em 7px rgba(0, 255, 130, 0.9), -0.0466354763em 1.3219967173em 7px rgba(225, 0, 255, 0.9), 0.1520580601em -0.0059153542em 7px rgba(255, 0, 65, 0.9), -0.3972099387em 1.3132320895em 7px rgba(255, 217, 0, 0.9), 1.0742650826em 1.4742281578em 7px rgba(255, 0, 119, 0.9), 0.3076206453em 0.2413195107em 7px rgba(255, 0, 150, 0.9), 1.5461011406em 1.8660511397em 7px rgba(255, 0, 161, 0.9), 2.4316880128em 1.2027673326em 7px rgba(0, 121, 255, 0.9), 0.4449076683em 1.7937675791em 7px rgba(0, 255, 156, 0.9), 1.436652197em 1.1784124148em 7px rgba(100, 255, 0, 0.9), 0.2212420565em 1.2809953451em 7px rgba(0, 255, 24, 0.9), 1.9747827467em -0.4723512415em 7px rgba(0, 165, 255, 0.9), 0.9471554642em 0.087309997em 7px rgba(255, 18, 0, 0.9), 0.229220411em -0.3332044367em 7px rgba(243, 0, 255, 0.9), 2.0571644408em -0.3465382991em 7px rgba(7, 0, 255, 0.9), 2.3716410379em -0.2126759499em 7px rgba(0, 177, 255, 0.9), 2.0685775186em -0.17685629em 7px rgba(182, 255, 0, 0.9), 0.560902167em 0.2643824256em 7px rgba(255, 0, 49, 0.9), 0.5384411566em 2.237945775em 7px rgba(119, 0, 255, 0.9), 1.6602636345em 0.5437739042em 7px rgba(0, 226, 255, 0.9), 1.1333223599em -0.0324862631em 7px rgba(176, 255, 0, 0.9), 1.2298154285em 0.7214768402em 7px rgba(0, 255, 118, 0.9), 1.6434757894em 0.2713931625em 7px rgba(0, 109, 255, 0.9), 2.4343247865em 0.4629924979em 7px rgba(0, 255, 45, 0.9), 1.2509083537em 1.1543247465em 7px rgba(0, 87, 255, 0.9), 1.5021784545em 1.052176725em 7px rgba(0, 255, 124, 0.9), -0.3109092736em 0.79362586em 7px rgba(16, 255, 0, 0.9), -0.3212289088em 0.43491223em 7px rgba(255, 0, 37, 0.9), 2.2419058232em 1.629389875em 7px rgba(228, 0, 255, 0.9), 1.4613377184em -0.2560050293em 7px rgba(250, 0, 255, 0.9), -0.2960645606em 0.6789383761em 7px rgba(255, 0, 70, 0.9);
+      animation-duration: 42s;
+      animation-delay: -23s;
     }
-    .cube:nth-child(3) {
-      animation-delay: 4s;
-      left: 75vw;
-      top: 50vh;
+    
+    head::after {
+      position: absolute;
+      text-shadow: -0.4978875268em -0.060670325em 7px rgba(0, 233, 255, 0.9), 1.7003494907em 0.6091314799em 7px rgba(255, 222, 0, 0.9), 1.2392784132em 2.2423267451em 7px rgba(0, 219, 255, 0.9), 2.2998716251em 1.5511051772em 7px rgba(0, 255, 175, 0.9), 0.4243677531em 1.4560683741em 7px rgba(21, 255, 0, 0.9), 1.8519007858em -0.4531533941em 7px rgba(0, 57, 255, 0.9), -0.4052859544em 1.6818597583em 7px rgba(39, 0, 255, 0.9), -0.4826514577em 1.6182699268em 7px rgba(0, 222, 255, 0.9), 0.9290442291em 1.2664736809em 7px rgba(0, 77, 255, 0.9), 1.672503363em 1.2119745186em 7px rgba(0, 255, 20, 0.9), 2.4040274286em 1.9654251892em 7px rgba(0, 255, 133, 0.9), 0.8130960902em -0.4193287676em 7px rgba(0, 50, 255, 0.9), 0.030681326em 1.4171936819em 7px rgba(145, 0, 255, 0.9), 1.9037802259em -0.4420345869em 7px rgba(255, 0, 178, 0.9), 0.7409692619em 0.559052641em 7px rgba(0, 255, 103, 0.9), -0.1546587474em 1.2305819658em 7px rgba(0, 133, 255, 0.9), 2.2819628417em 0.6692815204em 7px rgba(236, 255, 0, 0.9), 1.7551843726em 2.1653647629em 7px rgba(255, 224, 0, 0.9), 1.8104062134em 1.8328731615em 7px rgba(255, 241, 0, 0.9), 1.0600737627em 1.4286220211em 7px rgba(159, 255, 0, 0.9), 2.1616466606em 2.1950533037em 7px rgba(0, 159, 255, 0.9), 1.2789965451em 0.591700681em 7px rgba(0, 73, 255, 0.9), 1.4364881756em 1.4680188693em 7px rgba(0, 142, 255, 0.9), 0.3926954771em 1.3255945217em 7px rgba(209, 255, 0, 0.9), 0.5016262488em 1.5051478617em 7px rgba(157, 0, 255, 0.9), 1.551400931em 1.213883272em 7px rgba(255, 0, 3, 0.9), 0.8683228856em 0.9460031775em 7px rgba(255, 0, 158, 0.9), 0.8538546302em 1.6887305408em 7px rgba(255, 0, 130, 0.9), 2.4116075009em 0.3684289497em 7px rgba(0, 255, 76, 0.9), 0.0331330375em -0.4134360736em 7px rgba(255, 0, 223, 0.9), 0.9774979258em 1.3086415216em 7px rgba(255, 0, 30, 0.9), 1.3563683016em 2.1750587833em 7px rgba(0, 180, 255, 0.9), 0.3901093497em 1.3664349357em 7px rgba(213, 0, 255, 0.9), -0.2353774502em 1.4700801757em 7px rgba(22, 0, 255, 0.9), 1.8161085815em 1.5459581986em 7px rgba(255, 190, 0, 0.9), 2.1637340743em 2.2725765934em 7px rgba(0, 44, 255, 0.9), -0.0790718476em 2.4561499909em 7px rgba(0, 139, 255, 0.9), 0.0756182795em 1.5767926247em 7px rgba(255, 0, 158, 0.9), 1.2191199447em 1.8157072179em 7px rgba(0, 255, 169, 0.9), 2.3776387895em 0.0072900123em 7px rgba(0, 61, 255, 0.9), 0.0236436085em 1.6548989646em 7px rgba(145, 255, 0, 0.9);
+      animation-duration: 41s;
+      animation-delay: -19s;
     }
-    .cube:nth-child(4) {
-      animation-delay: 6s;
-      left: 90vw;
-      top: 10vh;
-    }
-    .cube:nth-child(5) {
-      animation-delay: 8s;
-      left: 10vw;
-      top: 85vh;
-    }
-    .cube:nth-child(6) {
-      animation-delay: 10s;
-      left: 50vw;
-      top: 10vh;
-    }
-    /* Animate Background*/
-    @keyframes Gradient {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-    @keyframes cube {
+    
+    @keyframes move {
       from {
-        transform: scale(0) rotate(0deg) translate(-50%, -50%);
-        opacity: 1;
+        transform: rotate(0deg) scale(12) translateX(-20px);
       }
       to {
-        transform: scale(20) rotate(960deg) translate(-50%, -50%);
-        opacity: 0;
+        transform: rotate(360deg) scale(18) translateX(20px);
       }
     }
     
     
     </style>
+
+<body>
+  
+
+
+
+
+
     <div class="container-fluid">
 
-      <div class="background">
-         <div class="cube"></div>
-         <div class="cube"></div>
-         <div class="cube"></div>
-         <div class="cube"></div>
-        <div class="cube"></div>
+      
+         
     
-<div class="d-flex justify-content-center align-items-center" >
+<div class="d-flex justify-content-center align-items-center" style="z-index: 50;" >
   <div class="row g-0">
-    <div class="col saadbharwa one " style="padding: 50px;" > <form method="post">
+    <div class="col  one " style="padding: 50px;" > <form method="post">
       {% csrf_token %}
-      <div class="form-group pb-2 ">
+      <div class="form-group pb-2 "  style="position: relative; z-index:50 ; " >
           <label for="username" style="font-size: 20px;"  >Full Name</label>
           <input type="text" class="form-control" id="username" name="username" placeholder="Enter your full name" style="margin-right: 200px;" >
       </div>
-      <div class="form-group pb-2 ">
+      <div class="form-group pb-2 "  style="position: relative; z-index:50 ; " >
           <label for="email" style="font-size: 20px;" >Email</label>
           <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
       </div>
-      <div class="form-group pb-2 ">
+      <div class="form-group pb-2 "  style="position: relative; z-index:50 ; " >
           <label for="password" style="font-size: 20px;" >Password</label>
           <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
       </div>
+      <div class="form-group"  style="position: relative; z-index:50 ; "  >
       <button type="submit" class="btn btn-primary">Create Account</button>
-  </form>
-  <p>Already have account? <a href="{% url 'login' %}">Sign in</a></p> </div>
-    <div class="col div1 text-container " style="padding: 40px;  ;" > <h1 id="text" ></h1> </div>
+      <p>Already have account? <a href="{% url 'login' %}" style="color: white;" >Sign in</a></p> </div>
+    </div>
+    </form>
+    <div class="col div1 text-container " style="padding: 40px;  ;" > <h1 id="text" style="margin-top:100px ;" ></h1> </div>
   </div>
 </div>
 
@@ -224,10 +206,10 @@
 
 
  
-    </div>
+    
 
 <script>
- const text = "Text Writing\nAnimation";
+ const text = "Explore \n New \n Styles";
 let index = 0;
 let intervalId;
 

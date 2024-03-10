@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path ,include
-
+from .views import proxy_to_external_api
+from .views import get_states_for_country
 
 from . import views
 urlpatterns = [
@@ -26,6 +27,9 @@ urlpatterns = [
      path('ch/',views.Home,name='ch_page'),
     path('product/<int:productId>/', views.product_detail, name='product-detail'),
      path('place-order/', views.place_order, name='place_order'),
+      path('api/proxy/countries/', proxy_to_external_api, name='proxy_countries'),
+       path('api/proxy/states/<str:country_code>/', get_states_for_country, name='get_states_for_country'),
+   
    
     
 ]

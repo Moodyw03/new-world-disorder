@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <script>
-        function toggleEdit(fieldName) {
-            const displayDiv = document.getElementById(fieldName + '-display');
-            const editDiv = document.getElementById(fieldName + '-edit');
-            displayDiv.style.display = displayDiv.style.display === 'none' ? 'block' : 'none';
-            editDiv.style.display = editDiv.style.display === 'block' ? 'none' : 'block';
-        }
+     
     </script>
 </head>
 <body>
@@ -61,6 +56,14 @@
             .catch((error) => {
                 console.error('Error:', error);
             });
+        }
+
+
+        function toggleEdit(fieldName) {
+            const displayDiv = document.getElementById(fieldName + '-display');
+            const editDiv = document.getElementById(fieldName + '-edit');
+            displayDiv.style.display = displayDiv.style.display === 'none' ? 'block' : 'none';
+            editDiv.style.display = editDiv.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 </body>

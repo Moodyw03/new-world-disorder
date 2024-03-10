@@ -44,6 +44,9 @@
     cursor: grabbing;
     cursor: -webkit-grabbing;
 }
+body{
+    background-color: black;
+}
  head {
   display: block;
   font-size: 52px;
@@ -95,6 +98,16 @@ head::after {
     transform: rotate(360deg) scale(18) translateX(20px);
   }
 }
+.custom-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
     </style>
 
 
@@ -105,16 +118,17 @@ head::after {
 
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container p-4">
-            <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-size: 30px; font-weight: bolder;  text-shadow: 3px 3px gray; " >New World Disorder EST.2024</a>
+            <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder EST.2024 </h2> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active  " href="{% url 'list_printful_products' %}" ><h5>Home</h5></a>
-                    <a class="nav-link" href="#"> <h5> Contact Us </h5></a>
-                    <a class="nav-link" href="{% url 'register' %}" style="background-color: black; border-radius: 25px; text-align: center; color: white; padding-top: 10px; padding-bottom: 10px; padding-left: 15px;padding-right: 15px; " > SIGN UP </a>
-                    <a class="nav-link d-none d-lg-block" href="#"><img src="./Cart.svg" alt=""></a>
+                    <a class="nav-link active  " href="{% url 'list_printful_products' %}" style="margin-top: 10px; color: beige; ">Home</a>
+                    <a class="nav-link lg:mr-2 " href="{% url 'profile' %} " style="cursor: pointer;margin-top: 10px; color: beige; ">  Contact Us </a>
+                    <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
+                    
+                    
                 </div>
             </div>
         </div>
@@ -125,26 +139,19 @@ head::after {
 
 
 
-
+   <div class="text-center" > <h2 style="color: beige; text-decoration: underline; " > OUR PRODUCTS </h2> </div>
    
 <!-- Set up your HTML -->
 <div class="owl-carousel p-4 position-relative  z-index-50 ">
     {% for product in products %}
-    <div class="col-2" onclick="location.href='{% url 'product-detail' product.id %}';"  style="cursor:pointer; " >
+    <div class="col-2" onclick="location.href='{% url 'product-detail' product.id %}'"  style="cursor:pointer; " >
         <div class="card card-block">
             <div class="text-end"></div>
+            <div class="mt-1  " > <img src="../static/bar.svg" alt=""> </div>
             <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product">
             <div class="card-body">
-                <h5 class="card-title text-center">{{ product.id }}</h5>
-                <h3 class="card-text text-center">Name: {{ product.name }}</h3>
-                <!-- <p>Variants:</p>
-                <select onchange="redirectToVariant(this)">
-                    {% for variant in product.variants %}
-                    <option value="{{ product.id }}-{{ variant.variant_id }}">
-                        {{ variant.color }} - {{ variant.size }}
-                    </option>
-                    {% endfor %}
-                </select> -->
+                {% comment %} <h5 class="card-title text-center">ID:{{ product.id }}</h5> {% endcomment %}
+                <h4 class="card-text text-center">{{ product.name }}</h4>
             </div>
         </div>
     </div>

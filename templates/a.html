@@ -2,11 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Address Form</title>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <a href="{% url 'profile' %}">My Profile</a>
-    <h1>Its Working</h1>
+    <input type="text" id="name" placeholder="Name" required><br><br>
+    <input type="text" id="address1" placeholder="Address" required><br><br>
+
+    <!-- Dropdown for countries -->
+    <select id="country" required>
+        <option value="">Select Country</option>
+    </select><br><br>
+
+
+
+    <select id="countryCode" required>
+        <option value="">Select Country Code </option>
+    </select><br><br>
+
+
+
+    <!-- Dropdown for states -->
+    <select id="state" required>
+        <option value="">Select State</option>
+    </select><br><br>
+    
+    <!-- Dropdown for ZIP codes -->
+   
+    
+    <script>
+        $(document).ready(function() {
+            // Assume countriesData is loaded with the full data including states (and possibly ZIP codes)
+            var countriesData;
+        
+            // Initially fetch countries (and their states)
+            $.getJSON('/api/proxy/countries/', function(response) {
+                if (response.code === 200 && Array.isArray(response.result)) {
+                    countriesData = response.result; // Store the fetched data
+                    response.result.forEach(function(country) {
+                        $('#country').append($('<option>', {
+                            value: country.code,
+                            text: country.name
+                        }));
+                    });
+                } else {
+                    console.error("Unexpected data structure or error code:", response);
+                }
+                print(country.name)
+            });
+        
+            // When a country is selected, populate states from preloaded data
+            $('#country').change(function() {
+                var countryCode = $(this).val(); // Get the selected country code
+                var selectedCountry = countriesData.find(country => country.code === countryCode);
+        
+                $('#state').empty().append('<option value="">Select State</option>'); // Reset state dropdown
+                $('#zip_dropdown').empty(); // Potentially clear ZIP code dropdown
+        
+                // Populate states dropdown
+                if (selectedCountry && Array.isArray(selectedCountry.states)) {
+                    selectedCountry.states.forEach(function(state) {
+                        $('#state').append($('<option>', {
+                            value: state.code,
+                            text: state.name
+                        }));
+                    });
+                }
+            });
+        
+            // Optionally handle state change to populate ZIP codes, if ZIP code data is available and structured accordingly
+            // This part is left as a template because your initial data structure doesn't include ZIP codes
+            $('#state_dropdown').change(function() {
+                // This would be similar to the states handling, but since we don't have ZIP codes in your data,
+                // you'd need to adjust based on your actual needs and data structure.
+            });
+        });
+        
+        
+        
+        </script>
+        
 </body>
 </html>

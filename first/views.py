@@ -8,6 +8,8 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+
 def fetch_product_data(api_url, headers):
     response = requests.get(api_url, headers=headers)
     if response.status_code == 200:
@@ -113,10 +115,18 @@ def place_order(request):
 
     # Parse JSON data from the request body
     data = json.loads(request.body)
+    items = data.get('items', [])  # Get the list of items, default to an empty list if not found
+
+    for product in items:
+              variant_id = product.get('variant_id')
+              quantity = product.get('quantity')
+              image_url = product.get('image_url')
+   
+   
     
-    variant_id = data.get('variant_id')
-    quantity = data.get('quantity')
-    image_url = data.get('image_url')
+    # Now, variant_id, quantity, and image_url refer to the current product in the loop
+    print(variant_id, quantity, image_url)
+
     
     # Recipient details coming from the AJAX request
     recipient_details = data.get('recipient', {})
@@ -126,15 +136,18 @@ def place_order(request):
         "recipient": {
             "name": recipient_details.get('name', ''),
             "address1": recipient_details.get('address1', ''),
+            "country": recipient_details.get('country', ''),
             "city": recipient_details.get('city', ''),
+            "state": recipient_details.get('state', ''),
             "state_code": recipient_details.get('state_code', ''),
             "country_code": recipient_details.get('country_code', ''),
             "zip": recipient_details.get('zip', '')
         },
+        
         "items": [
             {
                 "variant_id": variant_id,
-                "quantity": int(quantity),
+                "quantity": 1,
                 "files": [
                     {
                         "type": "default",
@@ -144,12 +157,12 @@ def place_order(request):
             }
         ]
     }
-
+    print(data)
     headers = {
         'Authorization': f'Bearer {api_key}',
         'Content-Type': 'application/json'
     }
-
+    
     response = requests.post(api_url, json=order_data, headers=headers)
     print(response.status_code)
    
@@ -162,4 +175,28 @@ def place_order(request):
         error_message = response_data.get('error', {}).get('message', 'Unknown error occurred.')
         return JsonResponse({'status': 'error', 'message': error_message}, status=400)
 
-print
+
+
+def proxy_to_external_api(request):
+    # Make a GET request to the external API
+    response = requests.get('https://api.printful.com/countries')
+    
+    # Return the API response as a JSON response
+    return JsonResponse(response.json(), safe=False)  
+
+# external_api_url = f'https://api.printful.com/states/{country_code}'
+
+def get_states_for_country(request, country_code):
+    try:
+        external_api_url = f'https://api.printful.com/states/{country_code}'
+        response = requests.get(external_api_url)
+        if response.status_code == 200:
+            return JsonResponse(response.json(), safe=False)
+        else:
+            # Log unexpected status codes
+            print(f"Error fetching states: {response.status_code}")
+            return JsonResponse({'error': 'Failed to fetch states from external API'}, status=500)
+    except Exception as e:
+        # Log any exceptions thrown during processing
+        print(f"Exception occurred: {e}")
+        return JsonResponse({'error': 'An error occurred processing your request'}, status=500)

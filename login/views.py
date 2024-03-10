@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.contrib.auth.decorators import login_required
 
 
 def user_login(request):
@@ -37,7 +38,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('login')  # Redirect to login page after logout
+    return redirect('list_printful_products')  # Redirect to login page after logout
 
 def user_register(request):
     if request.method == 'POST':
@@ -76,3 +77,6 @@ def update_profile(request):
         return JsonResponse({'status': 'success', 'message': 'Profile updated successfully'})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+
+      
