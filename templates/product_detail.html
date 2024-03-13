@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
 .centered {
@@ -18,7 +20,21 @@
     
     padding: 20px;
 }
-
+.custom-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.cartb{
+    background-color: transparent;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    
+}
 /* Media query for small screens */
 @media (max-width: 768px) { /* Adjust the max-width as needed for your breakpoint */
     .centered {
@@ -131,24 +147,26 @@
  <!-- product_detail.html -->
 
 
- <nav class="navbar navbar-expand-lg navbar-light ">
-    <div class="container p-4">
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-secondary ">
+    <div class="container ">
         <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder EST.2024 </h2> </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-                <a class="nav-link active  " href="{% url 'list_printful_products' %}" style="margin-top: 10px; color: beige; ">Home</a>
-                <a class="nav-link lg:mr-2 " href="{% url 'profile' %} " style="cursor: pointer;margin-top: 10px; color: beige; ">  Contact Us </a>
+                <a class="nav-link active  " href="{% url 'list_printful_products' %}" style="margin-top: 10px; color: white; ">Home</a>
+                <a class="nav-link lg:mr-2 " href="{% url 'profile' %} " style="cursor: pointer;margin-top: 10px; color: white;  ">  Contact Us </a>
+                <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: #fbfaff; margin-top: 11px; "></i> </a>
                 <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
-                <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  > <button class="cartb" > <i class="fa-solid fa-cart-plus fa-xl" style="color: #fbfaff;"></i></button> </a>
                 
                 
             </div>
         </div>
     </div>
 </nav>
+
 
 {% if request.user.is_authenticated %}
 <div style=" max-width: fit-content; padding:10px ; height: 90vh;   " >
@@ -191,12 +209,12 @@
             </option>
             {% endfor %}
         </select> <br>
-        
-        <button id="newButton" onclick="displaySelectedVariantDetails();" style="display: none; margin-top: 5px;" class="shiny-btn">New Button</button>
-        
-       
+        {% if request.user.is_authenticated %}
+        <button id="newButton" onclick="displaySelectedVariantDetails();" style="display: none; margin-top: 5px;" class="shiny-btn">Add To Cart</button>
         <button id="orderButton" onclick="document.getElementById('orderForm').style.display='block'" style="margin-top: 5px;" class="shiny-btn" disabled>Order Now</button>
-        
+        {% else %}
+       <button onclick="location.href='{% url 'login' %}'" class="btn btn-outline-secondary mt-1 " >Log In to Place Order</button>
+       {% endif %}
 
 
     </div>
@@ -227,7 +245,7 @@
 
 
 
-<div class="container-fluid bg-dark  text-center fixed-bottom "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
+<div class="container-fluid bg-secondary  text-center fixed-bottom "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
 <script>
 
 
@@ -526,9 +544,10 @@ $(document).ready(function() {
 
         var currentSelection = { variantId, imgSrc, price }; // Create object for the new selection
         selectedVariants.push(currentSelection); // Add to array
-
+        alert('Added to Cart')
         localStorage.setItem(storageKey, JSON.stringify(selectedVariants)); // Update localStorage with user-specific key
         appendVariantToContainer(currentSelection, selectedVariants.length - 1); // Display the new selection
+        
     }
 
     function appendVariantToContainer(variant, index) {

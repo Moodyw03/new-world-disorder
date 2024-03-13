@@ -29,11 +29,17 @@
     cursor: pointer;
     
 }
+.center {
+  margin: auto;
+  width: 50%;
+  
+  padding: 10px;
+}
 </style>
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-light bg-black ">
-        <div class="container p-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary ">
+        <div class="container ">
             <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder EST.2024 </h2> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,10 +60,10 @@
 
    
     <div  ></div>
-    <div id="selectedVariantsContainer" style="text-align: center; justify-content: center; align-items: center; " >   </div>
+    <div id="selectedVariantsContainer" class="center" >   </div>
 
 
-
+    <div class="container-fluid bg-secondary  text-center fixed-bottom "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
     {% if user.is_authenticated %}
 <script type="text/javascript">
     var userID = "{{ user.id }}"; // Injected securely from Django template
