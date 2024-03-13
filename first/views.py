@@ -10,6 +10,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 
+
+
+# Function for the fetching the Product
 def fetch_product_data(api_url, headers):
     response = requests.get(api_url, headers=headers)
     if response.status_code == 200:
@@ -43,8 +46,6 @@ def list_printful_products(request):
         
         # Render the template with the product data in the context
         return render(request, 't.html', context)
-
-# this function is managing my api response in order get the desire data from the api
 def managejsonify(product_data):
     simplified_products = []
 
@@ -76,7 +77,7 @@ def managejsonify(product_data):
 
     return simplified_products
 def Home(request):
-    return render(request, "a.html")
+    return render(request, "cart.html")
 
 
 
@@ -107,30 +108,24 @@ def product_detail(request, productId):
 @csrf_exempt
 
 @require_POST
+
+
 def place_order(request):
     print("Request received")
-    
     api_url = 'https://api.printful.com/orders'
     api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
-
     # Parse JSON data from the request body
     data = json.loads(request.body)
     items = data.get('items', [])  # Get the list of items, default to an empty list if not found
-
     for product in items:
               variant_id = product.get('variant_id')
               quantity = product.get('quantity')
               image_url = product.get('image_url')
-   
-   
-    
+             
+              
     # Now, variant_id, quantity, and image_url refer to the current product in the loop
-    print(variant_id, quantity, image_url)
-
-    
     # Recipient details coming from the AJAX request
     recipient_details = data.get('recipient', {})
-
     # Forming the order details
     order_data = {
         "recipient": {
@@ -143,7 +138,6 @@ def place_order(request):
             "country_code": recipient_details.get('country_code', ''),
             "zip": recipient_details.get('zip', '')
         },
-        
         "items": [
             {
                 "variant_id": variant_id,
@@ -157,17 +151,17 @@ def place_order(request):
             }
         ]
     }
-    print(data)
     headers = {
         'Authorization': f'Bearer {api_key}',
         'Content-Type': 'application/json'
     }
-    
     response = requests.post(api_url, json=order_data, headers=headers)
     print(response.status_code)
-   
+
     if response.status_code == 200 or response.status_code == 201:
-        # Handle success
+       
+        
+
         return JsonResponse({'status': 'success', 'message': 'Order placed successfully.'})
     else:
         # Handle error
@@ -200,3 +194,8 @@ def get_states_for_country(request, country_code):
         # Log any exceptions thrown during processing
         print(f"Exception occurred: {e}")
         return JsonResponse({'error': 'An error occurred processing your request'}, status=500)
+    
+
+
+
+

@@ -79,4 +79,10 @@ def update_profile(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
 
-      
+
+
+
+
+
+
+   

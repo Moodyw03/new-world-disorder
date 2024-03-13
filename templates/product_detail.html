@@ -13,22 +13,78 @@
 .centered {
     position: fixed;
     top: 50%; /* Keep centered vertically */
-    left: 35%; /* Centered horizontally on large screens */
+    left: 50%; /* Centered horizontally on large screens */
     transform: translate(-50%, -50%);
-    background-color: lightblue;
+    
     padding: 20px;
 }
 
 /* Media query for small screens */
 @media (max-width: 768px) { /* Adjust the max-width as needed for your breakpoint */
     .centered {
-        left: 0; /* Align to the left */
+        left: 30%; /* Align to the left */
         top: 50%; /* Keep centered vertically */
         transform: translate(0, -50%); /* Remove horizontal centering */
         
     }
 }
+@media (max-width: 820px) { /* Adjust the max-width as needed for your breakpoint */
+    .centered {
+        left: 30%; /* Align to the left */
+        top: 50%; /* Keep centered vertically */
+        transform: translate(0, -50%); /* Remove horizontal centering */
+        
+    }
+}
+@media (max-width: 390px) { /* Adjust the max-width as needed for your breakpoint */
+    .centered {
+        left: 10%; /* Align to the left */
+        top: 60%; /* Keep centered vertically */
+        transform: translate(0, -50%); /* Remove horizontal centering */
+        width: 10px;
+        
+    }
+}
+@media (max-width: 430px) { /* Adjust the max-width as needed for your breakpoint */
+    .centered {
+        left: 10%; /* Align to the left */
+        top: 60%; /* Keep centered vertically */
+        transform: translate(0, -50%); /* Remove horizontal centering */
+        width: 10px;
+        
+    }
+}
+.centered2{
+    position:fixed;
+     top:40%;
+      left:37vh;
+      width:300px;
+}
+@media (max-width: 768px) { /* Adjust the max-width as needed for your breakpoint */
+    .centered2 {
+        position:fixed;
+        left:35vh;
+        top:17vh ;
+        width:250px;
+    }
+}
 
+@media (max-width: 390px) { /* Adjust the max-width as needed for your breakpoint */
+    .centered2 {
+        position:fixed;
+        left:10vh;
+        top:22vh ;
+        width:250px;
+    }
+}
+@media (max-width: 430px) { /* Adjust the max-width as needed for your breakpoint */
+    .centered2 {
+        position:fixed;
+        left:10vh;
+        top:22vh ;
+        width:250px;
+    }
+}
 .shiny-btn {
     padding: 10px 20px;
     font-size: 16px;
@@ -75,25 +131,27 @@
  <!-- product_detail.html -->
 
 
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <nav class="navbar navbar-expand-lg navbar-light ">
     <div class="container p-4">
-        <a class="navbar-brand" href="{% url 'list_printful_products' %}">New World Disorder EST.2024</a>
+        <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder EST.2024 </h2> </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-                <a class="nav-link active" href="{% url 'list_printful_products' %}">Home</a>
-                <a class="nav-link" href="#">Contact Us</a>
+                <a class="nav-link active  " href="{% url 'list_printful_products' %}" style="margin-top: 10px; color: beige; ">Home</a>
+                <a class="nav-link lg:mr-2 " href="{% url 'profile' %} " style="cursor: pointer;margin-top: 10px; color: beige; ">  Contact Us </a>
+                <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
+                <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  > <button class="cartb" > <i class="fa-solid fa-cart-plus fa-xl" style="color: #fbfaff;"></i></button> </a>
                 
-                <a class="nav-link d-none d-lg-block" href="#"><img src="./Cart.svg" alt=""></a>
+                
             </div>
         </div>
     </div>
 </nav>
 
 {% if request.user.is_authenticated %}
-<div style="background-color: #f8f9fa; max-width: fit-content; padding:10px ; height: 90vh;   " >
+<div style=" max-width: fit-content; padding:10px ; height: 90vh;   " >
 <div id="username-display">
     <strong>Username:</stron>   <i> {{ user.username }} </i> <button  onclick="toggleEdit('username')" >Edit</button>
 
@@ -120,31 +178,35 @@
 </div>
 {% endif %}
 
+<div class="centered" >
+    <div class="text-center p-2" style="border: 2px solid black; display: inline-block;">
+        <img id="productImage" src="{{ product.thumbnail_url }}" alt="Product Image" style="max-width: 200px; max-height:200px;">
+        <h2 style="text-align: center;">{{ product.name }}</h2>
+        <h3 id="productPrice">Price: {{variant.price}}</h3>
+        <p>Select any Sizes with any Color:</p>
+        <select id="variantSelector" onchange="updateVariantDetails(); enableOrderButton(); showNewButton(); checkEnter();">
+            {% for variant in product.variants %}
+            <option value="{{ variant.variant_id }}" data-img="{{ variant.product.image }}" data-price="{{ variant.retail_price }} {{ variant.currency }}">
+                {{ variant.color }} - {{ variant.size }}
+            </option>
+            {% endfor %}
+        </select> <br>
+        
+        <button id="newButton" onclick="displaySelectedVariantDetails();" style="display: none; margin-top: 5px;" class="shiny-btn">New Button</button>
+        
+       
+        <button id="orderButton" onclick="document.getElementById('orderForm').style.display='block'" style="margin-top: 5px;" class="shiny-btn" disabled>Order Now</button>
+        
 
-<div class="text-center lg:pt-5 centered " style="border: 2px solid black; display: inline-block;  margin-top: 65px; " >
-    <div class="mt-1  " > <img src="../static/bar.svg" alt=""> </div>
-    <img id="productImage" src="{{ product.thumbnail_url }}" alt="Product Image" style="width: 200px;"  >
-    <h2 style="text-align: center;" >{{ product.name }}</h2>
-    <h3 id="productPrice">Price: {{variant.price}} </h3>
-    <p>Select any Sizes with any Color:</p>
-    <select id="variantSelector" onchange="updateVariantDetails()">
-        {% for variant in product.variants %}
-        <option value="{{ variant.variant_id }}" data-img="{{ variant.product.image }}" data-price="{{ variant.retail_price }} {{ variant.currency }}">
-            {{ variant.color }} - {{ variant.size }}
-        </option>
-        {% endfor %}
-    </select> <br>
-    <button onclick="document.getElementById('orderForm').style.display='block'" style="margin-top: 5px;"  class="shiny-btn" >Order Now</button>
-</div>
 
-
+    </div>
 
 <!-- The card for collecting recipient information -->
-<div id="orderForm"  class="m-5 p-4 " style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white;  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);  width:300px; border-radius:5px;">
-    <h4 class="p-3" > Shipping Information</h4>
+<div id="orderForm"  class="m-5 p-4 centered2 " style="display:none;  transform:translate(-50%, -50%); background:white;  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);   max-height:fit-content ; border-radius:5px;">
+    <h4 class="p-1" style="display:inline-block ; white-space: nowrap; " > Shipping Information</h4>
     <input type="text" id="name" placeholder="Name" required class="form-control mb-2 " >
     <input type="text" id="address1" placeholder="Address" required class="form-control mb-2 " >
-    <select id="country" required style="width: 15vh;"class="form-select mb-2 " ><option value="">Select Country</option></select>
+    <select id="country" required style="width: 18vh;"class="form-select mb-2 " ><option value="">Select Country</option></select>
    <input type="text" id="city" placeholder="City" required class="form-control mb-2 " >
    <select id="state" required class="form-select mb-2 " ><option value="">Select State</option></select>
     <input type="text" id="zip" placeholder="ZIP Code"  class="form-control mb-2 " required>
@@ -155,8 +217,14 @@
 {% endif %}
     <button onclick="document.getElementById('orderForm').style.display='none'" class="btn btn-outline-secondary mt-1 " >Cancel</button>
 </div>
-
+</div>
 <!-- Button to show the order form -->
+
+
+
+
+
+
 
 
 <div class="container-fluid bg-dark  text-center fixed-bottom "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
@@ -165,36 +233,89 @@
 
 
 
-function updateVariantDetails() {
-    var selector = document.getElementById('variantSelector');
-    var selectedOption = selector.options[selector.selectedIndex];
-    var imgSrc = selectedOption.getAttribute('data-img');
-    var price = selectedOption.getAttribute('data-price');
 
-    document.getElementById('productImage').src = imgSrc;
-    document.getElementById('productPrice').innerText = 'Price: ' + price;
-    console.log(imgSrc);
-    console.log(price);
+
+// var selectedVariants = JSON.parse(localStorage.getItem('selectedVariants') || '[]');
+
+// function updateVariantDetails() {
+//     var selector = document.getElementById('variantSelector');
+//     var selectedOption = selector.options[selector.selectedIndex];
+//     var imgSrc = selectedOption.getAttribute('data-img');
+//     var price = selectedOption.getAttribute('data-price');
+//     var variantId = selectedOption.value;
+
+//     // Update the product image and price display
+//     document.getElementById('productImage').src = imgSrc;
+//     document.getElementById('productPrice').textContent = 'Price: ' + price;
+// }
+
+// function showNewButton() {
+//     document.getElementById('newButton').style.display = 'inline-block'; // Make the New Button visible
+// }
+
+// function displaySelectedVariantDetails() {
+//     var selector = document.getElementById('variantSelector');
+//     var selectedOption = selector.options[selector.selectedIndex];
+//     var imgSrc = selectedOption.getAttribute('data-img');
+//     var price = selectedOption.getAttribute('data-price');
+//     var variantId = selectedOption.value;
+
+//     var currentSelection = { variantId, imgSrc, price }; // Create object for the new selection
+//     selectedVariants.push(currentSelection); // Add to array
+
+//     localStorage.setItem('selectedVariants', JSON.stringify(selectedVariants)); // Update localStorage
+//     appendVariantToContainer(currentSelection, selectedVariants.length - 1); // Display the new selection
+// }
+
+// function appendVariantToContainer(variant, index) {
+//     var container = document.getElementById('selectedVariantsContainer');
+//     var variantDisplay = document.createElement('div');
+//     variantDisplay.setAttribute('id', `variant-${index}`);
+//     variantDisplay.innerHTML = `
+//         <img src="${variant.imgSrc}" alt="Variant Image" style="width: 50px; height: 50px;">
+//         <p>Price: ${variant.price}</p>
+//         <button onclick="deleteVariant(${index})">Delete</button>
+//     `;
+//     container.appendChild(variantDisplay);
+// }
+
+// function deleteVariant(index) {
+//     selectedVariants.splice(index, 1); // Remove variant
+//     localStorage.setItem('selectedVariants', JSON.stringify(selectedVariants)); // Update localStorage
+//     refreshVariantsDisplay(); // Refresh display
+// }
+
+// function refreshVariantsDisplay() {
+//     var container = document.getElementById('selectedVariantsContainer');
+//     container.innerHTML = ''; // Clear display
+//     selectedVariants.forEach((variant, index) => {
+//         appendVariantToContainer(variant, index); // Re-append each variant
+//     });
+// }
+
+// // Display variants from localStorage on page load
+// document.addEventListener('DOMContentLoaded', function() {
+//     refreshVariantsDisplay();
+// });
+
+
+// Add this function to handle the Enter key press
+function checkEnter(event) {
+    if (event.key === 'Enter') {
+        var selectElement = document.getElementById('variantSelector');
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+        if (selectedOption.value === '') {
+            alert('Please select any product.');
+            event.preventDefault(); // Prevent form submission or other default behavior
+        }
+    }
 }
 
-var selectedVariantId; // Global variable to hold the selected variant ID
-var selectedImageUrl; // Global variable to hold the selected variant's image URL
 
-function updateVariantDetails() {
-    var selector = document.getElementById('variantSelector');
-    var selectedOption = selector.options[selector.selectedIndex];
-    var imgSrc = selectedOption.getAttribute('data-img');
-    var price = selectedOption.getAttribute('data-price');
-
-    // Set the global variables
-    selectedVariantId = selectedOption.value;
-    selectedImageUrl = imgSrc; // Assuming data-img stores the URL to the variant's image
-
-    // Update the product image and price display
-    document.getElementById('productImage').src = imgSrc;
-    document.getElementById('productPrice').innerText = 'Price: ' + price;
-}
-
+function enableOrderButton() {
+        document.getElementById('orderButton').disabled = false;
+    }
 function placePrintfulOrder() {
     var country=document.getElementById("country");
     var state=document.getElementById('state');
@@ -254,10 +375,11 @@ const items = [
     return response.json();
 })
 .then(data => {
-    console.log("Order successful:", data);
+    alert("Order successful:", data);
+
 })
 .catch(error => {
-    console.error("Order error:", error);
+    alert.error("Order error:", error);
 });
 
 }
@@ -304,6 +426,18 @@ function saveChanges() {
     });
 }
 
+function enableOrderButton() {
+    var selectElement = document.getElementById('variantSelector');
+    var orderButton = document.getElementById('orderButton');
+
+    if (selectElement.value !== '') {
+        orderButton.removeAttribute('disabled');
+        selectElement.style.cursor = 'auto'; // Change cursor style to default
+    } else {
+        orderButton.setAttribute('disabled', 'disabled');
+        document.getElementById('orderButton').style.cursor = 'none'; // Change cursor style to not-allowed
+    }
+}
 
 function toggleEdit(fieldName) {
     const displayDiv = document.getElementById(fieldName + '-display');
@@ -361,6 +495,74 @@ $(document).ready(function() {
 // });
 
 </script>   
+{% if user.is_authenticated %}
+<script type="text/javascript">
+    var userID = "{{ user.id }}"; // Injected securely from Django template
+    var storageKey = 'selectedVariants-' + userID; // User-specific local storage key
+
+    var selectedVariants = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+    function updateVariantDetails() {
+        var selector = document.getElementById('variantSelector');
+        var selectedOption = selector.options[selector.selectedIndex];
+        var imgSrc = selectedOption.getAttribute('data-img');
+        var price = selectedOption.getAttribute('data-price');
+        var variantId = selectedOption.value;
+
+        document.getElementById('productImage').src = imgSrc;
+        document.getElementById('productPrice').textContent = 'Price: ' + price;
+    }
+
+    function showNewButton() {
+        document.getElementById('newButton').style.display = 'inline-block'; // Make the New Button visible
+    }
+
+    function displaySelectedVariantDetails() {
+        var selector = document.getElementById('variantSelector');
+        var selectedOption = selector.options[selector.selectedIndex];
+        var imgSrc = selectedOption.getAttribute('data-img');
+        var price = selectedOption.getAttribute('data-price');
+        var variantId = selectedOption.value;
+
+        var currentSelection = { variantId, imgSrc, price }; // Create object for the new selection
+        selectedVariants.push(currentSelection); // Add to array
+
+        localStorage.setItem(storageKey, JSON.stringify(selectedVariants)); // Update localStorage with user-specific key
+        appendVariantToContainer(currentSelection, selectedVariants.length - 1); // Display the new selection
+    }
+
+    function appendVariantToContainer(variant, index) {
+        var container = document.getElementById('selectedVariantsContainer');
+        var variantDisplay = document.createElement('div');
+        variantDisplay.setAttribute('id', `variant-${index}`);
+        variantDisplay.innerHTML = `
+            <img src="${variant.imgSrc}" alt="Variant Image" style="width: 50px; height: 50px;">
+            <p>Price: ${variant.price}</p>
+            <button onclick="deleteVariant(${index})">Delete</button>
+        `;
+        container.appendChild(variantDisplay);
+    }
+
+    function deleteVariant(index) {
+        selectedVariants.splice(index, 1); // Remove variant
+        localStorage.setItem(storageKey, JSON.stringify(selectedVariants)); // Update localStorage with user-specific key
+        refreshVariantsDisplay(); // Refresh display
+    }
+
+    function refreshVariantsDisplay() {
+        var container = document.getElementById('selectedVariantsContainer');
+        container.innerHTML = ''; // Clear display
+        selectedVariants.forEach((variant, index) => {
+            appendVariantToContainer(variant, index); // Re-append each variant
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        refreshVariantsDisplay();
+    });
+</script>
+{% endif %}
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

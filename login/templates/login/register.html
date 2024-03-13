@@ -176,15 +176,15 @@
       {% csrf_token %}
       <div class="form-group pb-2 "  style="position: relative; z-index:50 ; " >
           <label for="username" style="font-size: 20px;"  >Full Name</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Enter your full name" style="margin-right: 200px;" >
+          <input type="text" class="form-control" id="username" required name="username" placeholder="Enter your full name" style="margin-right: 200px;" >
       </div>
       <div class="form-group pb-2 "  style="position: relative; z-index:50 ; " >
           <label for="email" style="font-size: 20px;" >Email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+          <input type="email" class="form-control" required id="email" name="email" placeholder="Enter your email">
       </div>
       <div class="form-group pb-2 "  style="position: relative; z-index:50 ; " >
           <label for="password" style="font-size: 20px;" >Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
+          <input type="password" required id="password" name="password" class="form-control" placeholder="Enter your password">
       </div>
       <div class="form-group"  style="position: relative; z-index:50 ; "  >
       <button type="submit" class="btn btn-primary">Create Account</button>

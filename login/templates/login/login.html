@@ -191,16 +191,16 @@ head::after {
                     {% endif %}
                     <div class="form-group pb-2"  style="position: relative;" >
                         <label for="username" style="font-size: 20px;">Full Name</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your full name">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your full name" required >
                     </div>
                     
                     <div class="form-group pb-2">
                         <label for="password" style="font-size: 20px;">Password</label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required >
                     </div>
                     <button type="submit" class="btn btn-primary"  style="position: relative;" >Log IN</button>
                 </form>
-                <p  style="position: relative;" >Don't have an account? <a href="{% url 'register' %}" style="color:white;" >Sign up</a></>
+                <p  style="position: relative;" >Don't have an account? <a href="{% url 'register' %}" style="color:white;" >Sign up</a>
             </div>
             
            

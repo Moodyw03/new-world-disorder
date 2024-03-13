@@ -29,7 +29,7 @@ urlpatterns = [
      path('place-order/', views.place_order, name='place_order'),
       path('api/proxy/countries/', proxy_to_external_api, name='proxy_countries'),
        path('api/proxy/states/<str:country_code>/', get_states_for_country, name='get_states_for_country'),
-   
-   
+        
+       
     
 ]
