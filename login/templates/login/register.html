@@ -37,7 +37,7 @@
     }
     
     .one {
-      background: linear-gradient(to bottom right, #fd116a, #832fb6, #6295c4);
+      background: beige;
     }
     
     .btn-primary {
@@ -172,9 +172,9 @@
     
 <div class="d-flex justify-content-center align-items-center" style="z-index: 50;" >
   <div class="row g-0">
-    <div class="col  one " style="padding: 50px;" > <form method="post">
+    <div class="col  one " style="padding: 50px; " > <form method="post">
       {% csrf_token %}
-      <div class="form-group pb-2 "  style="position: relative; z-index:50 ; " >
+      <div class="form-group pb-2 "  style="position: relative; z-index:50 ;  " >
           <label for="username" style="font-size: 20px;"  >Full Name</label>
           <input type="text" class="form-control" id="username" required name="username" placeholder="Enter your full name" style="margin-right: 200px;" >
       </div>
@@ -188,7 +188,7 @@
       </div>
       <div class="form-group"  style="position: relative; z-index:50 ; "  >
       <button type="submit" class="btn btn-primary">Create Account</button>
-      <p>Already have account? <a href="{% url 'login' %}" style="color: white;" >Sign in</a></p> </div>
+      <p>Already have account? <a href="{% url 'login' %}" style="color: blue;" >Sign in</a></p> </div>
     </div>
     </form>
     <div class="col div1 text-container " style="padding: 40px;  ;" > <h1 id="text" style="margin-top:100px ;" ></h1> </div>
@@ -203,7 +203,7 @@
 
 
 
-
+<div class="container-fluid bg-dark  text-center fixed-bottom "  > <p class="text-white pt-1 "  > @New World Disorder EST 2024. All right reserved </p> </div>
 
  
     

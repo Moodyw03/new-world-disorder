@@ -46,13 +46,10 @@
     
 ;
 }
-body{
-    background-color: beige;
-}
 </style>
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
         <div class="container ">
             <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder <br> EST.2024 </h2> </a>
             <button class="navbar-toggler" style="border: 5px solid white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,11 +72,12 @@ body{
                 </div>
             </div>
         </div>
-    </nav>
+    </nav> -->
+    {% if request.user.is_authenticated %}
+<div style="width: 100%; background-color: beige ;" >
 
-
-   <div class="container my-5 " > <div class="row text-center"> <h2>  YOUR CART   </h2> </div> </div>
-    <div class="container-fluid "><div class="row"> 
+   <div class="container py-5 " > <div class="row text-center"> <h2> CART ITEMS  </h2> </div> </div>
+    <div class="container-fluid "   ><div class="row"> 
         <div class="col-2 col-md-3 center " id="selectedVariantsContainer" ></div> 
         <div class="col">
 
@@ -90,7 +88,7 @@ body{
   <hr>     
   
   <div style="display: flex; justify-content: space-between; " > <div  > <h4  > Total </h4></div> <div> <h5 id="totalCost" >  </h5> </div> </div>
-  <div  style="display: flex; justify-content: center; align-items: center; margin-top:10% ; " >  <button style="background-color: black; width:80% ; " > <a href="{% url 'list_printful_products' %}" style="text-decoration: none; color: white; " >  Check Out  </a> </button>  </div>        
+  <div  style="display: flex; justify-content: center; align-items: center; margin-top:10% ; " >  <button   style="background-color: black; width:80% ; color: white; " >   Check Out   </button>  </div>        
 
 </div>
         
@@ -102,9 +100,9 @@ body{
 
 </div></div>
     <!-- <div id="selectedVariantsContainer" class="center" >   </div> -->
-
-
-    <div class="container-fluid bg-dark  text-center fixed-bottom "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
+</div>
+{% else %}
+{% endif %}
     <script>
         var orderDetails = responseData.orderDetails;
     console.log(orderDetails); // Output: details of the order
@@ -207,7 +205,7 @@ body{
         return sum + parseFloat(variant.price.replace(/[^0-9.-]+/g,"")); // Assuming price is a string like "$99.99"
     }, 0);
 
-    document.getElementById('totalCost').textContent =  totalCost.toFixed(2) +' GBP';
+    document.getElementById('totalCost').textContent =  totalCost.toFixed(2)  +' GBP';
 }
 
 

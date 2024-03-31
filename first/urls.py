@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path ,include
 from .views import proxy_to_external_api
 from .views import get_states_for_country
+from .views import create_payment
+from .views import payment_form
 
 from . import views
 urlpatterns = [
@@ -25,11 +27,13 @@ urlpatterns = [
     path('', views.list_printful_products, name='list_printful_products'),
      path('', include('login.urls')), 
      path('ch/',views.Home,name='ch_page'),
+     
     path('product/<int:productId>/', views.product_detail, name='product-detail'),
      path('place-order/', views.place_order, name='place_order'),
       path('api/proxy/countries/', proxy_to_external_api, name='proxy_countries'),
        path('api/proxy/states/<str:country_code>/', get_states_for_country, name='get_states_for_country'),
-        
+        path('order_history/', views.view_order_history, name='view_order_history'),
        
-    
+        path('payment-form/', payment_form, name='payment_form'),
+        path('create-payment/', views.create_payment, name='create_payment'),
 ]

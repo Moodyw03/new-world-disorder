@@ -6,7 +6,10 @@ PRINTFUL_API_KEY = os.environ.get('PRINTFUL_API_KEY')
 # settings.py
 
 # WARNING: Storing sensitive information in your source code can lead to security risks.
-PRINTFUL_API_KEY = 'YR2EPlsIXuqYdUXSoJKlyE1YsYwhXyTiRhyxZODU'
+PRINTFUL_API_KEY = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
+# settings.py
+
+STRIPE_SECRET_KEY = 'sk_test_51OvFQwRxR89gpN14N8XjbY56QV35xqruH9YCS5yxCWeubXlIY9DWAgxTX5BxKTDGqwTOj5C9n1gp3Q0CMDIdAWFv00kYUL9lOd'
 
 
 """
@@ -48,7 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login'
+    'login',
+    'rest_framework'
    
     
 ]
@@ -64,6 +68,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'first.urls'
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 TEMPLATES = [
     {
@@ -132,6 +141,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+APPEND_SLASH = False
 
 
 # Static files (CSS, JavaScript, Images)

@@ -9,8 +9,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+import stripe
 
-
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Function for the fetching the Product
 def fetch_product_data(api_url, headers):
@@ -19,8 +21,11 @@ def fetch_product_data(api_url, headers):
         return response.json()
     return None
 
+from django.http import HttpResponse
+from django.shortcuts import render
+
 def list_printful_products(request):
-    api_key = 'P1pHaofDN94gYPU1mxGaxP2PBHLOyjam63yY1EYP'
+    api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
     first_api_url = 'https://api.printful.com/store/products'
     headers = {'Authorization': f'Bearer {api_key}'}
     
@@ -46,6 +51,19 @@ def list_printful_products(request):
         
         # Render the template with the product data in the context
         return render(request, 't.html', context)
+        
+    else:
+        # Handle the case where data or 'result' key is missing
+        return HttpResponse("Error: No product data found")
+
+
+
+
+
+
+
+
+
 def managejsonify(product_data):
     simplified_products = []
 
@@ -76,15 +94,20 @@ def managejsonify(product_data):
             simplified_products.append(simplified_product)
 
     return simplified_products
+    
+
+
+
 def Home(request):
     return render(request, "cart.html")
 
 
-
+def Home1(request):
+    return render(request, "check.html")
 
 
 def product_detail(request, productId):
-    api_key = 'P1pHaofDN94gYPU1mxGaxP2PBHLOyjam63yY1EYP'
+    api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
     api_url = f'https://api.printful.com/store/products/{productId}'
     headers = {'Authorization': f'Bearer {api_key}'}
 
@@ -100,6 +123,7 @@ def product_detail(request, productId):
             'thumbnail_url': product_info['thumbnail_url'],
             'variants': variants_info
         }
+        
     except requests.RequestException:
         raise Http404("Product does not exist")
 
@@ -110,64 +134,105 @@ def product_detail(request, productId):
 @require_POST
 
 
+
+
+@csrf_exempt
 def place_order(request):
     print("Request received")
-    api_url = 'https://api.printful.com/orders'
-    api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
-    # Parse JSON data from the request body
-    data = json.loads(request.body)
-    items = data.get('items', [])  # Get the list of items, default to an empty list if not found
-    for product in items:
-              variant_id = product.get('variant_id')
-              quantity = product.get('quantity')
-              image_url = product.get('image_url')
+    if request.method == "POST":
+        try:
+            api_url = 'https://api.printful.com/orders'
+            api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
+            
+            # Parse JSON data from the request body
+            data = json.loads(request.body)
+            
+            # Extract recipient details from the request
+            recipient_details = data.get('recipient', {})
+            
+            # Initialize the items list for the API request
+            items_for_api = []
+            
+            # Iterate over each item in the received items list
+            for item in data.get('items', []):
+                # Extract item details
+                variant_id = item.get('variant_id')
+                quantity = item.get('quantity')
+                price = item.get('price')
+                
+                image_url = item.get('image_url')  # Correctly structured from the client
+                
+                # Append item details, including the image_url inside 'files'
+                items_for_api.append({
+                    "variant_id": variant_id,
+                    "quantity": quantity,
+                    "price":price,
+                    "files": [
+                        {
+                            "type": "default",
+                            "url": image_url
+                        }
+                    ]
+                })
              
-              
-    # Now, variant_id, quantity, and image_url refer to the current product in the loop
-    # Recipient details coming from the AJAX request
-    recipient_details = data.get('recipient', {})
-    # Forming the order details
-    order_data = {
-        "recipient": {
-            "name": recipient_details.get('name', ''),
-            "address1": recipient_details.get('address1', ''),
-            "country": recipient_details.get('country', ''),
-            "city": recipient_details.get('city', ''),
-            "state": recipient_details.get('state', ''),
-            "state_code": recipient_details.get('state_code', ''),
-            "country_code": recipient_details.get('country_code', ''),
-            "zip": recipient_details.get('zip', '')
-        },
-        "items": [
-            {
-                "variant_id": variant_id,
-                "quantity": 1,
-                "files": [
-                    {
-                        "type": "default",
-                        "url": image_url
-                    }
-                ]
+            
+            # Forming the complete order data for the API request
+            order_data = {
+                "recipient": recipient_details,
+                "items": items_for_api
             }
-        ]
-    }
-    headers = {
-        'Authorization': f'Bearer {api_key}',
-        'Content-Type': 'application/json'
-    }
-    response = requests.post(api_url, json=order_data, headers=headers)
-    print(response.status_code)
-
-    if response.status_code == 200 or response.status_code == 201:
-       
-        
-
-        return JsonResponse({'status': 'success', 'message': 'Order placed successfully.'})
+            print(order_data)
+            
+            headers = {
+                'Authorization': f'Bearer {api_key}',
+                'Content-Type': 'application/json'
+            }
+            
+            # Sending the order to the external API
+            response = requests.post(api_url, json=order_data, headers=headers)
+            # print(response.status_code)
+            
+            if response.status_code in [200, 201]:
+                # Retrieve the current order history from the session or initialize it if not present
+                order_history = request.session.get('order_history', [])
+                
+                # Append the new order to the order history list
+                order_history.append(order_data)
+                
+                # Save the updated order history back to the session
+                request.session['order_history'] = order_history
+                request.session.modified = True  # Mark the session as modified to save changes
+                
+                return JsonResponse({'status': 'success', 'message': 'Order placed successfully.'})
+            else:
+                # Handle API error
+                error_message = response.json().get('error', {}).get('message', 'Unknown error occurred.')
+                return JsonResponse({'status': 'error', 'message': error_message}, status=400)
+        except Exception as e:
+    # If there's an error, return an error response with the error message
+            error_message = str(e)
+            return JsonResponse({'status': 'error', 'message': error_message}, status=400)
     else:
-        # Handle error
-        response_data = response.json()
-        error_message = response_data.get('error', {}).get('message', 'Unknown error occurred.')
-        return JsonResponse({'status': 'error', 'message': error_message}, status=400)
+        return JsonResponse({'status': 'error', 'message': 'This endpoint expects a POST request.'}, status=405)
+
+
+
+
+
+
+
+
+def view_order_history(request):
+    order_history = request.session.get('order_history', [])
+
+    # Optional: Debugging print to verify the structure of order_history
+    for order in order_history:
+        for item in order.get("items", []):
+            if item.get("files"):
+                print("Verified Image URL:", item["files"][0].get("url", "No Image URL"))
+
+    return render(request, 'order_history.html', {'order_history': order_history})
+
 
 
 
@@ -197,5 +262,38 @@ def get_states_for_country(request, country_code):
     
 
 
+stripe.api_key = 'sk_test_51OvFQwRxR89gpN14N8XjbY56QV35xqruH9YCS5yxCWeubXlIY9DWAgxTX5BxKTDGqwTOj5C9n1gp3Q0CMDIdAWFv00kYUL9lOd'
 
+import json
+from django.http import JsonResponse
 
+def create_payment(request):
+    if request.method == 'POST':
+        try:
+            # Parse JSON data from the request body
+            
+
+            # Create a Stripe PaymentIntent
+            intent = stripe.PaymentIntent.create(
+                amount=00,  # Replace with your calculation logic
+                currency='gbp',
+                payment_method_types=['card'],
+                # Optionally, you can add metadata or other parameters here
+            )
+
+            # Serialize the response data to JSON
+            response_data = {
+                'clientSecret': intent.client_secret
+            }
+
+            return JsonResponse(response_data)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+        
+
+def payment_form(request):
+    return render(request, 'payment_form.html')        

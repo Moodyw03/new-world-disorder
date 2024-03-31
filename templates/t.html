@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 
     <style>
@@ -126,17 +127,23 @@ head::after {
 
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container p-4">
-            <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder EST.2024 </h2> </a>
+            <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder <br> EST.2024 </h2> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link active  " href="{% url 'list_printful_products' %}" style="margin-top: 10px; color: white; ">Home</a>
-                    <a class="nav-link lg:mr-2 " href="{% url 'profile' %} " style="cursor: pointer;margin-top: 10px; color: white;  ">  Contact Us </a>
+                    <a class="nav-link lg:mr-2 " href="{% url 'view_order_history' %} " style="cursor: pointer;margin-top: 10px; color: white;  ">  Order Histroy </a>
                     <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: #fbfaff; margin-top: 11px; "></i> </a>
-                    <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
                     
+                    {% if request.user.is_authenticated %}
+                    
+                        <button class="px-3" style="margin: 5px;  background-color: black; color: white; border-radius:50px;  "  >{{ user.username }}</button>
+                    
+                    {% else %}
+                    <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
+                    {% endif %}
                     
                 </div>
             </div>
@@ -154,12 +161,33 @@ head::after {
 <div class="owl-carousel p-4 position-relative  z-index-50 ">
     {% for product in products %}
     <div class="col-2" onclick="location.href='{% url 'product-detail' product.id %}'"  style="cursor:pointer; " >
-        <div class="card card-block">
+        <div class="card card-block"  >
             <div class="text-end"></div>
-            <div class="mt-1  " > <img src="../static/bar.svg" alt=""> </div>
-            <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product"  >
+            
+            <div style="background-color: blue;" ><img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product"  > </div>
             <div class="card-body" style="display: inline-block; white-space: nowrap;  " >
                 {% comment %} <h5 class="card-title text-center">ID:{{ product.id }}</h5> {% endcomment %}
+                <h5 class="card-text text-center"    >{{ product.name }}</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+<div class="owl-carousel p-4 position-relative  z-index-50 ">
+    {% for product in products %}
+    <div class="col-2" onclick="location.href='{% url 'product-detail' product.id %}'"  style="cursor:pointer; " >
+        <div class="card card-block"  >
+            <div class="text-end"></div>
+            
+            <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product"  >
+            <div class="card-body" style="display: inline-block; white-space: nowrap;  " >
+                
                 <h5 class="card-text text-center"   >{{ product.name }}</h5>
             </div>
         </div>
@@ -172,15 +200,7 @@ head::after {
 
 
 
-
-
-
-  
-
-
-
-
-<div class="container-fluid bg-dark  text-center fixed-bottom "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
+<div class="container-fluid bg-dark  text-center  "> <footer class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </footer> </div>
 
 
 
@@ -195,8 +215,10 @@ $(document).ready(function(){
   $(".owl-carousel").owlCarousel({
     loop:true,
     autoplay:true,
-    autoplayTimeout:1000,
+    autoplayTimeout:1500,
     autoplayHoverPause:true,
+    rtl:true,
+   
     responsive:{
         0:{
             items:1
@@ -210,8 +232,8 @@ $(document).ready(function(){
         1060:{
             items:4
         },
-        1200:{
-            items:4
+        1200:{  
+            items:5
         },
     }
 

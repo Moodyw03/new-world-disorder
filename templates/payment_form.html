@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Accept a payment</title>
+    <meta name="description" content="A demo of a payment on Stripe" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/checkout.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/svg-with-js.min.css"> -->
+  </head>
+  <body>
+    <!-- Display a payment form -->
+    <form id="payment-form" action="{% url 'create_payment' %}" method="post">
+      {% csrf_token %}
+      <!-- Payment element will be injected here by Stripe.js -->
+      <div id="payment-element">
+          <!-- Card Element -->
+          <div id="card-element"></div>
+      </div>
+      <!-- Submit button -->
+      <button id="submit">
+          <!-- Spinner element (hidden by default) -->
+          <div class="spinner hidden" id="spinner"></div>
+          <!-- Button text -->
+          <span id="button-text">Pay now</span>
+      </button>
+      <!-- Payment message (hidden by default) -->
+      <div id="payment-message" class="hidden"></div>
+  </form>
+  <script src="/static/checkout.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Create an instance of Stripe
+    var stripe = Stripe('pk_test_51OvFQwRxR89gpN14AgMtxKaSJeUETOI4bBKVWNKaevr8zbanpBfxvqO84evu3l1TAwvnXaFCw6w5KEPKMpserZKV00fAmnWjuf');
+
+    // Create an instance of Stripe Elements
+    var elements = stripe.elements();
+
+    // Create an instance of the card Element
+    var cardElement = elements.create('card');
+
+    // Mount the card Element onto the DOM
+    cardElement.mount('#card-element');
+
+    // Handle form submission
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Disable the submit button to prevent multiple submissions
+        document.getElementById('submit').disabled = true;
+
+        // Create payment method
+        stripe.createPaymentMethod({
+            type: 'card',
+            card: cardElement
+        }).then(function (result) {
+            if (result.error) {
+                // Show error message to the user
+                var errorElement = document.getElementById('payment-message');
+                errorElement.textContent = result.error.message;
+                errorElement.classList.remove('hidden');
+
+                // Re-enable the submit button
+                document.getElementById('submit').disabled = false;
+            } else {
+                // Send payment method ID to the server
+                var paymentMethodId = result.paymentMethod.id;
+                fetch('/process_payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ payment_method_id: paymentMethodId })
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    // Handle server response
+                    if (data.success) {
+                        // Payment successful
+                        var successElement = document.getElementById('payment-message');
+                        successElement.textContent = 'Payment successful!';
+                        successElement.classList.remove('hidden');
+                    } else {
+                        // Payment failed
+                        var errorElement = document.getElementById('payment-message');
+                        errorElement.textContent = data.error;
+                        errorElement.classList.remove('hidden');
+                    }
+
+                    // Re-enable the submit button
+                    document.getElementById('submit').disabled = false;
+                });
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/svg-with-js.min.css"></script>
+  </body>
+</html>
