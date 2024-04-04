@@ -34,8 +34,385 @@
 body{
     background-color: beige;
 }
+
+
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+@keyframes move {
+  100% {
+      transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: white;
+  overflow: hidden;
+}
+
+.background span {
+  width: 10vmin;
+  height: 10vmin;
+  /* border-radius: 10vmin; */
+  backface-visibility: hidden;
+  position: absolute;
+  animation: move;
+  animation-duration: 45;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+.background span:nth-child(0) {
+  color: #583C87;
+  top: 36%;
+  left: 38%;
+  animation-duration: 39s;
+  animation-delay: -16s;
+  transform-origin: 19vw -7vh;
+  box-shadow: -20vmin 0 2.854451878929169vmin currentColor;
+}
+.background span:nth-child(1) {
+  color: #583C87;
+  top: 93%;
+  left: 58%;
+  animation-duration: 34s;
+  animation-delay: -39s;
+  transform-origin: 5vw -15vh;
+  box-shadow: -20vmin 0 3.005530256639704vmin currentColor;
+}
+.background span:nth-child(2) {
+    color: #583C87;
+  top: 46%;
+  left: 1%;
+  animation-duration: 8s;
+  animation-delay: -31s;
+  transform-origin: 0vw 18vh;
+  box-shadow: -20vmin 0 3.1080460821454166vmin currentColor;
+}
+.background span:nth-child(3) {
+  color: #583C87;
+  top: 54%;
+  left: 82%;
+  animation-duration: 51s;
+  animation-delay: -13s;
+  transform-origin: -11vw 17vh;
+  box-shadow: -20vmin 0 2.5946505726218674vmin currentColor;
+}
+.background span:nth-child(4) {
+    color: #583C87;
+  top: 64%;
+  left: 65%;
+  animation-duration: 21s;
+  animation-delay: -2s;
+  transform-origin: 22vw -11vh;
+  box-shadow: -20vmin 0 3.4341717098615354vmin currentColor;
+}
+.background span:nth-child(5) {
+  color: #583C87;
+  top: 64%;
+  left: 14%;
+  animation-duration: 55s;
+  animation-delay: -1s;
+  transform-origin: -23vw -14vh;
+  box-shadow: 20vmin 0 3.103077727173976vmin currentColor;
+}
+.background span:nth-child(6) {
+  color: #583C87;
+  top: 29%;
+  left: 5%;
+  animation-duration: 7s;
+  animation-delay: -18s;
+  transform-origin: -21vw -21vh;
+  box-shadow: 20vmin 0 3.259927481937839vmin currentColor;
+}
+.background span:nth-child(7) {
+  color: #583C87;
+  top: 64%;
+  left: 38%;
+  animation-duration: 17s;
+  animation-delay: -50s;
+  transform-origin: -6vw 7vh;
+  box-shadow: 20vmin 0 2.9947077647966935vmin currentColor;
+}
+.background span:nth-child(8) {
+    color: #583C87;
+  top: 24%;
+  left: 12%;
+  animation-duration: 33s;
+  animation-delay: -14s;
+  transform-origin: 6vw 4vh;
+  box-shadow: -20vmin 0 3.0293967169637077vmin currentColor;
+}
+.background span:nth-child(9) {
+    color: #583C87;
+  top: 2%;
+  left: 97%;
+  animation-duration: 26s;
+  animation-delay: -27s;
+  transform-origin: 3vw 23vh;
+  box-shadow: -20vmin 0 2.920710809851262vmin currentColor;
+}
+.background span:nth-child(10) {
+    color: #583C87;
+  top: 95%;
+  left: 62%;
+  animation-duration: 30s;
+  animation-delay: -12s;
+  transform-origin: -5vw 14vh;
+  box-shadow: 20vmin 0 3.447569051380521vmin currentColor;
+}
+.background span:nth-child(11) {
+  color: #583C87;
+  top: 52%;
+  left: 86%;
+  animation-duration: 45s;
+  animation-delay: -47s;
+  transform-origin: -2vw 6vh;
+  box-shadow: 20vmin 0 3.2028495510069144vmin currentColor;
+}
+.background span:nth-child(12) {
+  color: #583C87;
+  top: 41%;
+  left: 61%;
+  animation-duration: 16s;
+  animation-delay: -47s;
+  transform-origin: -3vw -5vh;
+  box-shadow: 20vmin 0 3.2552761778683346vmin currentColor;
+}
+.background span:nth-child(13) {
+  color: #583C87;
+  top: 12%;
+  left: 20%;
+  animation-duration: 23s;
+  animation-delay: -36s;
+  transform-origin: -14vw 21vh;
+  box-shadow: 20vmin 0 2.6211622721201615vmin currentColor;
+}
+.background span:nth-child(14) {
+    color: #583C87;
+  top: 44%;
+  left: 52%;
+  animation-duration: 6s;
+  animation-delay: -26s;
+  transform-origin: 8vw -20vh;
+  box-shadow: 20vmin 0 3.2195445350143173vmin currentColor;
+}
+.background span:nth-child(15) {
+  color: #583C87;
+  top: 21%;
+  left: 58%;
+  animation-duration: 37s;
+  animation-delay: -31s;
+  transform-origin: -7vw 14vh;
+  box-shadow: -20vmin 0 2.8103836569911573vmin currentColor;
+}
+.background span:nth-child(16) {
+  color: #583C87;
+  top: 28%;
+  left: 77%;
+  animation-duration: 46s;
+  animation-delay: -31s;
+  transform-origin: -17vw -16vh;
+  box-shadow: -20vmin 0 2.6659354149772096vmin currentColor;
+}
+.background span:nth-child(17) {
+    color: #583C87;
+  top: 52%;
+  left: 72%;
+  animation-duration: 14s;
+  animation-delay: -23s;
+  transform-origin: -21vw 25vh;
+  box-shadow: 20vmin 0 3.2720254847298746vmin currentColor;
+}
+.background span:nth-child(18) {
+  color: #583C87;
+  top: 95%;
+  left: 22%;
+  animation-duration: 54s;
+  animation-delay: -17s;
+  transform-origin: -18vw 16vh;
+  box-shadow: 20vmin 0 3.103900725419248vmin currentColor;
+}
+.background span:nth-child(19) {
+  color: #583C87;
+  top: 80%;
+  left: 95%;
+  animation-duration: 49s;
+  animation-delay: -2s;
+  transform-origin: -24vw 13vh;
+  box-shadow: -20vmin 0 2.709665173056922vmin currentColor;
+}
+.background span:nth-child(20) {
+  color: #583C87;
+  top: 62%;
+  left: 63%;
+  animation-duration: 21s;
+  animation-delay: -21s;
+  transform-origin: 23vw -24vh;
+  box-shadow: 20vmin 0 2.5353481751914444vmin currentColor;
+}
+.background span:nth-child(21) {
+  color: #583C87;
+  top: 79%;
+  left: 11%;
+  animation-duration: 49s;
+  animation-delay: -46s;
+  transform-origin: -16vw 19vh;
+  box-shadow: -20vmin 0 2.5862638804676044vmin currentColor;
+}
+.background span:nth-child(22) {
+    color: #583C87;
+  top: 44%;
+  left: 56%;
+  animation-duration: 32s;
+  animation-delay: -19s;
+  transform-origin: -16vw 14vh;
+  box-shadow: -20vmin 0 3.4045256423828256vmin currentColor;
+}
+.background span:nth-child(23) {
+    color: #583C87;
+  top: 35%;
+  left: 33%;
+  animation-duration: 14s;
+  animation-delay: -36s;
+  transform-origin: 15vw 6vh;
+  box-shadow: 20vmin 0 2.918311267954702vmin currentColor;
+}
+.background span:nth-child(24) {
+  color: #583C87;
+  top: 100%;
+  left: 54%;
+  animation-duration: 19s;
+  animation-delay: -50s;
+  transform-origin: -14vw 3vh;
+  box-shadow: -20vmin 0 3.186682834208984vmin currentColor;
+}
+.background span:nth-child(25) {
+  color: #583C87;
+  top: 70%;
+  left: 18%;
+  animation-duration: 53s;
+  animation-delay: -40s;
+  transform-origin: 4vw 21vh;
+  box-shadow: 20vmin 0 3.2632338666640726vmin currentColor;
+}
+.background span:nth-child(26) {
+  color: #583C87;
+  top: 74%;
+  left: 100%;
+  animation-duration: 50s;
+  animation-delay: -41s;
+  transform-origin: 22vw 8vh;
+  box-shadow: 20vmin 0 3.0201810387113337vmin currentColor;
+}
+.background span:nth-child(27) {
+  color: #583C87;
+  top: 58%;
+  left: 48%;
+  animation-duration: 55s;
+  animation-delay: -18s;
+  transform-origin: -16vw 12vh;
+  box-shadow: -20vmin 0 2.8845469905641004vmin currentColor;
+}
+.background span:nth-child(28) {
+    color: #583C87;
+  top: 77%;
+  left: 18%;
+  animation-duration: 11s;
+  animation-delay: -44s;
+  transform-origin: -4vw -4vh;
+  box-shadow: 20vmin 0 2.58317245325746vmin currentColor;
+}
+.background span:nth-child(29) {
+    color: #583C87;
+  top: 86%;
+  left: 93%;
+  animation-duration: 15s;
+  animation-delay: -32s;
+  transform-origin: -8vw 1vh;
+  box-shadow: 20vmin 0 3.207395241219427vmin currentColor;
+}
+.background span:nth-child(30) {
+    color: #583C87;
+  top: 50%;
+  left: 28%;
+  animation-duration: 7s;
+  animation-delay: -31s;
+  transform-origin: -16vw 15vh;
+  box-shadow: 20vmin 0 3.436429982400022vmin currentColor;
+}
+.background span:nth-child(31) {
+  color: #583C87;
+  top: 66%;
+  left: 16%;
+  animation-duration: 11s;
+  animation-delay: -23s;
+  transform-origin: -19vw 16vh;
+  box-shadow: -20vmin 0 3.0708005867171764vmin currentColor;
+}
+.background span:nth-child(32) {
+  color: #583C87;
+  top: 78%;
+  left: 66%;
+  animation-duration: 20s;
+  animation-delay: -10s;
+  transform-origin: -13vw -23vh;
+  box-shadow: -20vmin 0 3.3862097091338637vmin currentColor;
+}
+
+.glas{
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 </style>
 <body>
+    <div class="main" style="position: relative;" >
+        <div style="z-index: 50; position: relative; " > 
+
 
      <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
         <div class="container ">
@@ -51,6 +428,10 @@ body{
                     {% if request.user.is_authenticated %}
                     
                     <button class="px-3" style="margin: 5px;  background-color: black; color: white; border-radius:50px;  "  >{{ user.username }}</button>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" style="margin: 5px;  background-color: black; color: white; border-radius:50px;  "   >Logout</button>
+                    </form>
                 
                 {% else %}
                 <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
@@ -68,8 +449,7 @@ body{
 
 
 
-
-
+ 
 
 
 
@@ -100,14 +480,138 @@ body{
     <div class=" col-3 col-lg-4 mt-4 "> <div style="display: flex;" >
         
         
-            <form action="{% url 'logout' %}" method="post">
+            <!-- <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit" style="margin: 5px; background-color: black; color: white; "  >Logout</button>
-            </form>
+            </form> -->
         </div> </div>
        </div>
        </div> 
+
+
+       <div id="confirmationMessage" style="display: none;" ></div>
+   <div class="container  " >
+    <div class="row mt-3 " >
+    <div class="col glas "  > <div class="card-body"  >
+        <h2 class="card-title text-center "   >Saved Address Details</h2>
+        <div class="" >
+        <div class="row">
+            <div class="col  "  style="display: flex;  justify-content: space-between; " >
+                <div><h3>Country: </h3></div>  <div><span id="displayCountry" style="font-size: 20px;  "></span></div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col  "  style="display: flex;  justify-content: space-between; " >
+                <div><h3>State:</h3></div>  <div><span id="displayState" style="font-size: 20px; "></span></div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col"  style="display: flex;  justify-content: space-between; "  >
+                <div><h3>City:</h3></div>  <div><span id="displayCity" style="font-size: 20px; margin-left: 15%; "></span></div>
+            </div>
+            </div>
+            <div class="row" >
+            <div class="col"  style="display: flex;  justify-content: space-between; " >
+                <div><h3>ZIP Code:</h3></div>  <div><span id="displayZip" style="font-size: 20px; margin-left: 3%; "></span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col " style="display: flex;  justify-content: space-between; " >
+                <div><h3>Address:</h3></div> <div><span id="displayAddress" style="font-size: 20px;  margin-left: 0%;"></span></div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; " >
+        <button id="showFormButton" class="my-2  " >Change Your Details</button> </div>
+    </div>
+    </div> </div>
+    
+    
+
+
+
+
+
+
+    
+    
+    <div class="col">   <form id="addressForm" class="glas p-4 ">
+    <h2>Address Form</h2>
+    <div class="form-group">
+        <label for="countryInput">Country:</label>
+        <input type="text" class="form-control" id="countryInput" name="countryInput" required>
+    </div>
+
+    <div class="form-group">
+        <label for="stateInput">State:</label>
+        <input type="text" class="form-control" id="stateInput" name="stateInput" required>
+    </div>
+
+    <div class="form-group">
+        <label for="cityInput">City:</label>
+        <input type="text" class="form-control" id="cityInput" name="cityInput" required>
+    </div>
+
+    <div class="form-group">
+        <label for="zipInput">ZIP Code:</label>
+        <input type="text" class="form-control" id="zipInput" name="zipInput" required>
+    </div>
+
+    <div class="form-group">
+        <label for="addressInput">Address:</label>
+        <input type="text" class="form-control" id="addressInput" name="addressInput" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Address</button>
+</form> </div>
+
+
+
+
+</div></div>
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <div class="card m-5 container "  style="width: fit-content;  background-color: transparent; "  >
+        
+    </div>
+    
    
+
+
+
+
+       
        {% endif %} 
        {% if request.user.is_authenticated %}
        <form action="{% url 'logout' %}" method="post">
@@ -157,13 +661,118 @@ body{
         {% endfor %}    
     </div>
     </div>
-    
+</div>
+<div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+ </div>
+
+</div>
     
                 
     
     <div class="container-fluid bg-dark  text-center fixed-bottom  "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
 
 <script>
+ document.addEventListener('DOMContentLoaded', function() {
+    // Fetch values from localStorage and populate the form fields
+    var country = localStorage.getItem('country') || '';
+    var state = localStorage.getItem('state') || '';
+    var city = localStorage.getItem('city') || '';
+    var zip = localStorage.getItem('zip') || '';
+    var address = localStorage.getItem('address') || '';
+
+    document.getElementById('countryInput').value = country;
+    document.getElementById('stateInput').value = state;
+    document.getElementById('cityInput').value = city;
+    document.getElementById('zipInput').value = zip;
+    document.getElementById('addressInput').value = address;
+
+    // Save form data to localStorage on form submission
+    document.getElementById('addressForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get form values
+        var country = document.getElementById('countryInput').value;
+        var state = document.getElementById('stateInput').value;
+        var city = document.getElementById('cityInput').value;
+        var zip = document.getElementById('zipInput').value;
+        var address = document.getElementById('addressInput').value;
+
+        // Save form values to localStorage
+        localStorage.setItem('country', country);
+        localStorage.setItem('state', state);
+        localStorage.setItem('city', city);
+        localStorage.setItem('zip', zip);
+        localStorage.setItem('address', address);
+
+        // Show confirmation message to the user
+        var confirmationMessage = document.createElement('p');
+        confirmationMessage.textContent = 'Address saved successfully!';
+        document.getElementById('confirmationMessage').appendChild(confirmationMessage);
+
+        // Alert the user
+        alert('Address saved successfully!');
+
+        // Display the saved address details
+        document.getElementById('displayCountry').textContent = country || 'Not provided';
+        document.getElementById('displayState').textContent = state || 'Not provided';
+        document.getElementById('displayCity').textContent = city || 'Not provided';
+        document.getElementById('displayZip').textContent = zip || 'Not provided';
+        document.getElementById('displayAddress').textContent = address || 'Not provided';
+
+        // Hide the input fields and display the show form button
+        document.getElementById('addressForm').style.display = 'none';
+        document.getElementById('showFormButton').style.display = 'block';
+    });
+
+    // Display the saved address details
+    document.getElementById('displayCountry').textContent = country || 'Not provided';
+    document.getElementById('displayState').textContent = state || 'Not provided';
+    document.getElementById('displayCity').textContent = city || 'Not provided';
+    document.getElementById('displayZip').textContent = zip || 'Not provided';
+    document.getElementById('displayAddress').textContent = address || 'Not provided';
+
+    // Show form button click event
+    document.getElementById('showFormButton').addEventListener('click', function() {
+        // Display the form and hide the show form button
+        document.getElementById('addressForm').style.display = 'block';
+        document.getElementById('showFormButton').style.display = 'none';
+    });
+});
+
+
 
 
     function saveChanges() {

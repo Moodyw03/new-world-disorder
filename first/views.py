@@ -297,3 +297,27 @@ def create_payment(request):
 
 def payment_form(request):
     return render(request, 'payment_form.html')        
+
+
+
+
+
+
+
+def save_address_data(request):
+    if request.method == 'POST':
+        # Extract data from the POST request
+        data = request.POST
+        country = data.get('country')
+        state = data.get('state')
+        city = data.get('city')
+        zip_code = data.get('zip')
+
+        # Process the data as needed
+        # For example, save it to the database or perform other operations
+
+        # Return a JSON response indicating success or failure
+        return JsonResponse({'message': 'Address data received successfully.'})
+
+    # Handle other HTTP methods if necessary
+    return JsonResponse({'error': 'Invalid request method.'}, status=405)

@@ -36,4 +36,5 @@ urlpatterns = [
        
         path('payment-form/', payment_form, name='payment_form'),
         path('create-payment/', views.create_payment, name='create_payment'),
+         
 ]

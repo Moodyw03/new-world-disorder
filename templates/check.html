@@ -14,6 +14,7 @@
 </head>
 
 <style>
+
 .custom-button {
     background-color: black;
     color: white;
@@ -74,7 +75,7 @@
         </div>
     </nav> -->
     {% if request.user.is_authenticated %}
-<div style="width: 100%; background-color: beige ;" >
+<div style="width: 100%;   " >
 
    <div class="container py-5 " > <div class="row text-center"> <h2> CART ITEMS  </h2> </div> </div>
     <div class="container-fluid "   ><div class="row"> 
@@ -88,8 +89,7 @@
   <hr>     
   
   <div style="display: flex; justify-content: space-between; " > <div  > <h4  > Total </h4></div> <div> <h5 id="totalCost" >  </h5> </div> </div>
-  <div  style="display: flex; justify-content: center; align-items: center; margin-top:10% ; " >  <button   style="background-color: black; width:80% ; color: white; " >   Check Out   </button>  </div>        
-
+  
 </div>
         
         </div> 
