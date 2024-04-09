@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import stripe
 
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Function for the fetching the Product
@@ -21,11 +22,10 @@ def fetch_product_data(api_url, headers):
         return response.json()
     return None
 
-from django.http import HttpResponse
-from django.shortcuts import render
+
 
 def list_printful_products(request):
-    api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
+    api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
     first_api_url = 'https://api.printful.com/store/products'
     headers = {'Authorization': f'Bearer {api_key}'}
     
@@ -88,10 +88,13 @@ def managejsonify(product_data):
                     'price': variant.get('retail_price', 'No Price Available'),
                     'currency': variant.get('currency', 'No Currency Available'),
                     'image_url': variant['product']['image'] if 'product' in variant and 'image' in variant['product'] else 'No Image Available'
+
                 }
+                
                 simplified_product['variants'].append(variant_info)
 
             simplified_products.append(simplified_product)
+        
 
     return simplified_products
     
@@ -107,7 +110,7 @@ def Home1(request):
 
 
 def product_detail(request, productId):
-    api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
+    api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
     api_url = f'https://api.printful.com/store/products/{productId}'
     headers = {'Authorization': f'Bearer {api_key}'}
 
@@ -117,18 +120,25 @@ def product_detail(request, productId):
         data = response.json()
         product_info = data['result']['sync_product']
         variants_info = data['result']['sync_variants']
+        for var in variants_info:
+             var['product']['image']=var["files"][2]["preview_url"]
+
         product = {
             'id': product_info['id'],
             'name': product_info['name'],
             'thumbnail_url': product_info['thumbnail_url'],
             'variants': variants_info
+
         }
-        
+        print("here")
+        variant_ino = variants_info[0]
+        print(variant_ino["files"][2]["preview_url"])
+           
     except requests.RequestException:
         raise Http404("Product does not exist")
 
     return render(request, 'product_detail.html', {'product': product})
-
+    
 @csrf_exempt
 
 @require_POST
@@ -142,7 +152,7 @@ def place_order(request):
     if request.method == "POST":
         try:
             api_url = 'https://api.printful.com/orders'
-            api_key = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
+            api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
             
             # Parse JSON data from the request body
             data = json.loads(request.body)

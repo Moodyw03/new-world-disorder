@@ -14,7 +14,6 @@
 </head>
 
 <style>
-
 .custom-button {
     background-color: black;
     color: white;
@@ -41,72 +40,160 @@
 .dit{
     border: 3px solid black;
     margin-bottom: 44px;
-    background-color: #F5F5F5;
+    
     padding: 1%; 
 
     
 ;
 }
+
+  .glas{
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 </style>
 <body>
-    
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
-        <div class="container ">
-            <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder <br> EST.2024 </h2> </a>
-            <button class="navbar-toggler" style="border: 5px solid white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link active  " href="{% url 'list_printful_products' %}" style="margin-top: 10px; color: white; ">Home</a>
-                    <a class="nav-link lg:mr-2 " href="{% url 'view_order_history' %} " style="cursor: pointer;margin-top: 10px; color: white;  ">  Order History </a>
-                    <a class="nav-link lg:mr-1 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: #fbfaff; margin-top: 11px; "></i> </a>
-                    {% if request.user.is_authenticated %}
-                    
-                    <button class="px-3" style="margin: 5px;  background-color: black; color: white; border-radius:50px;  "  >{{ user.username }}</button>
-                
-                {% else %}
-                <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
-                {% endif %}
-                    
-                    
-                </div>
-            </div>
-        </div>
-    </nav> -->
-    {% if request.user.is_authenticated %}
-<div style="width: 100%;   " >
+    <div class="main" style="position: relative;" >
+        <div style="z-index: 50; position: relative; " > 
 
-   <div class="container py-5 " > <div class="row text-center"> <h2> CART ITEMS  </h2> </div> </div>
-    <div class="container-fluid "   ><div class="row"> 
+  
+
+
+   <div class="container my-5 " > <div class="row text-center"> <h2>  YOUR CART   </h2> </div> </div>
+    <div class="container-fluid "><div class="row"> 
         <div class="col-2 col-md-3 center " id="selectedVariantsContainer" ></div> 
-        <div class="col">
+        <div class="col-2">
 
-         <div  style="width:30vh; border: 2px solid black ; padding: 20px; background-color: #F5F5F5; " >
+         <div  style="width:30vh;  padding: 20px; " class="glas"  >
           <div class="text-center" > <h3> Order Summary </h3> </div>
-          <div style="display: flex; justify-content: space-between; " > <div  > <h5 class="text-secondary"  > Items </h5></div> <div> <h5 id="totalItems" class="text-secondary" > </h5></div> </div>
-          <div style="display: flex; justify-content: space-between; " > <div> <h5 class="text-secondary" > Delivery </h5></div> <div> <h5 class="text-secondary" > Free </h5> </div> </div>
+          <div style="display: flex; justify-content: space-between; " > <div  > <h5 class="text-black"  > Items </h5></div> <div> <h5 id="totalItems" class="text-black" > </h5></div> </div>
+          <div style="display: flex; justify-content: space-between; " > <div> <h5 class="text-black" > Delivery </h5></div> <div> <h5 class="text-black" > Free </h5> </div> </div>
   <hr>     
   
   <div style="display: flex; justify-content: space-between; " > <div  > <h4  > Total </h4></div> <div> <h5 id="totalCost" >  </h5> </div> </div>
-  
+         
+
 </div>
         
         </div> 
+<div class="col  " >  <div id="orderForm" class="p-4 glas " style="display: none; max-width: 500px;    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); max-height: fit-content; border-radius: 5px;">
+    <h4 class="p-1" style="display: inline-block; white-space: nowrap;">Shipping Information</h4>
+    <input type="text" id="name" class="form-control mb-2" value="{{ user.username }}" required>
+    <input type="text" id="address1" placeholder="Address" class="form-control mb-2" value="{{ address }}" required>
+    <input type="text" id="country" placeholder="Country" required class="form-control mb-2">
+    <input type="text" id="city" placeholder="City" required class="form-control mb-2">
+    <input type="text" id="state" placeholder="State" required class="form-control mb-2">
+    
+    <input type="text" id="zip" placeholder="ZIP Code" class="form-control mb-2" required>
+    
+    {% if request.user.is_authenticated %}
+    <p>Please fill all the information to place the order</p>
+    <button id="button-text" onclick="showAlert()" id="placeOrderButton" class="btn btn-outline-secondary">Place Order</button>
+    {% else %}
+    <button onclick="location.href='{% url 'login' %}'" class="btn btn-outline-secondary mt-1">Log In to Place Order</button>
+    {% endif %}
+    <button onclick="hideOrderForm()" class="btn btn-outline-secondary mt-1">Cancel</button>
+</div></div>
 
-
-
+<div></div>
 
 
 </div></div>
-    <!-- <div id="selectedVariantsContainer" class="center" >   </div> -->
+<div style="display: none;" >
+    <p>Country: <span id="displayCountry">Loading...</span></p>
+    <p>State: <span id="displayState">Loading...</span></p>
+    <p>City: <span id="displayCity">Loading...</span></p>
+    <p>Zip: <span id="displayZip">Loading...</span></p>
+    <p>Address: <span id="displayAddress">Loading...</span></p>
+    </div>
 </div>
-{% else %}
-{% endif %}
+<div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+ </div>
+
+</div>
+   
     <script>
         var orderDetails = responseData.orderDetails;
     console.log(orderDetails); // Output: details of the order
+
+    function showOrderForm() {
+        document.getElementById('orderForm').style.display = 'block';
+    }
+
+    function hideOrderForm() {
+        document.getElementById('orderForm').style.display = 'none';
+    }
+
+    function showAlert() {
+        alert('Order place');
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fetch values from localStorage and display the saved address details
+        var country = localStorage.getItem('country') || 'Not provided';
+        var state = localStorage.getItem('state') || 'Not provided';
+        var city = localStorage.getItem('city') || 'Not provided';
+        var zip = localStorage.getItem('zip') || 'Not provided';
+        var address = localStorage.getItem('address') || 'Not provided';
+
+        document.getElementById('displayCountry').textContent = country;
+        document.getElementById('displayState').textContent = state;
+        document.getElementById('displayCity').textContent = city;
+        document.getElementById('displayZip').textContent = zip;
+        document.getElementById('displayAddress').textContent = address;
+        
+
+        document.getElementById('address1').value = address;
+        document.getElementById('city').value = city;
+        document.getElementById('zip').value = zip;
+    });
+
     </script>
+
+
+
+
+    
     {% if user.is_authenticated %}
 <script type="text/javascript">
     var userID = "{{ user.id }}"; // Injected securely from Django template
@@ -157,7 +244,7 @@
         var variantDisplay = document.createElement('div');
         variantDisplay.setAttribute('id', `variant-${index}`);
         variantDisplay.innerHTML = `
-            <div class='dit'   >
+            <div class='dit glas '   >
                 <div style="display: flex; flex-wrap: wrap;  justify-content: space-between; " >
              <div>
              <img src="${variant.imgSrc}" alt="Variant Image" style="width: 10vh; height: 10vh;"></div>
@@ -205,7 +292,7 @@
         return sum + parseFloat(variant.price.replace(/[^0-9.-]+/g,"")); // Assuming price is a string like "$99.99"
     }, 0);
 
-    document.getElementById('totalCost').textContent =  totalCost.toFixed(2)  +' GBP';
+    document.getElementById('totalCost').textContent =  totalCost.toFixed(2) +' GBP';
 }
 
 

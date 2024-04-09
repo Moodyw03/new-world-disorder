@@ -6,7 +6,7 @@ PRINTFUL_API_KEY = os.environ.get('PRINTFUL_API_KEY')
 # settings.py
 
 # WARNING: Storing sensitive information in your source code can lead to security risks.
-PRINTFUL_API_KEY = 'PlRLr2kzXugl1YMRF9k97SGTh9ztgh2e5TYcmlPy'
+PRINTFUL_API_KEY = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
 # settings.py
 
 STRIPE_SECRET_KEY = 'sk_test_51OvFQwRxR89gpN14N8XjbY56QV35xqruH9YCS5yxCWeubXlIY9DWAgxTX5BxKTDGqwTOj5C9n1gp3Q0CMDIdAWFv00kYUL9lOd'

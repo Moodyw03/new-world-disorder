@@ -407,6 +407,9 @@ backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
 border: 1px solid rgba(255, 255, 255, 0.3);
 }
+.social-icon {
+        display: inline-block;
+    }
 
 </style>
 <body>
@@ -414,20 +417,21 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         <div style="z-index: 50; position: relative; " > 
 
 
-     <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+     <nav class="navbar navbar-expand-lg navbar-light  ">
         <div class="container ">
-            <a class="navbar-brand"href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px white; color: beige; " > <h2> New World Disorder <br> EST.2024 </h2> </a>
+          <img src="/static/logo.png" alt="" style="width: 5%; height: 5%; " >
+            <a class="navbar-brand  "href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px beige; color: black; " > <h2>  New World Disorder  <br> EST.2024   </h2>   </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active  " href="{% url 'list_printful_products' %}" style=" margin-top:10px ; color: white; ">Home</a>
-                    <a class="nav-link lg:mr-2 " href="{% url 'view_order_history' %} " style="cursor: pointer; margin-top: 10px;  color: white;  ">  Order History </a>
-                    <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: #fbfaff; margin-top: 20px; "></i> </a>
+                    <a class="nav-link active  " href="{% url 'list_printful_products' %}" style=" margin-top:10px ; color: black; ">Home</a>
+                    <a class="nav-link lg:mr-2 " href="{% url 'view_order_history' %} " style="cursor: pointer; margin-top: 10px; min-width: fit-content; color: black;  "> Profile </a>
+                    <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: black; margin-top: 20px; "></i> </a>
                     {% if request.user.is_authenticated %}
                     
-                    <button class="px-3" style="margin: 5px;  background-color: black; color: white; border-radius:50px;  "  >{{ user.username }}</button>
+                    
                     <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
                         <button type="submit" style="margin: 5px;  background-color: black; color: white; border-radius:50px;  "   >Logout</button>
@@ -460,7 +464,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     {% if request.user.is_authenticated %}
 
 
-    <div class="container mt-5 "  >
+    <div class="container mt-3 "  >
        <div class="row">
            <div class=" col-4 col-lg-4"> <div id="username-display" > <label for=""> <h2> <strong>Username:</strong> </h2>  </label>  <div style="display: flex;" > <h5  > {{ user.username }} </h5> <button class="btn"  onclick="toggleEdit('username')" ><i class="fa-solid fa-pen "></i></button> </div></div>  <div id="username-edit" style="display:none">
                <label for="username"><h2> <strong>Username:</strong> </h2></label> <br>
@@ -616,10 +620,10 @@ border: 1px solid rgba(255, 255, 255, 0.3);
        {% if request.user.is_authenticated %}
        <form action="{% url 'logout' %}" method="post">
            {% csrf_token %}
-           <h2 style="text-align: center;" class="my-5" >Order History</h2>
+           <h2 style="text-align: center;" class="my-2" >Order History</h2>
        </form>
        {% else %}
-       <h2 style="text-align: center;" class="my-5" >PLease Login First</h2>
+       <h2 style="text-align: center;" class="my-2" >PLease Login First</h2>
        {% endif %}
     
     <!-- <div class="container-fluid">
@@ -702,7 +706,16 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     
                 
     
-    <div class="container-fluid bg-dark  text-center fixed-bottom  "> <p class="text-white pt-1 " > @New World Disorder EST 2024. All right reserved </p> </div>
+<div class="container-fluid bg-dark text-center fixed-bottom">
+  <p class="text-white pt-1">
+      <a href="https://www.facebook.com/yourfacebookpage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-facebook" style="color: #316FF6;"></i></div> </a>
+      <a href="https://www.instagram.com/yourinstagrampage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-instagram" style="background: linear-gradient(90deg, #ffdf9e, #ffc273, #e56969, #c1558b, #8a49a1);"></i></div> </a>
+      <div class="social-icon"  style="color: white;" >@New World Disorder EST 2024. All rights reserved</div>
+      <a href="https://twitter.com/yourtwitterpage" style="text-decoration: none;" > <div class="social-icon" style="margin-left: 10px; margin-right: 10px;"><i class="fa-brands fa-twitter" style="color: #1DA1F2;"></i></div> </a>
+      <a href="https://wa.me/yourwhatsappnumber" style="text-decoration: none;" ><div class="social-icon" style="margin-left: 10px;"><i class="fa-brands fa-whatsapp" style="color: #128C7E;"></i></div> </a>
+  </p>
+</div>
+
 
 <script>
  document.addEventListener('DOMContentLoaded', function() {
