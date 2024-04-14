@@ -20,9 +20,8 @@
 
 <body>
         
-
-    <div class="main" style="position: relative;" >
-        <div style="z-index: 50; position: relative; " > 
+<div>
+    
             <nav class="navbar navbar-expand-lg navbar-light ">
                 <div class="container p-4">
                     <img src="/static/logo.png" alt="" style="width: 5%; height: 5%; " >
@@ -36,13 +35,13 @@
                             <a class="nav-link lg:mr-2 " href="{% url 'view_order_history' %} " style="cursor: pointer;margin-top: 10px; color: black; min-width: fit-content;  ">  Profile </a>
                             <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: black; margin-top: 11px; "></i> </a>
                             
-                            {% if request.user.is_authenticated %}
                             
-                                <button class="px-3" style="margin: 5px;  background-color: black; color: white; border-radius:50px;  "  >{{ user.username }}</button>
                             
-                            {% else %}
+                                
+                            
+                            
                             <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
-                            {% endif %}
+                            
                             
                         </div>
                     </div>
@@ -56,31 +55,12 @@
         
            <div class="text-center" > <h2 style="color: black; text-decoration: underline; " > OUR PRODUCTS </h2> </div>
            
-        <!-- Set up your HTML -->
+
+        
+        
         <!-- <div class="owl-carousel  position-relative z-index-50">
         
             {% for product in products %}
-            <div  class="imgs py-3 mx-4 " style=" min-width: fit-content; "  >
-                <div class="col-2 text-center  " onclick="location.href='{% url 'product-detail' product.id %}'" style="cursor:pointer;">
-                    <div class="card card-block"  >
-                        <div class="text-end"></div>
-        
-                        <div class="mr-5" ><img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product"></div>
-                        
-                    </div>
-                </div>
-                <div class="card-body mt-3 " style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center; ">
-                    <h5 class="card-text text-center" style="color: white;" >{{ product.name }}</h5>
-                </div>
-            </div>
-            {% endfor %}
-        
-        </div> -->
-        
-        
-        <div class="owl-carousel  position-relative z-index-50">
-        
-            {% for product in products %}
             <div class="imgs mx-4 pb-3 " >
             <div class=" mx-4  " style="border: 1px solid white; border-radius: 20px; background-color: white;  width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer; "   onclick="location.href='{% url 'product-detail' product.id %}'"  >
                 <div  style="width: fit-content;"  >
@@ -113,69 +93,88 @@
         
         </div>
         
+
+
+
+
+        <div class="owl-carousel  position-relative z-index-50">
         
-        <!-- <div class="owl-carousel p-4 position-relative  z-index-50 ">
             {% for product in products %}
-            <div class="col-2" onclick="location.href='{% url 'product-detail' product.id %}'"  style="cursor:pointer; " >
-                <div class="card card-block"  >
-                    <div class="text-end"></div>
-                    
-                    <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product"  >
-                    <div class="card-body" style="display: inline-block; white-space: nowrap;  " >
-                        
-                        <h5 class="card-text text-center"   >{{ product.name }}</h5>
+            <div class="imgs mx-4 pb-3 " >
+            <div class=" mx-4  " style="border: 1px solid white; border-radius: 20px; background-color: white;  width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer; "   onclick="location.href='{% url 'product-detail' product.id %}'"  >
+                <div  style="width: fit-content;"  >
+                    <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;" >
+                </div>
+                <div class="card-body mt-3 " style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center; ">
+                    <h5 class="card-text text-center" style="color: black;" >{{ product.name }}</h5>
+                </div>  
+                 </div>
+                </div>
+            {% endfor %}
+        
+        </div> -->
+
+        
+ 
+   
+        <div class="owl-carousel  position-relative z-index-50">
+            {% for product in products %}
+            {% if forloop.counter <= 11 %}
+            <div class="imgs mx-4 pb-3">
+                <div class="mx-4" style="border: 1px solid white; border-radius: 20px; background-color: white; width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer;" onclick="location.href='{% url 'product-detail' product.id %}'">
+                    <div style="width: fit-content;">
+                        <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;">
+                    </div>
+                    <div class="card-body mt-3" style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center;">
+                        <h5 class="card-text text-center" style="color: black;">{{ product.name }}</h5>
                     </div>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
-        </div> -->
-        
         </div>
-        <div class="background">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-         </div>
-
-    </div>
-
+        
+        <div class="owl-carousel  position-relative z-index-50">
+            {% for product in products %}
+            {% if forloop.counter > 11 and forloop.counter <= 22 %}
+            <div class="imgs mx-4 pb-3">
+                <div class="mx-4" style="border: 1px solid white; border-radius: 20px; background-color: white; width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer;" onclick="location.href='{% url 'product-detail' product.id %}'">
+                    <div style="width: fit-content;">
+                        <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;">
+                    </div>
+                    <div class="card-body mt-3" style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center;">
+                        <h5 class="card-text text-center" style="color: black;">{{ product.name }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+        <div class="owl-carousel  position-relative z-index-50">
+            {% for product in products %}
+            {% if forloop.counter > 22 %}
+            <div class="imgs mx-4 pb-3">
+                <div class="mx-4" style="border: 1px solid white; border-radius: 20px; background-color: white; width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer;" onclick="location.href='{% url 'product-detail' product.id %}'">
+                    <div style="width: fit-content;">
+                        <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;">
+                    </div>
+                    <div class="card-body mt-3" style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center;">
+                        <h5 class="card-text text-center" style="color: black;">{{ product.name }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
    
 
 
 
 
 
-    <div class="container-fluid bg-dark text-center fixed-bottom">
+    <div class="container-fluid bg-dark text-center  mt-2 ">
         <p class="text-white pt-1">
             <a href="https://www.facebook.com/yourfacebookpage" style="text-decoration: none;" > <div  style="margin-right: 10px; display: inline-block;"><i class="fa-brands fa-facebook" style="color: #316FF6;"></i></div> </a>
             <a href="https://www.instagram.com/yourinstagrampage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px; display: inline-block; "><i class="fa-brands fa-instagram" style="background: linear-gradient(90deg, #ffdf9e, #ffc273, #e56969, #c1558b, #8a49a1);"></i></div> </a>
@@ -186,7 +185,7 @@
       </div>
 
 
-
+    </div>
         <script src="jquery.min.js"></script>
         <script src="owlcarousel/owl.carousel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

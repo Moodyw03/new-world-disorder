@@ -11,58 +11,22 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import stripe
-
-
+import aiohttp
+import asyncio
+from aiohttp import ClientSession
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-# Function for the fetching the Product
-def fetch_product_data(api_url, headers):
-    response = requests.get(api_url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    return None
+# # Function for the fetching the Product
+# def fetch_product_data(api_url, headers):
+#     response = requests.get(api_url, headers=headers)
+#     if response.status_code == 200:
+#         return response.json()
+#     return None
 
 
-
-def list_printful_products(request):
-    api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
-    first_api_url = 'https://api.printful.com/store/products'
-    headers = {'Authorization': f'Bearer {api_key}'}
-    
-    # Fetch product IDs from the first API endpoint
-    data = fetch_product_data(first_api_url, headers)
-    
-    if data and data.get('result'):
-        products = data['result']  # Retrieve all products from the API response
-        detailed_product_data = []
-        
-        for product in products:
-            product_id = product['id']
-            second_api_url = f'https://api.printful.com/store/products/{product_id}'
-            detailed_product_data.append(fetch_product_data(second_api_url, headers))
-        
-        # Call managejsonify() function and get the JSON data
-        json_data = managejsonify(detailed_product_data)
-        
-        # Pass the JSON data to the template context
-        context = {
-            'products': json_data,
-        }
-        
-        # Render the template with the product data in the context
-        return render(request, 't.html', context)
-        
-    else:
-        # Handle the case where data or 'result' key is missing
-        return HttpResponse("Error: No product data found")
-
-
-
-
-
-
-
-
+async def fetch_product_data(session, url, headers):
+    async with session.get(url, headers=headers) as response:
+        return await response.json()
 
 def managejsonify(product_data):
     simplified_products = []
@@ -87,16 +51,110 @@ def managejsonify(product_data):
                     'color': variant.get('color', 'Unknown Color'),
                     'price': variant.get('retail_price', 'No Price Available'),
                     'currency': variant.get('currency', 'No Currency Available'),
-                    'image_url': variant['product']['image'] if 'product' in variant and 'image' in variant['product'] else 'No Image Available'
-
+                    'image_url': variant['files'][0]['preview_url'] if 'files' in variant and variant['files'] else 'No Image Available'
                 }
                 
                 simplified_product['variants'].append(variant_info)
 
             simplified_products.append(simplified_product)
         
-
     return simplified_products
+
+async def list_printful_products(request):
+    try:
+        api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
+        first_api_url = 'https://api.printful.com/store/products'
+        headers = {'Authorization': f'Bearer {api_key}'}
+        all_product_data = []
+
+        async with ClientSession() as session:
+            while first_api_url:
+                async with session.get(first_api_url, headers=headers, params={'limit': 40}) as response:
+                    data = await response.json()
+
+                if data and data.get('result'):
+                    products = data['result']
+                    all_product_data.extend(products)
+
+                    # Check for pagination
+                    if 'paging' in data and 'next' in data['paging']:
+                        first_api_url = data['paging']['next']
+                    else:
+                        first_api_url = None
+                else:
+                    # Handle the case where data or 'result' key is missing
+                    return HttpResponse("Error: No product data found")
+
+            # Fetch detailed product data asynchronously
+            tasks = []
+            for product in all_product_data:
+                product_id = product['id']
+                second_api_url = f'https://api.printful.com/store/products/{product_id}'
+                task = fetch_product_data(session, second_api_url, headers)
+                tasks.append(task)
+
+            detailed_product_data = await asyncio.gather(*tasks)
+
+            # Process detailed product data
+            json_data = managejsonify(detailed_product_data)
+
+            # Render the template with the product data in the context
+            context = {
+                'products': json_data,
+            }
+            return render(request, 't.html', context)
+    except Exception as e:
+        # Handle exceptions and return an error response
+        print(f"Error: {str(e)}")
+        return HttpResponse("Error: Failed to fetch product data")
+
+# Django view function
+async def printful_products_view(request):
+    products = await list_printful_products(request)
+
+    context = {
+        'products': products,
+    }
+    return render(request, 't.html', context)
+
+
+
+
+
+
+# def managejsonify(product_data):
+#     simplified_products = []
+
+#     for product in product_data:
+#         if 'result' in product and 'sync_product' in product['result']:
+#             product_info = product['result']['sync_product']
+#             variants = product['result'].get('sync_variants', [])
+
+#             simplified_product = {
+#                 'id': product_info['id'],
+#                 'name': product_info['name'],
+#                 'thumbnail_url': product_info.get('thumbnail_url', 'No Thumbnail Available'),
+#                 'variants': []
+#             }
+
+#             for variant in variants:
+#                 variant_info = {
+#                     'variant_id': variant['id'],
+#                     'name': variant['name'],
+#                     'size': variant.get('size', 'Unknown Size'),
+#                     'color': variant.get('color', 'Unknown Color'),
+#                     'price': variant.get('retail_price', 'No Price Available'),
+#                     'currency': variant.get('currency', 'No Currency Available'),
+#                     'image_url': variant['product']['image'] if 'product' in variant and 'image' in variant['product'] else 'No Image Available'
+
+#                 }
+                
+#                 simplified_product['variants'].append(variant_info)
+
+#             simplified_products.append(simplified_product)
+        
+
+#     return simplified_products
     
 
 
