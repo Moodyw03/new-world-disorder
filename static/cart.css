@@ -1,0 +1,61 @@
+.custom-button {
+    background-color: black;
+    color: white;
+    border: none;
+
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.cartb{
+    background-color: transparent;
+
+    padding: 10px 20px;
+    cursor: pointer;
+
+}
+.center {
+  margin-left: 2%;
+  width: 45%;
+  border: 1px black ;
+
+
+
+}
+.dit{
+    border: 3px solid black;
+    margin-bottom: 44px;
+
+    padding: 1%;
+
+
+;
+}
+
+  .glas{
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.1);
+
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.social-icon {
+  display: inline-block;
+}
+body {
+    /* Replace 'your-background-image.jpg' with the path to your image */
+    /* This ensures that the background image covers the entire body */
+    /* Prevents the background image from repeating */
+   /* You can add more CSS properties here to style the background */
+   font-family: 'Courier New', Courier, monospace;
+   background: linear-gradient(270deg, #ede8eb, #271cba24, #edecfb, #ffffff);
+     background-size: 800% 800%;
+     animation: AnimationName 15s ease infinite;
+
+   }
+   @keyframes AnimationName {
+     0%{background-position:0% 50%}
+     50%{background-position:100% 50%}
+     100%{background-position:0% 50%}
+   }

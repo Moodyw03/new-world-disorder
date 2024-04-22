@@ -5,220 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="login.css">
 </head>
-<style>
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    .container {
-        animation: fadeIn 1s ease-out;
-    }
-   
-   
-    .error-message {
-        color: red;
-        font-size: 0.8em;
-    }
-    
-    body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        flex-direction: column;
-    }
-
-    .container, .row {
-        width: 100%;
-        max-width: 400px;
-        
-    }
-
-    .one, .div1 {
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .div1 {
-        background-color: black;
-        color: whitesmoke;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .form-group, .btn-primary {
-        margin-bottom: 20px;
-        position: relative;
-    }
-
-    /* Error message styling */
-    .error-message {
-        color: red;
-        font-size: 0.8em;
-    }
-    
-      
-
-    /* Adjusting for responsive design */
-    @media (max-width: 768px) {
-        body, .row, .one, .div1 {
-            flex-direction: column;
-            padding: 10px;
-        }
-
-        .form-control, .btn-primary {
-            font-size: 16px;
-        }
-
-        #text {
-            font-size: 1.5em;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .form-control, .btn-primary {
-            font-size: 14px;
-        }
-
-        #text {
-            font-size: 1.2em;
-            white-space: nowrap; /* Prevent text from wrapping */
-            overflow: hidden;
-        }
-    }
-
-    /* Equal heights using Flexbox for the .row container */
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .one, .div1 {
-        flex: 1; /* Equal height for both divs */
-    }
-
-   
-    .btn-primary{
-        width:300px;
-        background-color:black;
-        border:black;
-    }  
-
-
-.form-group.focused .form-control {
-            border-color: #832fb6;
-            box-shadow: 0 0 0 0.2rem rgba(131, 47, 182, 0.25);
-        }
-        .error {
-            color: red;
-        }
-
-
-        body {
-          background-image: url('/static/nwdlogin.png'); /* Replace 'your-background-image.jpg' with the path to your image */
-          background-size: cover; /* This ensures that the background image covers the entire body */
-          background-repeat: no-repeat; /* Prevents the background image from repeating */
-          /* You can add more CSS properties here to style the background */
-          font-family: 'Courier New', Courier, monospace;
-        }
-
-        .glas{
-    /* From https://css.glass */
-background: rgba(255, 255, 255, 0.1);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
-}
-.image-container {
-    max-width: 100%; 
-    text-align: center;
-  }
-  
-  .image-container img {
-    width: 100%;
-    height: auto;
-  }
-
-          
-</style>
-
 <body>
-    
-         
+    {% csrf_token %}
+    {% if username_error %}
+        <div class="error-message  p-2 " style="background-color: pink; color: black; text-align: center; font-weight:bolder ; " >{{ username_error }}</div>
+    {% endif %}
+    <div style="position: relative;  width: 100vw; height: 100vh; " >  
+        <img src="/static/nwdlogin.png" alt="" style=" object-fit: full; width: 100vw; height: 100%;  " >
+
+        <div style="position: absolute; left: 0; top: 20vh; width: 100vw; height: 100vh;  " >
             <div class="d-flex  justify-content-center align-items-center" style="position: relative; z-index:50 ; " >
                 <div class="row g-0">
-                    <div class="col one glas equal-height p-5 ">
+                    <div class="col one glas equal-height p-5">
                         <form method="post" id="loginForm">
                             {% csrf_token %}
-                            {% if error %}
-                            <div class="error-message" {{error}}></div>
-                            {% endif %}
-                            <div class="form-group pb-2"  style="position: relative;"  >
-                                <label for="username" style="font-size: 20px;">Name</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your full name" required >
-                                <div id="error-message" class="error"></div><br>
-                            </div>
                             
+                            <div class="form-group pb-2" style="position: relative;">
+                                <label for="username" style="font-size: 20px;">Name</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your full name" required>
+                                <div id="usernameError" class="error">{{ username_error }}</div><br>
+                            </div>
+                                    
                             <div class="form-group pb-2">
                                 <label for="password" style="font-size: 20px;">Password</label>
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required >
-                                <div id="passwordError" class="error"></div><br>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                                <div id="passwordError" class="error">{{ password_error }}</div><br>
                             </div>
-                            <button type="submit" class="btn btn-primary"  style="position: relative;" >Log IN</button>
+                            <button type="submit" class="btn btn-primary" style="position: relative;">Log IN</button>
                         </form>
-                        <p  style="position: relative;" >Don't have an account? <a href="{% url 'register' %}" style="color:blue;" >Sign up</a>
+                        <p style="position: relative;">Don't have an account? <a href="{% url 'register' %}" style="color:blue;">GET STARTED</a></p>
                     </div>
                     
-                   
-                    </div>
-                </div>
-       
 
-
-    
-   
-
-        <div class="container-fluid bg-dark  text-center fixed-bottom "  > <p class="text-white pt-1 "  > @New World Disorder EST 2024. All right reserved </p> </div>
+        <div class="container-fluid bg-dark  text-center fixed-bottom "  > 
+            <p class="text-white pt-1 "  > @New World Disorder EST 2024. All right reserved </p> 
+        </div>
+    </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                var usernameError = document.getElementById('usernameError');
+                var passwordError = document.getElementById('passwordError');
 
+                // Clear any existing error messages
+                usernameError.textContent = '';
+                passwordError.textContent = '';
 
+                if (username.trim() === '') {
+                    usernameError.textContent = 'Please enter your username.';
+                    event.preventDefault(); // Prevent the form from being submitted
+                }
 
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            console.log("hello")
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            
-            if (username === '' || password === '') {
-                alert('Please fill in all fields');
-                event.preventDefault(); // Prevent the form from being submitted
-            }
+                if (password.trim() === '') {
+                    passwordError.textContent = 'Please enter your password.';
+                    event.preventDefault(); // Prevent the form from being submitted
+                }
+            });
         });
-        
-        
-    
-        
-
-
-
-
     </script>
-    
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        
-    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>

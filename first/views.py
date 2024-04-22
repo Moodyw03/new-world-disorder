@@ -16,17 +16,52 @@ import asyncio
 from aiohttp import ClientSession
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-# # Function for the fetching the Product
-# def fetch_product_data(api_url, headers):
-#     response = requests.get(api_url, headers=headers)
-#     if response.status_code == 200:
-#         return response.json()
-#     return None
+# Function for the fetching the Product
+def fetch_product_data(api_url, headers):
+    response = requests.get(api_url, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    return None
 
 
-async def fetch_product_data(session, url, headers):
-    async with session.get(url, headers=headers) as response:
-        return await response.json()
+def list_printful_products(request):
+    api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
+    first_api_url = 'https://api.printful.com/store/products'
+    headers = {'Authorization': f'Bearer {api_key}'}
+
+    # Fetch product IDs from the first API endpoint
+    with requests.get(first_api_url, headers=headers, params={'limit': 40}) as response:
+        data = response.json()  # Parse the JSON response
+
+    if data and data.get('result'):
+        products = data['result']  # Retrieve all products from the API response
+        detailed_product_data = []
+
+        for product in products:
+            product_id = product['id']
+            second_api_url = f'https://api.printful.com/store/products/{product_id}'
+            with requests.get(second_api_url, headers=headers) as response:
+                detailed_product_data.append(response.json())
+
+        # Call managejsonify() function and get the JSON data
+        json_data = managejsonify(detailed_product_data)
+
+        # Pass the JSON data to the template context
+        context = {
+            'products': json_data,
+        }
+
+        # Render the template with the product data in the context
+        return render(request, 't.html', context)
+
+    else:
+        # Handle the case where data or 'result' key is missing
+        return HttpResponse("Error: No product data found")
+
+
+
+
+
 
 def managejsonify(product_data):
     simplified_products = []
@@ -51,111 +86,17 @@ def managejsonify(product_data):
                     'color': variant.get('color', 'Unknown Color'),
                     'price': variant.get('retail_price', 'No Price Available'),
                     'currency': variant.get('currency', 'No Currency Available'),
-                    'image_url': variant['files'][0]['preview_url'] if 'files' in variant and variant['files'] else 'No Image Available'
+                    'image_url': variant['product']['image'] if 'product' in variant and 'image' in variant['product'] else 'No Image Available'
+
                 }
-                
+
                 simplified_product['variants'].append(variant_info)
 
             simplified_products.append(simplified_product)
-        
+
+
     return simplified_products
 
-async def list_printful_products(request):
-    try:
-        api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
-        first_api_url = 'https://api.printful.com/store/products'
-        headers = {'Authorization': f'Bearer {api_key}'}
-        all_product_data = []
-
-        async with ClientSession() as session:
-            while first_api_url:
-                async with session.get(first_api_url, headers=headers, params={'limit': 40}) as response:
-                    data = await response.json()
-
-                if data and data.get('result'):
-                    products = data['result']
-                    all_product_data.extend(products)
-
-                    # Check for pagination
-                    if 'paging' in data and 'next' in data['paging']:
-                        first_api_url = data['paging']['next']
-                    else:
-                        first_api_url = None
-                else:
-                    # Handle the case where data or 'result' key is missing
-                    return HttpResponse("Error: No product data found")
-
-            # Fetch detailed product data asynchronously
-            tasks = []
-            for product in all_product_data:
-                product_id = product['id']
-                second_api_url = f'https://api.printful.com/store/products/{product_id}'
-                task = fetch_product_data(session, second_api_url, headers)
-                tasks.append(task)
-
-            detailed_product_data = await asyncio.gather(*tasks)
-
-            # Process detailed product data
-            json_data = managejsonify(detailed_product_data)
-
-            # Render the template with the product data in the context
-            context = {
-                'products': json_data,
-            }
-            return render(request, 't.html', context)
-    except Exception as e:
-        # Handle exceptions and return an error response
-        print(f"Error: {str(e)}")
-        return HttpResponse("Error: Failed to fetch product data")
-
-# Django view function
-async def printful_products_view(request):
-    products = await list_printful_products(request)
-
-    context = {
-        'products': products,
-    }
-    return render(request, 't.html', context)
-
-
-
-
-
-
-# def managejsonify(product_data):
-#     simplified_products = []
-
-#     for product in product_data:
-#         if 'result' in product and 'sync_product' in product['result']:
-#             product_info = product['result']['sync_product']
-#             variants = product['result'].get('sync_variants', [])
-
-#             simplified_product = {
-#                 'id': product_info['id'],
-#                 'name': product_info['name'],
-#                 'thumbnail_url': product_info.get('thumbnail_url', 'No Thumbnail Available'),
-#                 'variants': []
-#             }
-
-#             for variant in variants:
-#                 variant_info = {
-#                     'variant_id': variant['id'],
-#                     'name': variant['name'],
-#                     'size': variant.get('size', 'Unknown Size'),
-#                     'color': variant.get('color', 'Unknown Color'),
-#                     'price': variant.get('retail_price', 'No Price Available'),
-#                     'currency': variant.get('currency', 'No Currency Available'),
-#                     'image_url': variant['product']['image'] if 'product' in variant and 'image' in variant['product'] else 'No Image Available'
-
-#                 }
-                
-#                 simplified_product['variants'].append(variant_info)
-
-#             simplified_products.append(simplified_product)
-        
-
-#     return simplified_products
-    
 
 
 
@@ -191,12 +132,12 @@ def product_detail(request, productId):
         print("here")
         variant_ino = variants_info[0]
         print(variant_ino["files"][2]["preview_url"])
-           
+
     except requests.RequestException:
         raise Http404("Product does not exist")
 
     return render(request, 'product_detail.html', {'product': product})
-    
+
 @csrf_exempt
 
 @require_POST
@@ -211,25 +152,25 @@ def place_order(request):
         try:
             api_url = 'https://api.printful.com/orders'
             api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
-            
+
             # Parse JSON data from the request body
             data = json.loads(request.body)
-            
+
             # Extract recipient details from the request
             recipient_details = data.get('recipient', {})
-            
+
             # Initialize the items list for the API request
             items_for_api = []
-            
+
             # Iterate over each item in the received items list
             for item in data.get('items', []):
                 # Extract item details
                 variant_id = item.get('variant_id')
                 quantity = item.get('quantity')
                 price = item.get('price')
-                
+
                 image_url = item.get('image_url')  # Correctly structured from the client
-                
+
                 # Append item details, including the image_url inside 'files'
                 items_for_api.append({
                     "variant_id": variant_id,
@@ -242,35 +183,35 @@ def place_order(request):
                         }
                     ]
                 })
-             
-            
+
+
             # Forming the complete order data for the API request
             order_data = {
                 "recipient": recipient_details,
                 "items": items_for_api
             }
             print(order_data)
-            
+
             headers = {
                 'Authorization': f'Bearer {api_key}',
                 'Content-Type': 'application/json'
             }
-            
+
             # Sending the order to the external API
             response = requests.post(api_url, json=order_data, headers=headers)
             # print(response.status_code)
-            
+
             if response.status_code in [200, 201]:
                 # Retrieve the current order history from the session or initialize it if not present
                 order_history = request.session.get('order_history', [])
-                
+
                 # Append the new order to the order history list
                 order_history.append(order_data)
-                
+
                 # Save the updated order history back to the session
                 request.session['order_history'] = order_history
                 request.session.modified = True  # Mark the session as modified to save changes
-                
+
                 return JsonResponse({'status': 'success', 'message': 'Order placed successfully.'})
             else:
                 # Handle API error
@@ -307,9 +248,9 @@ def view_order_history(request):
 def proxy_to_external_api(request):
     # Make a GET request to the external API
     response = requests.get('https://api.printful.com/countries')
-    
+
     # Return the API response as a JSON response
-    return JsonResponse(response.json(), safe=False)  
+    return JsonResponse(response.json(), safe=False)
 
 # external_api_url = f'https://api.printful.com/states/{country_code}'
 
@@ -327,7 +268,7 @@ def get_states_for_country(request, country_code):
         # Log any exceptions thrown during processing
         print(f"Exception occurred: {e}")
         return JsonResponse({'error': 'An error occurred processing your request'}, status=500)
-    
+
 
 
 stripe.api_key = 'sk_test_51OvFQwRxR89gpN14N8XjbY56QV35xqruH9YCS5yxCWeubXlIY9DWAgxTX5BxKTDGqwTOj5C9n1gp3Q0CMDIdAWFv00kYUL9lOd'
@@ -339,11 +280,11 @@ def create_payment(request):
     if request.method == 'POST':
         try:
             # Parse JSON data from the request body
-            
+
 
             # Create a Stripe PaymentIntent
             intent = stripe.PaymentIntent.create(
-                amount=00,  # Replace with your calculation logic
+                amount=25.00,  # Replace with your calculation logic
                 currency='gbp',
                 payment_method_types=['card'],
                 # Optionally, you can add metadata or other parameters here
@@ -361,10 +302,10 @@ def create_payment(request):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
-        
+
 
 def payment_form(request):
-    return render(request, 'payment_form.html')        
+    return render(request, 'payment_form.html')
 
 
 

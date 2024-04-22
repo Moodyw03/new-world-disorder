@@ -1,6 +1,6 @@
 import os
-import firebase_admin
-from firebase_admin import credentials
+# import firebase_admin
+# from firebase_admin import credentials
 PRINTFUL_API_KEY = os.environ.get('PRINTFUL_API_KEY')
 
 # settings.py
@@ -95,19 +95,15 @@ WSGI_APPLICATION = 'first.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 # Firebase Configuration
-FIREBASE_CONFIG_FILE = 'C:\\Users\\Binary Bridges\\Desktop\\first\\firebase_config.json'
-cred = credentials.Certificate(FIREBASE_CONFIG_FILE)
-firebase_admin.initialize_app(cred)
+# FIREBASE_CONFIG_FILE = 'C:\Users\Binary Bridges\Desktop\first\first\firebase_config.json'
+# cred = credentials.Certificate(FIREBASE_CONFIG_FILE)
+# firebase_admin.initialize_app(cred)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'AUTHENTICATION_BACKENDS ': {
-        'ENGINE': 'django_firebase_app.firebase',
-        'CREDENTIALS': cred,
-        'NAME': 'default',
-    }
+   
 }
 
 

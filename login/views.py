@@ -11,29 +11,30 @@ import json
 from django.contrib.auth.decorators import login_required
 
 
+from django.contrib.auth import authenticate
+
 def user_login(request):
     context = {
-        'username_error': '',
+        'username_error': '',  # Initialize username_error as an empty string
         'password_error': '',
+        'error': ''
     }
 
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
             return redirect('list_printful_products')
         else:
-            # Check if the username exists
-            context = {'error': 'Invalid username or password.'}
-            if not User.objects.filter(username=username).exists():
-                context['username_error'] = 'Invalid username. Please try again.'
-            else:
-                context['password_error'] = 'Invalid password. Please try again.'
-    
+            # Authentication failed
+            context['error'] = 'Invalid Credentials'
+            context['username_error'] = 'Invalid Credentials.'  # Set username_error here
+
     return render(request, 'login/login.html', context)
+
 
 
 def user_logout(request):

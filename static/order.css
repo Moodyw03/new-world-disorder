@@ -1,0 +1,67 @@
+.custom-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+.glas{
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.social-icon {
+        display: inline-block;
+    }
+    body {
+  background-image: url('/static/nwdt.png'); /* Replace 'your-background-image.jpg' with the path to your image */
+  background-size: cover; /* This ensures that the background image covers the entire body */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+  /* You can add more CSS properties here to style the background */
+  font-family: 'Courier New', Courier, monospace;   
+  }
