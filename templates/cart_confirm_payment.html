@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Replace orderData with your actual order data object
+    var orderData = {
+        // Your order data properties here
+    };
+
+    fetch('/send_order_to_printful_using_cart/')
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(error => Promise.reject(error));
+        }
+        return response.json();
+    })
+    .then(data => {
+       window.location.href = "https://www.newworlddisorder.shop/order_history/";
+    })
+    .catch(error => {
+      window.location.href = "https://www.newworlddisorder.shop/order_history/";
+
+    });
+</script>
+</body>
+
+</html>

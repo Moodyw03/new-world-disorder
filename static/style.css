@@ -82,14 +82,36 @@ animation: AnimationName 15s ease infinite;
 .modal-backdrop {
 backdrop-filter: blur(5px);
 }
-.modal-dialog {
-position: absolute;
-top: 35%;
-left: 35%;
-transform: translate(-50%, -50%);
-width: 50vw;
+.modal {
+display: flex;
+align-items: center;
+justify-content: center;
+position: fixed;
+margin-top:29vh;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
 }
+
+.modal-dialog {
+position: relative;
+width: auto;
+margin: 0;
+}
+
+@media (min-width: 576px) {
+.modal-dialog {
+max-width: 500px; /* Adjust the maximum width as needed */
+}
+}
+
+
 
 .social-icon {
 display: inline-block;
+}
+#scrollable-modal {
+max-height: 15vh; /* Adjust the max-height according to your design */
+overflow-y: auto;
 }

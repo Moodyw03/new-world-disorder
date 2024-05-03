@@ -19,25 +19,33 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/static/style.css">
-
 </head>
 
 <body>
 <!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal container-fluid " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">About Us</h5>
+        <h5 class="modal-title" id="exampleModalLabel">"about us" is "Manifesto"</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        Your Text Goes here
+      <div class="modal-body" id="scrollable-modal" >
+        Hey there, welcome to New World Disorder! <br>
+You've just stepped into a place where fashion isn't just worn; it's experienced. Here at New World Disorder, we're not just making clothes. We're creating exclusive pieces that break the mold and tell a story—your story.
+<br>Why 33? Because Unique is Our Middle Name <br>
+<br>Each of our t-shirt designs is limited to just 33 pieces. That’s right—once they're gone, they're gone. They really are limited edition!
+<br>Exclusive Means Exclusive<br>
+<br>Every time a design sells out, it’s retired to make room for something new and exciting. Owning one of our tees means you’re wearing a piece of art that only a select few can claim. Plus, it’s a cool way to show off your unique style.
+<br>Get First Dibs<br>
+<br>By signing up with us, you’re not just buying a t-shirt. You’re joining a club. <br> Our members get first dibs on new releases and exclusive access to special gear, like rare accessories that we throw into the mix now and then. It’s all about giving you the first crack at all the coolest stuff we come up with.
+Ready to Jump In?<br>
+Join our crew, embrace the exclusivity, and let's make a statement together. Dive into the disorder!
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn" data-dismiss="modal"  style="background-color:black; color:white; " >Close</button>
       </div>
     </div>
   </div>
@@ -47,44 +55,9 @@
 
         <div style="position: absolute; left: 0; top: 0; width: 100vw; height: 100vh;  " >
 
-                 <nav class="navbar navbar-expand-lg navbar-light ">
-                <div class="container p-4">
 
 
-                    <img src="/static/logo.png"  class="d-none d-sm-block" alt="" style="width: 5%; height: 5%; "  >
-                    <div style="display:flex; justify-content: space-between; width: 100vw; " >
-                    <div>
-                    <a class="navbar-brand  "href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px beige; color: black; " > <h5> New World Disorder  <div style="width: fit-content; font-size:15px; " > EST.2024   </h5>   </a></div>
-                    <div><button class="navbar-toggler" style="width: fit-content;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button></div></div>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav ms-auto">
-                            <a class="nav-link active  " href="{% url 'list_printful_products' %}" style="margin-top: 10px; color: black; ">Home</a>
-                            <a class="nav-link lg:mr-2 " href="{% url 'view_order_history' %} " style="cursor: pointer;margin-top: 10px; color: black; min-width: fit-content;  ">  Profile </a>
-                            <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: black; margin-top: 11px; "></i> </a>
-
-
-
-
-
-
-                          {% if request.user.is_authenticated %}
-                            <form action="{% url 'logout' %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="custom-button  mt-2 mr-2 "   >Logout</button>
-                            </form>
-                            {% else %}
-                        <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button  "   style="width: 150px;" > Sign up</button> </a>
-                            {% endif %}
-
-                           <button type="button" class="custom-button mt-2 " data-toggle="modal" data-target="#exampleModal" style="height: fit-content; width: 150px; " >About Us</button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-
+{% include 'check.html' with show_button=True %}
 
 
 
@@ -94,70 +67,13 @@
 
 
 
-        <!-- <div class="owl-carousel  position-relative z-index-50">
-
-            {% for product in products %}
-            <div class="imgs mx-4 pb-3 " >
-            <div class=" mx-4  " style="border: 1px solid white;  background-color: white;  width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer; "   onclick="location.href='{% url 'product-detail' product.id %}'"  >
-                <div  style="width: fit-content;"  >
-                    <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;" >
-                </div>
-                <div class="card-body mt-3 " style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center; ">
-                    <h5 class="card-text text-center" style="color: black;" >{{ product.name }}</h5>
-                </div>
-                 </div>
-                </div>
-            {% endfor %}
-
-        </div>
 
 
-        <div class="owl-carousel  position-relative z-index-50">
-
-            {% for product in products %}
-            <div class="imgs mx-4 pb-3 " >
-            <div class=" mx-4  " style="border: 1px solid white; background-color: white;  width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer; "   onclick="location.href='{% url 'product-detail' product.id %}'"  >
-                <div  style="width: fit-content;"  >
-                    <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;" >
-                </div>
-                <div class="card-body mt-3 " style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center; ">
-                    <h5 class="card-text text-center" style="color: black;" >{{ product.name }}</h5>
-                </div>
-                 </div>
-                </div>
-            {% endfor %}
-
-        </div>
-
-
-
-
-
-        <div class="owl-carousel  position-relative z-index-50">
-
-            {% for product in products %}
-            <div class="imgs mx-4 pb-3 " >
-            <div class=" mx-4  " style="border: 1px solid white; background-color: white;  width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer; "   onclick="location.href='{% url 'product-detail' product.id %}'"  >
-                <div  style="width: fit-content;"  >
-                    <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;" >
-                </div>
-                <div class="card-body mt-3 " style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center; ">
-                    <h5 class="card-text text-center" style="color: black;" >{{ product.name }}</h5>
-                </div>
-                 </div>
-                </div>
-            {% endfor %}
-
-        </div> -->
-
-
-
-
-        <div class="owl-carousel  position-relative z-index-50">
+  <div class="owl-carousel  position-relative z-index-50">
             {% for product in products %}
             {% if forloop.counter <= 11 %}
             <div class=" mx-4 pb-3">
-                <div class="mx-4" style="border: 1px solid white; background-color: white; width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer;" onclick="location.href='{% url 'product-detail' product.id %}'">
+                <div class="mx-4" style="border: 1px solid white; background-color: white; width: auto; height:fit-content; margin-top: 30px; padding: 15px; cursor: pointer;" onclick="location.href='{% url 'product-detail' product.id %}'">
                     <div style="width: fit-content;">
                         <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;">
                     </div>
@@ -191,12 +107,12 @@
             {% for product in products %}
             {% if forloop.counter > 22 %}
             <div class=" mx-4 pb-3" style="margin-bottom: 50px;" >
-                <div class="mx-4" style="border: 1px solid white; background-color: white; width: fit-content; margin-top: 30px; padding: 15px; cursor: pointer;" onclick="location.href='{% url 'product-detail' product.id %}'">
-                    <div style="width: fit-content;">
+                <div class="mx-4" style="border: 1px solid white; background-color: white; width: auto; margin-top: 30px; padding: 15px; cursor: pointer;" onclick="location.href='{% url 'product-detail' product.id %}'">
+                    <div style="width: auto;">
                         <img src="{{ product.thumbnail_url }}" class="card-img-top" alt="Product" style="mix-blend-mode: multiply;">
                     </div>
                     <div class="card-body mt-3" style="display: inline-block; white-space: nowrap; display: flex; justify-content: center; align-items: center;">
-                        <h5 class="card-text text-center" style="color: black;">{{ product.name }}</h5>
+                        <h5 class="card-text text-center mx-auto " style="color: black;">{{ product.name }}</h5>
                     </div>
                 </div>
             </div>
@@ -227,15 +143,16 @@
 
 
 <footer class="" >
-    <div class="container-fluid bg-dark text-center   fixed-bottom ">
-        <p class="text-white ">
-            <a href="https://www.facebook.com/yourfacebookpage" style="text-decoration: none;" > <div  style="margin-right: 10px; display: inline-block;"><i class="fa-brands fa-facebook" style="color: #316FF6;"></i></div> </a>
-            <a href="https://www.instagram.com/yourinstagrampage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px; display: inline-block; "><i class="fa-brands fa-instagram" style="background: linear-gradient(90deg, #ffdf9e, #ffc273, #e56969, #c1558b, #8a49a1);"></i></div> </a>
-            <div class="social-icon"  style="color: white;display: inline-block; " >@New World Disorder EST 2024. All rights reserved</div>
-            <a href="https://twitter.com/yourtwitterpage" style="text-decoration: none;" > <div class="social-icon" style="display: inline-block; margin-left: 10px; margin-right: 10px;"><i class="fa-brands fa-twitter" style="color: #1DA1F2;"></i></div> </a>
-            <a href="https://wa.me/yourwhatsappnumber" style="text-decoration: none;" ><div class="social-icon" style=" display: inline-block; margin-left: 10px;"><i class="fa-brands fa-whatsapp" style="color: #128C7E;"></i></div> </a>
-        </p>
-      </div>
+<div class="container-fluid bg-dark text-center fixed-bottom">
+  <p class="text-white pt-1">
+       <div style="color: white;">@New World Disorder EST 2024. All rights reserved</div>
+      <a href="https://www.facebook.com/yourfacebookpage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-facebook" style="color: #316FF6;"></i></div> </a>
+      <a href="https://www.instagram.com/yourinstagrampage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-instagram" style="background: linear-gradient(90deg, #ffdf9e, #ffc273, #e56969, #c1558b, #8a49a1);"></i></div> </a>
+      <a href="https://twitter.com/yourtwitterpage" style="text-decoration: none;" > <div class="social-icon" style="margin-left: 10px; margin-right: 10px;"><i class="fa-brands fa-twitter" style="color: #1DA1F2;"></i></div> </a>
+      <a href="https://wa.me/yourwhatsappnumber" style="text-decoration: none;" ><div class="social-icon" style="margin-left: 10px;"><i class="fa-brands fa-whatsapp" style="color: #128C7E;"></i></div> </a>
+
+  </p>
+</div>
 </footer >
 </div>
 
@@ -261,8 +178,8 @@ $(document).ready(function(){
         600:{
             items:2
         },
-        1000:{
-            items:3
+        1024:{
+            items:4
         },
         1060:{
             items:3

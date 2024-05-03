@@ -80,6 +80,7 @@ async function checkStatus() {
 
   switch (paymentIntent.status) {
     case "succeeded":
+      print("show")
       showMessage("Payment succeeded!");
       break;
     case "processing":

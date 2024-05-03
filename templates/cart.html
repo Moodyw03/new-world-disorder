@@ -11,91 +11,78 @@
 <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
 <link rel="stylesheet" href="/static/cart.css">
 </head>
-
-
 <body>
-    <div style="position: relative;  width: 100vw; height: 100vh; " >  <img src="/static/nwdt.png" alt="" style="object-fit: cover; width: 100vw; height: 100vh;  " >
+
+    {% include 'check.html' with show_button=False %}
+ <div style="position: relative;  width: 100vw; height: 100vh; " >  <img src="/static/nwdt.png" alt="" style="object-fit:cover; width: 100vw; height: 130vh;  " >
 
 
         <div style="position: absolute; left: 0; top: 0; width: 100vw; height: 100vh;  " >
 
-    <nav class="navbar navbar-expand-lg navbar-light  ">
-        <div class="container ">
-          <img src="/static/logo.png" alt="" style="width: 5%; height: 5%; " >
-          <a class="navbar-brand  "href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px beige; color: black; " > <h2> New World Disorder <br> <span style="font-size:15px;" >EST.2024</span>   </h2>   </a>
-            <button class="navbar-toggler" style="border: 5px solid white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link active  " href="{% url 'list_printful_products' %}" style="margin-top: 10px; color: black; ">Home</a>
-                    <a class="nav-link lg:mr-2 " href="{% url 'view_order_history' %} " style="cursor: pointer;margin-top: 10px; color: black; min-width:fit-content;  ">  Profile </a>
-                    <a class="nav-link lg:mr-1 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: black; margin-top: 11px; "></i> </a>
-                    {% if request.user.is_authenticated %}
-
-                    <button class="px-3" style="margin: 5px;  background-color: black; color: white;  "  >{{ user.username }}</button>
-                     <form action="{% url 'logout' %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="py-2 px-4 " style="margin: 5px;  background-color: black; color: white;   "   >Logout</button>
-                            </form>
-                {% else %}
-                <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
-
-                {% endif %}
 
 
-                </div>
-            </div>
-        </div>
-    </nav>
+
+
+
+
+
+
+
+
     {% if request.user.is_authenticated %}
 
-   <div class="container my-2 " > <div class="row text-center"> <h2>  YOUR CART   </h2> </div> </div>
-    <div class="container "><div class="row">
-        <div class="col-2 col-md-3 center mb-3 " id="selectedVariantsContainer" ></div>
-        <div class="col-2">
-
-         <div  style="width:30vh;  padding: 20px; " class="glas"  >
+   <div class="container my-2  " > <div class="row text-center"> <h2>  YOUR CART   </h2> </div> </div>
+    <div class="container  "  >
+        <div class="row" > <div class="col-12 col-md-6 col-lg-6  " >       <div>
+         <div  style="max-width: 500px;  padding: 10px; height:300px;  " class="glas mb-3 "  >
           <div class="text-center" > <h3> Order Summary </h3> </div>
           <div style="display: flex; justify-content: space-between; " > <div  > <h5 class="text-black"  > Items </h5></div> <div> <h5 id="totalItems" class="text-black" > </h5></div> </div>
           <div style="display: flex; justify-content: space-between; " > <div> <h5 class="text-black" > Delivery </h5></div> <div> <h5 class="text-black" > Free </h5> </div> </div>
   <hr>
 
   <div style="display: flex; justify-content: space-between; " > <div  > <h4  > Total </h4></div> <div> <h5 id="totalCost" >  </h5> </div> </div>
-   <div  style="display: flex; justify-content: center; align-items: center; margin-top:10% ; " >  <button style="background-color: black; width:80%" onclick="showOrderForm()">
-    <a style="text-decoration: none; color: white;">Check Out</a>
+   <div  style="display: flex; justify-content: center; align-items: center; margin-top:10% ; " >  <button class="py-1" style="background-color: black; width:120px" onclick="showOrderForm()">
+    <a style="text-decoration: none; color: white;"  >Check Out</a>
 </button>  </div>
+
 
 </div>
 
-        </div>
-<div class="col  " >  <div id="orderForm" class="p-4 glas " style="display: none; max-width: 500px;    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); max-height: fit-content; ">
-    <h4 class="p-1" style="display: inline-block; white-space: nowrap;">Shipping Information</h4>
-    <input type="text" id="name" class="form-control mb-2" value="{{ user.username }}" required>
+        </div></div> <div class="col-12 col-md-6 col-lg-6 mb-5 " > <div id="orderForm" class="p-2 glas " style="display: none; max-width: 500px;    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); max-height: fit-content; ">
+    <!--<h4 class="p-1" style="display: inline-block; white-space: nowrap;">Shipping Information</h4>-->
+    <input type="text" id="name" class="form-control mb-2"  readonly value="{{ user.username }}" required>
     <input type="text" id="address1" placeholder="Address" class="form-control mb-2" value="{{ address }}" required>
-    <input type="text" id="country" placeholder="Country" required class="form-control mb-2">
+     <select id="country" required style="width: 100%;"class="form-select mb-2 " ><option value="-1">Select Country</option></select>
+<select id="state" required class="form-select mb-2 " ><option value="">Select State</option></select>
     <input type="text" id="city" placeholder="City" required class="form-control mb-2">
-    <input type="text" id="state" placeholder="State" required class="form-control mb-2">
+
 
     <input type="text" id="zip" placeholder="ZIP Code" class="form-control mb-2" required>
 
     {% if request.user.is_authenticated %}
-    <p>Please fill all the information to place the order</p>
-    <button id="button-text" onclick="showAlert()" id="placeOrderButton" class="btn btn-outline-secondary">Place Order</button>
+    <button id="button-text"  id="placeOrderButton" class="btn " style=" background-color: black; color: white; " disabled>Place Order</button>
     {% else %}
-    <button onclick="location.href='{% url 'login' %}'" class="btn btn-outline-secondary mt-1">Log In to Place Order</button>
+    <button onclick="location.href='{% url 'login' %}'" class="btn  mt-1" style=" background-color: black; color: white; " >Log In to Place Order</button>
     {% endif %}
-    <button onclick="hideOrderForm()" class="btn btn-outline-secondary mt-1">Cancel</button>
-</div></div>
-
-<div></div>
+    <button onclick="hideOrderForm()" class="btn  mt-1" style=" background-color: black; color: white; " >Cancel</button>
+</div></div> </div><div class="row">
+        <div class="col-12 col-md-12 col-lg-12  mb-3  style="" " id="selectedVariantsContainer" ></div></div>
 {% else %}
 <div class="container my-5 " > <div class="row text-center"> <h2>  Login First   </h2> </div> </div>
 {% endif %}
 </div></div>
-<div style="display: none;" >
+
+
+</div>
+</div>
+
+<div class=""   > <img src="/static/nwdt.png" style="object-fit:cover; width: 100vw; height: 130vh;  " ></div>
+
+<div style="display:none;" >
     <p>Country: <span id="displayCountry">Loading...</span></p>
     <p>State: <span id="displayState">Loading...</span></p>
     <p>City: <span id="displayCity">Loading...</span></p>
@@ -103,28 +90,151 @@
     <p>Address: <span id="displayAddress">Loading...</span></p>
     </div>
 
-</div>
-</div>
-
-
-
 
 
 <div class="fixed-bottom" >dvdsfgdsfds</div>
 
-    <div class="container-fluid bg-dark text-center fixed-bottom  ">
-
-  <p class="text-white  ">
+<div class="container-fluid bg-dark text-center fixed-bottom">
+  <p class="text-white pt-1">
+       <div style="color: white;">@New World Disorder EST 2024. All rights reserved</div>
       <a href="https://www.facebook.com/yourfacebookpage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-facebook" style="color: #316FF6;"></i></div> </a>
       <a href="https://www.instagram.com/yourinstagrampage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-instagram" style="background: linear-gradient(90deg, #ffdf9e, #ffc273, #e56969, #c1558b, #8a49a1);"></i></div> </a>
-      <div class="social-icon"  style="color: white;" >@New World Disorder EST 2024. All rights reserved</div>
       <a href="https://twitter.com/yourtwitterpage" style="text-decoration: none;" > <div class="social-icon" style="margin-left: 10px; margin-right: 10px;"><i class="fa-brands fa-twitter" style="color: #1DA1F2;"></i></div> </a>
       <a href="https://wa.me/yourwhatsappnumber" style="text-decoration: none;" ><div class="social-icon" style="margin-left: 10px;"><i class="fa-brands fa-whatsapp" style="color: #128C7E;"></i></div> </a>
+
   </p>
 </div>
     <script>
-        var orderDetails = responseData.orderDetails;
-    console.log(orderDetails); // Output: details of the order
+
+document.addEventListener('DOMContentLoaded', function() {
+    var placeOrderButton = document.getElementById('button-text');
+    var requiredInputs = document.querySelectorAll('#name, #address1, #country, #city,  #zip');
+
+    // Function to check if all required inputs are filled
+    function areAllInputsFilled() {
+        return Array.from(requiredInputs).every(function(input) {
+            return input.value.trim() !== '';
+        });
+    }
+
+    // Function to update the state of the "Place Order" button
+    function updatePlaceOrderButton() {
+        placeOrderButton.disabled = !areAllInputsFilled();
+    }
+
+    // Add event listeners to each required input field
+    requiredInputs.forEach(function(input) {
+        input.addEventListener('input', updatePlaceOrderButton);
+    });
+
+    // Add event listener to the country select element
+    document.getElementById('country').addEventListener('change', function() {
+        updatePlaceOrderButton(); // Update button state when country changes
+    });
+});
+    // Stripe latest
+console.log("Sanity check!");
+
+// Get Stripe publishable key
+fetch("/config/")
+.then((result) => { return result.json(); })
+.then((data) => {
+  // Initialize Stripe.js
+  const stripe = Stripe(data.publicKey);
+
+  // Event handler
+  document.querySelector("#button-text").addEventListener("click", () => {
+    getAllVariantAndTotalData();
+    setTimeout(function() {
+       clear_cart();
+        temp();
+       // Your code here
+   }, 100);
+
+
+
+  });
+  function temp(){
+
+
+    // Get Checkout Session ID
+    fetch("/create_checkout_session_cart/")
+
+    .then((result) => { return result.json(); })
+    .then((data) => {
+
+
+      // Redirect to Stripe Checkout
+      return stripe.redirectToCheckout({sessionId: data.sessionId})
+
+    })
+    .then((res) => {
+      console.log(res);
+    });
+  }
+});
+ storeUserInfo() {
+    var name = document.getElementById('name').value;
+    var address1 = document.getElementById('address1').value;
+    var country = document.getElementById('country').value;
+    var city = document.getElementById('city').value;
+    var state = document.getElementById('state').value;
+    var zip = document.getElementById('zip').value;
+
+    var userInfo = {
+        name: name,
+        address1: address1,
+        country: country,
+        city: city,
+        state: state,
+        zip: zip
+    };
+
+    return userInfo;
+}
+function getAllVariantAndTotalData() {
+    var userInfo = storeUserInfo(); // Retrieve user details
+
+    var allVariantData = selectedVariants.map((variant, index) => {
+        return {
+            variantId:variant.variantId,
+            imgSrc: variant.imgSrc,
+            size: variant.size,
+            price: variant.price,
+            index: index
+        };
+    });
+
+    var totalData = {
+        totalItems: selectedVariants.length,
+        totalCost: calculateTotalCost()
+    };
+    var cart_date=[userInfo, allVariantData, totalData];
+    fetch('/place__cart_order/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Include other necessary headers
+        },
+        body: JSON.stringify(cart_date),
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(error => Promise.reject(error));
+        }
+        return response.json();
+    })
+    .then(data => {
+
+    })
+    .catch(error => {
+        alert.error("Cart error:", error);
+    });
+
+    return [userInfo, allVariantData, totalData]; // Combine user details with variant data and total data
+}
+    //     var orderDetails = responseData.orderDetails;
+    // console.log(orderDetails); // Output: details of the order
 
     function showOrderForm() {
         document.getElementById('orderForm').style.display = 'block';
@@ -141,11 +251,11 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         // Fetch values from localStorage and display the saved address details
-        var country = localStorage.getItem('country') || 'Not provided';
-        var state = localStorage.getItem('state') || 'Not provided';
-        var city = localStorage.getItem('city') || 'Not provided';
-        var zip = localStorage.getItem('zip') || 'Not provided';
-        var address = localStorage.getItem('address') || 'Not provided';
+        var country = localStorage.getItem('country') || '';
+        var state = localStorage.getItem('state') || '';
+        var city = localStorage.getItem('city') || '';
+        var zip = localStorage.getItem('zip') || '';
+        var address = localStorage.getItem('address') || '';
 
         document.getElementById('displayCountry').textContent = country;
         document.getElementById('displayState').textContent = state;
@@ -159,6 +269,58 @@
         document.getElementById('zip').value = zip;
     });
 
+
+
+
+
+ $(document).ready(function() {
+    // Assume countriesData is loaded with the full data including states (and possibly ZIP codes)
+    var countriesData;
+
+    // Initially fetch countries (and their states)
+    $.getJSON('/api/proxy/countries/', function(response) {
+        if (response.code === 200 && Array.isArray(response.result)) {
+            countriesData = response.result; // Store the fetched data
+            response.result.forEach(function(country) {
+                $('#country').append($('<option>', {
+                    value: country.code,
+                    text: country.name
+                }));
+            });
+        } else {
+            console.error("Unexpected data structure or error code:", response);
+        }
+    });
+
+    // When a country is selected, populate states from preloaded data
+    $('#country').change(function() {
+        var countryCode = $(this).val(); // Get the selected country code
+        var selectedCountry = countriesData.find(country => country.code === countryCode);
+
+        $('#state').empty(); // Empty the state dropdown
+        $('#zip_dropdown').empty(); // Potentially clear ZIP code dropdown
+
+        // Populate states dropdown if country has states data
+        if (selectedCountry && Array.isArray(selectedCountry.states) && selectedCountry.states.length > 0) {
+            selectedCountry.states.forEach(function(state) {
+                $('#state').append($('<option>', {
+                    value: state.code,
+                    text: state.name
+                }));
+            });
+            $('#state').show(); // Show the state dropdown
+        } else {
+            $('#state').hide(); // Hide the state dropdown if no states data
+        }
+    });
+});
+
+
+
+// JavaScript code to monitor input fields and enable/disable "Place Order" button
+// document.addEventListener('DOMContentLoaded', );
+
+
     </script>
 
 
@@ -168,10 +330,18 @@
     {% if user.is_authenticated %}
 <script type="text/javascript">
     var userID = "{{ user.id }}"; // Injected securely from Django template
-    var storageKey = 'selectedVariants-' + userID; // User-specific local storage key
-
+     var storageKey = 'selectedVariants-' + userID; // User-specific local storage key
+    var storagekey2 =  'selected-' + userID;
     var selectedVariants = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    var selectedproduct =  JSON.parse(localStorage.getItem(storagekey2) || '[]');
+    selectedproduct.forEach(function(obj){
+        selectedVariants.push(obj)
 
+
+    });
+    localStorage.setItem(storagekey2, JSON.stringify([]));
+    localStorage.setItem(storageKey, JSON.stringify(selectedVariants));
+    console.log(selectedVariants)
     function updateVariantDetails() {
         var selector = document.getElementById('variantSelector');
         var selectedOption = selector.options[selector.selectedIndex];
@@ -181,6 +351,10 @@
 
         document.getElementById('productImage').src = imgSrc;
         document.getElementById('productPrice').textContent = 'Price: ' + price;
+    }
+    function clear_cart(){
+        selectedVariants = [];
+        localStorage.setItem(storageKey, JSON.stringify(selectedVariants));
     }
 
     function showNewButton() {
@@ -216,14 +390,14 @@
         variantDisplay.setAttribute('id', `variant-${index}`);
         variantDisplay.innerHTML = `
             <div class='dit glas '   >
-                <div style="display: flex; flex-wrap: wrap;  justify-content: space-between; " >
+                <div style="display: flex;   justify-content: space-between; " >
              <div>
              <img src="${variant.imgSrc}" alt="Variant Image" style="width: 10vh; height: 10vh;"></div>
-             <div>  <h6> ${variant.color} -  ${variant.size}</h6> </div> <!-- Display size -->
+             <div style="min-width:fit-content;" >  <p> ${variant.color} -  ${variant.size}</p> </div> <!-- Display size -->
 
              <div  >
-            <h5> ${variant.price}</h5>
-            <div style='width:5vh;cursor: pointer; text-align:center; margin-top:4vh; ' >
+             <h5 style="width:auto; text-align:right; " > ${variant.price}</h5>
+            <div style='width:100%;cursor: pointer; text-align:center; margin-top:4vh; text-align:right; ' >
             <a onclick="deleteVariant(${index})"><i class="fa-regular fa-trash-can fa-xl "></i></a></div>
         </div>
             </div>
@@ -240,6 +414,7 @@
         updateTotalItemsCounter();
         updateTotalCost();
     }
+
 
     function refreshVariantsDisplay() {
         var container = document.getElementById('selectedVariantsContainer');
@@ -258,6 +433,14 @@
         updateTotalItemsCounter();
         updateTotalCost();
     });
+    function calculateTotalCost() {
+    var totalCost = selectedVariants.reduce((sum, variant) => {
+        return sum + parseFloat(variant.price.replace(/[^0-9.-]+/g,"")); // Assuming price is a string like "$99.99"
+    }, 0);
+
+    return totalCost.toFixed(2) + ' GBP';
+}
+
     function updateTotalCost() {
     var totalCost = selectedVariants.reduce((sum, variant) => {
         return sum + parseFloat(variant.price.replace(/[^0-9.-]+/g,"")); // Assuming price is a string like "$99.99"

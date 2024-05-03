@@ -15,14 +15,17 @@ import aiohttp
 import asyncio
 from aiohttp import ClientSession
 stripe.api_key = settings.STRIPE_SECRET_KEY
+from django.views.generic.base import TemplateView
 
+# Initialize the items list for the API request
+# Cookie expiration time (in seconds)
+COOKIE_EXPIRATION = 3600  # 1 hour
 # Function for the fetching the Product
 def fetch_product_data(api_url, headers):
     response = requests.get(api_url, headers=headers)
     if response.status_code == 200:
         return response.json()
     return None
-
 
 def list_printful_products(request):
     api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
@@ -65,7 +68,7 @@ def list_printful_products(request):
 
 def managejsonify(product_data):
     simplified_products = []
-
+    
     for product in product_data:
         if 'result' in product and 'sync_product' in product['result']:
             product_info = product['result']['sync_product']
@@ -109,6 +112,7 @@ def Home1(request):
 
 
 def product_detail(request, productId):
+
     api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
     api_url = f'https://api.printful.com/store/products/{productId}'
     headers = {'Authorization': f'Bearer {api_key}'}
@@ -139,110 +143,244 @@ def product_detail(request, productId):
     return render(request, 'product_detail.html', {'product': product})
 
 @csrf_exempt
+def place__cart_order(request):
+    print("Request received")
+    print(request)
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            
+            save_cart_data(data,request)
+            return JsonResponse({'status': 'success', 'message': 'cart data saved successfully.'})
+        except Exception as e:
+            error_message = str(e)
+            return JsonResponse({'status': 'error', 'message': error_message}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'This endpoint expects a POST request.'}, status=405)
+
+def save_cart_data(data,request):
+        
+     # Check if there is a pending order in the session
+        if 'cart_order' in request.session:
+            del request.session['cart_order']  # Delete the existing pending order
+        
+        # Convert order data to JSON string
+        order_data_json = json.dumps(data)
+   
+        # Store order data in session
+        request.session['cart_order'] = order_data_json
+       
+        print("done")
+        order_cart_json = request.session.get('cart_order')
+        print(order_cart_json)
+        # Return a success response
+        return JsonResponse({'status': 'success', 'message': 'Order data saved successfully'})
+
 
 @require_POST
-
-
-
-
 @csrf_exempt
 def place_order(request):
     print("Request received")
+    print(request)
     if request.method == "POST":
         try:
-            api_url = 'https://api.printful.com/orders'
-            api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
-
-            # Parse JSON data from the request body
             data = json.loads(request.body)
-
-            # Extract recipient details from the request
             recipient_details = data.get('recipient', {})
-
-            # Initialize the items list for the API request
             items_for_api = []
-
-            # Iterate over each item in the received items list
             for item in data.get('items', []):
                 # Extract item details
                 variant_id = item.get('variant_id')
                 quantity = item.get('quantity')
                 price = item.get('price')
-
                 image_url = item.get('image_url')  # Correctly structured from the client
 
                 # Append item details, including the image_url inside 'files'
                 items_for_api.append({
                     "variant_id": variant_id,
                     "quantity": quantity,
-                    "price":price,
-                    "files": [
-                        {
-                            "type": "default",
-                            "url": image_url
-                        }
-                    ]
+                    "price": price,
+                    "files": [{"type": "default", "url": image_url}]
                 })
-
-
-            # Forming the complete order data for the API request
-            order_data = {
-                "recipient": recipient_details,
-                "items": items_for_api
-            }
+            order_data = {"recipient": recipient_details, "items": items_for_api}
+            print("printing from order data")
             print(order_data)
-
-            headers = {
-                'Authorization': f'Bearer {api_key}',
-                'Content-Type': 'application/json'
-            }
-
-            # Sending the order to the external API
-            response = requests.post(api_url, json=order_data, headers=headers)
-            # print(response.status_code)
-
-            if response.status_code in [200, 201]:
-                # Retrieve the current order history from the session or initialize it if not present
-                order_history = request.session.get('order_history', [])
-
-                # Append the new order to the order history list
-                order_history.append(order_data)
-
-                # Save the updated order history back to the session
-                request.session['order_history'] = order_history
-                request.session.modified = True  # Mark the session as modified to save changes
-
-                return JsonResponse({'status': 'success', 'message': 'Order placed successfully.'})
-            else:
-                # Handle API error
-                error_message = response.json().get('error', {}).get('message', 'Unknown error occurred.')
-                return JsonResponse({'status': 'error', 'message': error_message}, status=400)
+            save_order_data(order_data, request)
+            return JsonResponse({'status': 'success', 'message': 'Order data saved successfully.'})
         except Exception as e:
-    # If there's an error, return an error response with the error message
             error_message = str(e)
             return JsonResponse({'status': 'error', 'message': error_message}, status=400)
     else:
         return JsonResponse({'status': 'error', 'message': 'This endpoint expects a POST request.'}, status=405)
 
+def save_order_data(data, request):
+    try:
+        # Check if there is a pending order in the session
+        if 'pending_order' in request.session:
+            del request.session['pending_order']  # Delete the existing pending order
+        
+        # Convert order data to JSON string
+        order_data_json = json.dumps(data)
+        print(order_data_json)
+        # Store order data in session
+        request.session['pending_order'] = order_data_json
+       
+        print("done")
+        # Return a success response
+        return JsonResponse({'status': 'success', 'message': 'Order data saved successfully'})
+        
+    except Exception as e:
+        error_message = str(e)
+        return JsonResponse({'status': 'error', 'message': error_message}, status=400)
+
+
+@csrf_exempt
+def send_order_to_printful(request):
+    
+    try:
+        api_url = 'https://api.printful.com/orders'
+        api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
+        order_data=request.session.get('pending_order')
+        order_data=json.loads(order_data)
+        print(order_data)
+        del request.session['pending_order']
+        headers = {'Authorization': f'Bearer {api_key}', 'Content-Type': 'application/json'}
+        print(headers)
+        print(order_data)
+        # Sending the order to the external API
+        response = requests.post(api_url, json=order_data, headers=headers)
+
+        if response.status_code in [200, 201]:
+         
+            return {'status': 'success', 'message': 'Order placed successfully.'}
+        else:
+            # Handle API error
+            error_message = response.json().get('error', {}).get('message', 'Unknown error occurred.')
+           
+            return {'status': 'error', 'message': error_message}
+    except Exception as e:
+        # If there's an error, return an error response with the error message
+        error_message = str(e)
+        return {'status': 'error', 'message': error_message}
+@csrf_exempt
+def send_order_to_printful_cart(order_data,request) :
+
+    try:
+        api_url = 'https://api.printful.com/orders'
+        api_key = 'hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'
+        headers = {'Authorization': f'Bearer {api_key}', 'Content-Type': 'application/json'}
+        
+        # Sending the order to the external API
+        response = requests.post(api_url, json=order_data, headers=headers)
+        print("ok kyo")
+        print(order_data)
+        if response.status_code in [200, 201]:
+            # request.session['pending_order']
+           
+            print("tayyab ka bosara 200")
+            return JsonResponse({'status': 'success', 'message': 'Order placed successfully.'})
+
+           
+        else:
+            print("order history in error")
+            # Handle API error
+            error_message = response.json().get('error', {}).get('message', 'Unknown error occurred.')
+            print(error_message)
+            return {'status': 'error', 'message': error_message}
+    except Exception as e:
+        # If there's an error, return an error response with the error message
+        error_message = str(e)
+        return {'status': 'error', 'message': error_message}
+@csrf_exempt
+def send_order_to_printful_using_cart(request):
+    items_for_api = []
+
+    try:
+        data = request.session.get('cart_order')
+        print("from success")
+        data=json.loads(data)
+        print(data)
+        name = data[0]['name']
+        print(name)
+        address = data[0]['address1']
+        country = data[0]['country']
+        city = data[0]['city']
+        zip_code = data[0]['zip']
+        recipient_details = {
+    "name": name,
+    "address1": address,
+    "country": country,
+    "city": city,
+    "country_code": 'UK',
+    "zip": zip_code
+}
+       
+        for item in data[1]:
+            print(item)
+            variant_id = item['variantId']
+            print(variant_id)
+            price = item['price']
+            print(price)
+            image_url = item['imgSrc']
+            
+            print(image_url)
+            items_for_api.append({
+                    "variant_id": variant_id,
+                    "quantity": 1,
+                    "price": price,
+                    "files": [{"type": "default", "url": image_url}]
+                })
+        order_data = {"recipient": recipient_details, "items": items_for_api}
+        print("order data")
+        print(order_data)
+        
+        if 'cart_order' in request.session:
+            print("delete session")
+            request.session.modified = True 
+            del request.session['cart_order']
+            
+            
+
+        send_order_to_printful_cart(order_data,request)
+            
 
 
 
-
-
-
-
+        if True:
+         
+            return {'status': 'success', 'message': 'Order placed successfully.'}
+        else:
+            # Handle API error
+            error_message = response.json().get('error', {}).get('message', 'Unknown error occurred.')
+           
+            return {'status': 'error', 'message': error_message}
+    except Exception as e:
+        # If there's an error, return an error response with the error message
+        error_message = str(e)
+        return {'status': 'error', 'message': error_message}
+@csrf_exempt
 def view_order_history(request):
-    order_history = request.session.get('order_history', [])
+    # Define the API endpoint URL
+    api_url = 'https://api.printful.com/orders'
 
-    # Optional: Debugging print to verify the structure of order_history
-    for order in order_history:
-        for item in order.get("items", []):
-            if item.get("files"):
-                print("Verified Image URL:", item["files"][0].get("url", "No Image URL"))
+    # Set the authorization header with your API key
+    headers = {'Authorization': 'Bearer hasiNeN7xTMlLWqhGQjxj053nGdD4EA7ozfUi44B'}
 
-    return render(request, 'order_history.html', {'order_history': order_history})
+    # Make the GET request to the Printful API
+    response = requests.get(api_url, headers=headers)
 
-
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Parse the JSON response
+        data = response.json()
+        
+        # Pass the response data to the template context
+        context = {'orders': data}
+        
+        # Render the template with the order data in the context
+        return render(request, 'order_history.html', context)
+    else:
+        # If the request was not successful, return an error message
+        return HttpResponse("Error: Failed to fetch Printful orders")
 
 
 def proxy_to_external_api(request):
@@ -273,44 +411,13 @@ def get_states_for_country(request, country_code):
 
 stripe.api_key = 'sk_test_51OvFQwRxR89gpN14N8XjbY56QV35xqruH9YCS5yxCWeubXlIY9DWAgxTX5BxKTDGqwTOj5C9n1gp3Q0CMDIdAWFv00kYUL9lOd'
 
-import json
-from django.http import JsonResponse
 
-def create_payment(request):
-    if request.method == 'POST':
-        try:
-            # Parse JSON data from the request body
-
-
-            # Create a Stripe PaymentIntent
-            intent = stripe.PaymentIntent.create(
-                amount=25.00,  # Replace with your calculation logic
-                currency='gbp',
-                payment_method_types=['card'],
-                # Optionally, you can add metadata or other parameters here
-            )
-
-            # Serialize the response data to JSON
-            response_data = {
-                'clientSecret': intent.client_secret
-            }
-
-            return JsonResponse(response_data)
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    else:
-        return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
 def payment_form(request):
     return render(request, 'payment_form.html')
-
-
-
-
-
+def cart_confirm_payment(request):
+    return render(request, 'cart_confirm_payment.html')
 
 
 def save_address_data(request):
@@ -330,3 +437,206 @@ def save_address_data(request):
 
     # Handle other HTTP methods if necessary
     return JsonResponse({'error': 'Invalid request method.'}, status=405)
+def retrive_data(request):
+    imge_list = []  # Initialize a list to store image URLs
+    data = json.loads(request.body)
+    # Iterate over each item in the received items list
+    for item in data.get('items', []):
+        # Extract item details
+        variant_id = item.get('variant_id')
+        quantity = item.get('quantity')
+        price = item.get('price')
+        imge_list.append(item.get('image_url'))  # Append the image URL to the list
+    return imge_list  # Return the list of image URLs
+
+
+
+
+import stripe
+from django.conf import settings
+from django.http.response import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.base import TemplateView
+
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+
+@csrf_exempt
+def stripe_config(request):
+    if request.method == 'GET':
+        stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
+        return JsonResponse(stripe_config, safe=False)
+
+
+@csrf_exempt
+def create_checkout_session(request):
+    if request.method == 'GET':
+        domain_url = 'http://127.0.0.1:8000/'
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        try:
+            print("Requwse")
+            print(request)
+            order_data_json = request.session.get('pending_order')
+            print("from stripe")
+            print(order_data_json)
+            order_data_json=json.loads(order_data_json)
+            variant_id = order_data_json['items'][0]['variant_id']
+            quantity = int(order_data_json['items'][0]['quantity'])
+            price = float(order_data_json['items'][0]['price'].split()[0])  # Extracting the numerical part of the price
+            image_url = order_data_json['items'][0]['files'][0]['url']
+          
+            # Initialize the items list for the API request
+           
+
+            # Iterate over each item in the received items list
+         
+
+            # Create new Checkout Session for the order
+            checkout_session = stripe.checkout.Session.create(
+                success_url=domain_url + 'payment-form/',
+                cancel_url=domain_url + 'cancelled/',
+                payment_method_types=['card'],
+                mode='payment',
+                line_items=[{
+                    'price_data': {
+                        'currency': 'GBP',
+                        'unit_amount': int(price)*100,  # Convert price to integer if needed
+                        'product_data': {
+                            'name': 'T-shirt',
+                            'description': "NEW World Disorder",
+                            'images': [image_url],  # Use the provided image_url
+                        },
+                    },
+                    'quantity': quantity,
+                }],
+            )
+            return JsonResponse({'sessionId': checkout_session['id']})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+        
+@csrf_exempt
+def create_checkout_session_cart(request):
+    if request.method == 'GET':
+        domain_url = 'http://127.0.0.1:8000/'
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        try:
+            
+            print("Requwse")
+            print(request)
+            order_cart_json = request.session.get('cart_order')
+            print("from cart stripe")
+            print(order_cart_json)
+            order_cart_json=json.loads(order_cart_json)
+            price = float(order_cart_json[2]['totalCost'].split()[0])  # Extracting the numerical part of the price
+            checkout_session = stripe.checkout.Session.create(
+                success_url=domain_url + 'cart_confirm_payment/',
+                cancel_url=domain_url + 'cancelled/',
+                payment_method_types=['card'],
+                mode='payment',
+                line_items=[{
+                    'price_data': {
+                        'currency': 'GBP',
+                        'unit_amount': int(price)*100,  # Convert price to integer if needed
+                        'product_data': {
+                            'name': 'T-shirt',
+                            'description': "NEW World Disorder",
+                            'images': ["https://i.ibb.co/S36Gg4t/3081986.png"],  # Use the provided image_url
+                        },
+                    },
+                    'quantity': 1,
+                }],
+            )
+            return JsonResponse({'sessionId': checkout_session['id']})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})        
+
+@csrf_exempt
+def stripe_webhook(request):
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+
+        # This method will be called when user successfully purchases something.
+        handle_checkout_session(session)
+        
+
+    return HttpResponse(status=200)
+
+
+def handle_checkout_session(session):
+    # client_reference_id = user's id
+    client_reference_id = session.get("client_reference_id")
+    payment_intent = session.get("payment_intent")
+    print("test")
+    order_data_json = session.get('pending_order')
+    print(order_data_json)
+
+    if client_reference_id is None:
+        # Customer wasn't logged in when purchasing
+        return
+
+    # Customer was logged in we can now fetch the Django user and make changes to our models
+    try:
+        user = User.objects.get(id=client_reference_id)
+        print(user.username, "just purchased something.")
+        # TODO: make changes to our models.
+        
+
+    except User.DoesNotExist:
+        pass
+
+
+class SuccessView(TemplateView):
+    template_name = 'success.html'
+
+
+class CancelledView(TemplateView):
+    template_name = 'cancelled.html'
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        print("Payment was successful.")
+        
+     
+    return HttpResponse(status=200)
+

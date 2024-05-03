@@ -1,19 +1,3 @@
-<!-- {% comment %} <!DOCTYPE html>
-<html>
-<head>
-    <title>Order History</title>
-</head>
-<body>
-    <div>
-        <h2>Order History</h2>
-        {% for order in order_history %}
-            <p>Recipient: {{ order.recipient.name }}</p>
-            <p>Address: {{ order.recipient.address1 }}, {{ order.items.image_url }}, {{ order.recipient.city }}, {{ order.recipient.state }}, {{ order.recipient.country }}, {{ order.recipient.zip }}</p>
-            <hr>
-        {% endfor %}
-    </div>
-</body>
-</html> {% endcomment %} -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,130 +5,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/order.css">
 </head>
-<style>
-.custom-button {
-    background-color: black;
-    color: white;
-    border: none;
-
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-
-
-
-h1 {
-    text-align: center;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-bottom: 5px;
-}
-
-input {
-    padding: 10px;
-    margin-bottom: 10px;
-
-    border: 1px solid #ccc;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-
-
-
-.glas{
-    /* From https://css.glass */
-background: rgba(255, 255, 255, 0.1);
-
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
-}
-.social-icon {
-        display: inline-block;
-    }
-    body {
-   /* Replace 'your-background-image.jpg' with the path to your image */
-   /* This ensures that the background image covers the entire body */
-   /* Prevents the background image from repeating */
-  /* You can add more CSS properties here to style the background */
-  font-family: 'Courier New', Courier, monospace;
-  background: linear-gradient(270deg, #ede8eb, #271cba24, #edecfb, #ffffff);
-    background-size: 800% 800%;
-    animation: AnimationName 15s ease infinite;
-
-  }
-  @keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-
-
-
-</style>
 <body>
 
-    <div style="position: relative;  width: 100vw; height: 100vh; " >  <img src="/static/nwdt.png" alt="" style="object-fit: cover; width: 100vw; height: 100vh;  " >
+ <div style="position: relative;  width: 100vw; height: 100vh; " >  <img src="/static/nwdt.png" alt="" style="object-fit:cover; width: 100vw; height: 130vh;  " >
 
 
-    <div style="position: absolute; left: 0; top: 0; width: 100vw; height: 100vh;  " >
-     <nav class="navbar navbar-expand-lg navbar-light  ">
-        <div class="container ">
-          <img src="/static/logo.png" alt="" style="width: 5%; height: 5%; " >
-            <a class="navbar-brand  "href="{% url 'list_printful_products' %}" style="font-weight: bolder;  text-shadow: 1px 1px beige; color: black; " > <h2>  New World Disorder  <br> <span style="font-size:15px;" > EST.2024</span>   </h2>   </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link active  " href="{% url 'list_printful_products' %}" style=" margin-top:10px ; color: black; ">Home</a>
-                    <a class="nav-link lg:mr-2 " href="{% url 'view_order_history' %} " style="cursor: pointer; margin-top: 10px; min-width: fit-content; color: black;  "> Profile </a>
-                    <a class="nav-link lg:mr-2 " href="{% url 'ch_page' %}"  >  <i class="fa-solid cartb fa-cart-plus fa-lg" style="color: black; margin-top: 20px; "></i> </a>
-                    {% if request.user.is_authenticated %}
-
-
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" style="margin: 5px;  background-color: black; color: white;  "   >Logout</button>
-                    </form>
-
-                {% else %}
-                <a class="nav-link lg:mr-2 " href="{% url 'register' %}"  > <button class="custom-button" > Sign up</button> </a>
-                {% endif %}
-
-
-                </div>
-            </div>
-        </div>
-    </nav>
+        <div style="position: absolute; left: 0; top: 0; width: 100vw; height: 100vh;  " >
 
 
 
 
 
-
-
+{% include 'check.html' with show_button=False %}
 
 
 
@@ -158,8 +34,8 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 
     <div class="container mt-3 "  >
        <div class="row">
-           <div class=" col-4 col-lg-4"> <div id="username-display" > <label for=""> <h2> <strong>Username:</strong> </h2>  </label>  <div style="display: flex;" > <h5  > {{ user.username }} </h5> <button class="btn"  onclick="toggleEdit('username')" ><i class="fa-solid fa-pen "></i></button> </div></div>  <div id="username-edit" style="display:none">
-               <label for="username"><h2> <strong>Username:</strong> </h2></label> <br>
+           <div class=" col-12 col-md-6 col-lg-4"> <div id="username-display" > <label for=""> <h3> <strong>Username:</strong> </h3>  </label>  <div style="display: flex;" > <h5 class="mt-1 mt-md-2 " > {{ user.username }} </h5> <button class="btn"  onclick="toggleEdit('username')" ><i class="fa-solid fa-pen "></i></button> </div></div>  <div id="username-edit" style="display:none">
+               <label for="username"><h3> <strong>Username:</strong> </h3></label> <br>
                <input type="text" id="username" name="username" value="{{ user.username }}"  > <button onclick="saveChanges()" style="margin: 5px; background-color: black; color: white; "  >Save Changes</button>
            </div>
 
@@ -168,12 +44,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 
 
        <!--  -->
-           <div class=" col-4 col-lg-4">  <div id="email-display" > <label for=""> <h2> <strong>Email:</strong> </h2>  </label>  <div style="display: flex;" > <h5> {{ user.email }} </h5> <button class="btn"  onclick="toggleEdit('email')" ><i class="fa-solid fa-pen "></i></button> </div></div>  <div id="email-edit" style="display:none">
-            <label for="email"><h2> <strong>Email:</strong> </h2></label> <br>
+           <div class=" col-8 col-md-6 col-lg-4">  <div id="email-display" > <label for=""> <h3> <strong>Email:</strong> </h3>  </label>  <div style="display: flex;" > <h5 class="mt-1 mt-md-2" > {{ user.email }} </h5> <button class="btn  "  onclick="toggleEdit('email')" ><i class="fa-solid fa-pen"  ></i></button> </div></div>  <div id="email-edit" style="display:none">
+            <label for="email"><h3> <strong>Email:</strong> </h3></label> <br>
             <input type="text" id="email" name="email" value="{{ user.email }}"> <button onclick="saveChanges()" style="margin: 5px; background-color: black; color: white; "  >Save Changes</button>
         </div>
     </div>
-    <div class=" col-3 col-lg-4 mt-4 "> <div style="display: flex;" >
+    <div class=" col-3 col-lg-4 mt-4  "> <div style="display: flex;" >
 
 
             <!-- <form action="{% url 'logout' %}" method="post">
@@ -188,33 +64,33 @@ border: 1px solid rgba(255, 255, 255, 0.3);
        <div id="confirmationMessage" style="display: none;" ></div>
    <div class="container  " >
     <div class="row mt-3 " >
-    <div class="col glas "  > <div class="card-body"  >
-        <h2 class="card-title text-center "   >Saved Address Details</h2>
+    <div class=" mx-1 mx-md-0  col-12 col-md-12 col-lg-6 mb-5 mb-lg-0 glas "  > <div class="card-body"  >
+        <h2 class="card-title text-center "  style="font-weight:bolder;"  >Saved Address Details</h2>
         <div class="" >
         <div class="row">
             <div class="col  "  style="display: flex;  justify-content: space-between; " >
-                <div><h3>Country: </h3></div>  <div><span id="displayCountry" style="font-size: 20px;  "></span></div>
+                <div><p style="font-size: 20px; font-weight:bolder; " >Country: </p></div>  <div><span id="displayCountry" style="font-size: 20px;  "></span></div>
             </div>
             </div>
             <div class="row">
             <div class="col  "  style="display: flex;  justify-content: space-between; " >
-                <div><h3>State:</h3></div>  <div><span id="displayState" style="font-size: 20px; "></span></div>
+                <div><p style="font-size: 20px; font-weight:bolder; "  >State:</p></div>  <div style=" width:100%; text-align:right;" ><span id="displayState" style="font-size: 20px; text-align:right; "></span></div>
             </div>
         </div>
 
         <div class="row">
             <div class="col"  style="display: flex;  justify-content: space-between; "  >
-                <div><h3>City:</h3></div>  <div><span id="displayCity" style="font-size: 20px; margin-left: 15%; "></span></div>
+                <div><p style="font-size: 20px; font-weight:bolder; " >City:</p></div>  <div><span id="displayCity" style="font-size: 20px;  "></span></div>
             </div>
             </div>
             <div class="row" >
             <div class="col"  style="display: flex;  justify-content: space-between; " >
-                <div><h3>ZIP Code:</h3></div>  <div><span id="displayZip" style="font-size: 20px; margin-left: 3%; "></span></div>
+                <div><p style="font-size: 20px; font-weight:bolder; " >ZIP Code:</p></div>  <div><span id="displayZip" style="font-size: 20px; margin-left: 3%; "></span></div>
             </div>
         </div>
         <div class="row">
             <div class="col " style="display: flex;  justify-content: space-between; " >
-                <div><h3>Address:</h3></div> <div><span id="displayAddress" style="font-size: 20px;  margin-left: 0%;"></span></div>
+                <div><p style="font-size: 20px; font-weight:bolder; " >Address:</p></div> <div><span id="displayAddress" style="font-size: 20px;  margin-left: 0%;"></span></div>
             </div>
         </div>
         <div style="display: flex; justify-content: center; " >
@@ -231,9 +107,9 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 
 
 
-    <div class="col">   <form id="addressForm" class="glas p-4 ">
+    <div class="col-12 col-md-12 col-lg-6">   <form id="addressForm" class="glas p-4" style="display:none;" >
     <h2>Address Form</h2>
-    <div class="form-group">
+    <div class="form-group"  >
         <label for="countryInput">Country:</label>
         <input type="text" class="form-control" id="countryInput" name="countryInput" required>
     </div>
@@ -309,66 +185,80 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 
 
        {% endif %}
-       {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
        <form action="{% url 'logout' %}" method="post">
            {% csrf_token %}
-           <h2 style="text-align: center;" class="my-2" >Order History</h2>
+
        </form>
+             <div class="container-fluid">
+        <h1 class="mt-5 mb-4">Order History</h1>
+        {% if orders %}
+            <div class="row ml-3 ml-md-4 mr-lg-5 ml-xl-5 ">
+                {% for order in orders.result %}
+                    {% if order.recipient.name == user.username %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><span class="fw-bold">Order ID:</span> {{ order.id }}</h5>
+                                    <p class="card-text"><span class="fw-bold">Status:</span> {{ order.status }}</p>
+                                    <p class="card-text"><span class="fw-bold">Shipping:</span> {{ order.shipping_service_name }}</p>
+                                    <p class="card-text"> <span class="fw-bold" >  Recipient Name:</span> {{ order.recipient.name }}</p>
+                                    <!-- <p class="card-text">Recipient Address: {{ order.recipient.address1 }}, {{ order.recipient.city }}, {{ order.recipient.state_code }}, {{ order.recipient.zip }}, {{ order.recipient.country_name }}</p> -->
+
+
+                                    <ul class="list-unstyled">
+                                        {% for item in order.items %}
+                                            <li>
+                                                <!--<p><span class="fw-bold" >Variant ID:</span> {{ item.variant_id }}</p>-->
+                                                {% if item.files %}
+                                                    {% for file in item.files %}
+                                                        {% if file.type == "default" %}
+                                                            <img src="{{ file.preview_url }}" class="img-fluid" alt="Product Image">
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <!--<p><span class="fw-bold" >Quantity:</span> {{ item.quantity }}</p>-->
+                                                <!--<p><span class="fw-bold" >Name:</span> {{ item.product.name }}</p>-->
+                                            </li>
+                                        <!--<p class="card-text"><span class="fw-bold" >Total Cost:</span> {{ order.costs.total }} {{ order.costs.currency }}</p>-->
+                                        {% endfor %}
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No orders found.</p>
+        {% endif %}
+    </div>
+
+
+
+
+
+
        {% else %}
        <h2 style="text-align: center;" class="my-2" >PLease Login First</h2>
        {% endif %}
 
-    <!-- <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            {% for order in order_history %}
-              <p>Recipient: {{ order.recipient.name }}</p>
-              <div class="row order-cards"> {% for item in order.items %}
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img src="{{ item.files.0.url }}" class="card-img-top" alt="Product Image">
-                      <div class="card-body">
-                        <p class="card-text">Variant ID: {{ item.variant_id }}</p>
-                        <p class="card-text">Quantity: {{ item.quantity }}</p>
-                      </div>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div> -->
-      <div class="container-fluid mb-5 ">
-      <div class="row">
-        {% for order in order_history %}
-        <div class="col-sm-3 mb-5 ">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><p>Recipient: {{ order.recipient.name }}</p></h5>
-              {% for item in order.items %}
-              <img src="{{ item.files.0.url }}" class="card-img-top" alt="Product Image">
-              <h5 class="card-text">Variant ID: {{ item.variant_id }}</h5>
-              <h5 class="card-text">Quantity: {{ item.quantity }}</h5>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        {% endfor %}
-    </div>
-    </div>
 
+
+<div><p style="margin-top:100px;" >.</p></div>
 <!-- wraap div -->
 </div>
 </div>
 
 <div class="container-fluid bg-dark text-center fixed-bottom">
   <p class="text-white pt-1">
+       <div style="color: white;">@New World Disorder EST 2024. All rights reserved</div>
       <a href="https://www.facebook.com/yourfacebookpage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-facebook" style="color: #316FF6;"></i></div> </a>
       <a href="https://www.instagram.com/yourinstagrampage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-instagram" style="background: linear-gradient(90deg, #ffdf9e, #ffc273, #e56969, #c1558b, #8a49a1);"></i></div> </a>
-      <div class="social-icon"  style="color: white;" >@New World Disorder EST 2024. All rights reserved</div>
       <a href="https://twitter.com/yourtwitterpage" style="text-decoration: none;" > <div class="social-icon" style="margin-left: 10px; margin-right: 10px;"><i class="fa-brands fa-twitter" style="color: #1DA1F2;"></i></div> </a>
       <a href="https://wa.me/yourwhatsappnumber" style="text-decoration: none;" ><div class="social-icon" style="margin-left: 10px;"><i class="fa-brands fa-whatsapp" style="color: #128C7E;"></i></div> </a>
+
   </p>
 </div>
 
@@ -415,11 +305,11 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         alert('Address saved successfully!');
 
         // Display the saved address details
-        document.getElementById('displayCountry').textContent = country || 'Enter Country NAme';
-        document.getElementById('displayState').textContent = state || 'Enter State';
-        document.getElementById('displayCity').textContent = city || 'Enter City';
-        document.getElementById('displayZip').textContent = zip || 'Enter Zip code';
-        document.getElementById('displayAddress').textContent = address || 'Enter Address';
+        document.getElementById('displayCountry').textContent = country || '';
+        document.getElementById('displayState').textContent = state || '';
+        document.getElementById('displayCity').textContent = city || '';
+        document.getElementById('displayZip').textContent = zip || '';
+        document.getElementById('displayAddress').textContent = address || '';
 
         // Hide the input fields and display the show form button
         document.getElementById('addressForm').style.display = 'none';
@@ -427,11 +317,11 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     });
 
     // Display the saved address details
-    document.getElementById('displayCountry').textContent = country || 'Enter Country Name';
-    document.getElementById('displayState').textContent = state || 'Enter State';
-    document.getElementById('displayCity').textContent = city || 'Enter City';
-    document.getElementById('displayZip').textContent = zip || 'Enter Zip';
-    document.getElementById('displayAddress').textContent = address || 'Enter Address';
+    document.getElementById('displayCountry').textContent = country || '';
+    document.getElementById('displayState').textContent = state || '';
+    document.getElementById('displayCity').textContent = city || '';
+    document.getElementById('displayZip').textContent = zip || '';
+    document.getElementById('displayAddress').textContent = address || '';
 
     // Show form button click event
     document.getElementById('showFormButton').addEventListener('click', function() {

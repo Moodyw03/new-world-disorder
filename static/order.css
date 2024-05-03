@@ -2,7 +2,7 @@
     background-color: black;
     color: white;
     border: none;
-    border-radius: 20px;
+
     padding: 10px 20px;
     cursor: pointer;
 }
@@ -26,7 +26,7 @@ label {
 input {
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 5px;
+
     border: 1px solid #ccc;
 }
 
@@ -35,7 +35,7 @@ button {
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 5px;
+
     cursor: pointer;
 }
 
@@ -49,7 +49,7 @@ button:hover {
 .glas{
     /* From https://css.glass */
 background: rgba(255, 255, 255, 0.1);
-border-radius: 16px;
+
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
@@ -59,9 +59,37 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         display: inline-block;
     }
     body {
-  background-image: url('/static/nwdt.png'); /* Replace 'your-background-image.jpg' with the path to your image */
-  background-size: cover; /* This ensures that the background image covers the entire body */
-  background-repeat: no-repeat; /* Prevents the background image from repeating */
+   /* Replace 'your-background-image.jpg' with the path to your image */
+   /* This ensures that the background image covers the entire body */
+   /* Prevents the background image from repeating */
   /* You can add more CSS properties here to style the background */
-  font-family: 'Courier New', Courier, monospace;   
+  font-family: 'Courier New', Courier, monospace;
+  background: linear-gradient(270deg, #ede8eb, #271cba24, #edecfb, #ffffff);
+    background-size: 800% 800%;
+    animation: AnimationName 15s ease infinite;
+
+  }
+  @keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+
+
+.custom-button {
+    background-color: black;
+    color: white;
+    border: none;
+
+    padding: 10px 20px;
+    cursor: pointer;
+}
+  .content {
+    display: block; /* Default display */
+  }
+
+  @media screen and (max-width: 768px) {
+    .content {
+      display: none; /* Hide content when screen width is less than 768px */
+    }
   }
