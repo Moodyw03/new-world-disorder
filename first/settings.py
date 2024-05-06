@@ -1,6 +1,6 @@
 import os
-# import firebase_admin
-# from firebase_admin import credentials
+import firebase_admin
+from firebase_admin import credentials
 PRINTFUL_API_KEY = os.environ.get('PRINTFUL_API_KEY')
 
 # settings.py
@@ -64,9 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   
 ]
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
 ROOT_URLCONF = 'first.urls'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -96,15 +95,19 @@ WSGI_APPLICATION = 'first.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 # Firebase Configuration
-# FIREBASE_CONFIG_FILE = 'C:\Users\Binary Bridges\Desktop\first\first\firebase_config.json'
-# cred = credentials.Certificate(FIREBASE_CONFIG_FILE)
-# firebase_admin.initialize_app(cred)
+FIREBASE_CONFIG_FILE = 'C:\\Users\\Binary Bridges\\Desktop\\first\\firebase_config.json'
+cred = credentials.Certificate(FIREBASE_CONFIG_FILE)
+firebase_admin.initialize_app(cred)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-   
+    'AUTHENTICATION_BACKENDS ': {
+        'ENGINE': 'django_firebase_app.firebase',
+        'CREDENTIALS': cred,
+        'NAME': 'default',
+    }
 }
 
 
@@ -154,6 +157,4 @@ STATICFILES_DIRS = [
     BASE_DIR,"static"
     
 ]
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51OvFQwRxR89gpN14AgMtxKaSJeUETOI4bBKVWNKaevr8zbanpBfxvqO84evu3l1TAwvnXaFCw6w5KEPKMpserZKV00fAmnWjuf'
-STRIPE_SECRET_KEY = 'sk_test_51OvFQwRxR89gpN14N8XjbY56QV35xqruH9YCS5yxCWeubXlIY9DWAgxTX5BxKTDGqwTOj5C9n1gp3Q0CMDIdAWFv00kYUL9lOd'
-STRIPE_ENDPOINT_SECRET = 'whsec_51ea9b537097b59b46b693f376099cc64f20366730fd660e1e926980cdbff0ac'
+
