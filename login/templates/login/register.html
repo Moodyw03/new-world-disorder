@@ -1,26 +1,146 @@
 <!doctype html>
 <html lang="en">
   <head>
-   
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="register.css">
     <title>Register</title>
   </head>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      width: 100%; /* Make the container fill its parent */
+      max-width: 400px;
+
+      padding: 20px;
+
+
+      margin: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .one {
+      background: beige;
+    }
+
+    .btn-primary {
+      background-color: black;
+      border-color: black;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background-color: #333;
+      border-color: #333;
+    }
+
+    .div1 {
+      background-color: black;
+    }
+
+    .text-container {
+      text-align: center;
+    }
+
+    #text {
+      color: whitesmoke;
+      font-size: 2em;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .row {
+        flex-direction: column;
+      }
+
+      .form-control, .btn-primary {
+        font-size: 16px;
+      }
+
+      #text {
+        font-size: 1.5em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .form-control, .btn-primary {
+        font-size: 14px;
+      }
+
+      #text {
+        font-size: 1.2em;
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow: hidden;
+      }
+    }
+    body {
+      /* Replace 'your-background-image.jpg' with the path to your image */
+      /* This ensures that the background image covers the entire body */
+      /* Prevents the background image from repeating */
+     /* You can add more CSS properties here to style the background */
+     font-family: 'Courier New', Courier, monospace;
+     background: linear-gradient(270deg, #ede8eb, #271cba24, #edecfb);
+       background-size: 800% 800%;
+       animation: AnimationName 15s ease infinite;
+     }
+     @keyframes AnimationName {
+       0%{background-position:0% 50%}
+       50%{background-position:100% 50%}
+       100%{background-position:0% 50%}
+     }
+
+    .glas{
+      /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.1);
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+    </style>
+
 <body>
-  
+    {% include 'check.html' with show_button=True %}
+
+  <div style="position: relative;  width: 100vw; height: 100vh; " >  <img src="/static/nwdlogin.png" alt="" style=" object-fit: full; width: 100vw; height: 100%;  " >
+
+
+    <div style="position: absolute; left: 0; top: 20vh; width: 100vw; height: 100vh;  " >
 
 
       <div class="container-fluid">
-        <div class="d-flex justify-content-center align-items-center" style="z-index: 50;" >
+        <div class="d-flex justify-content-center align-items-center"  >
           <div class="row g-0">
-            <div class="col  one glas " style="padding: 50px; " >
+            <div class="mx-1 mx-md-0 col  one glas " style="padding: 50px; " >
                <form method="post">
               {% csrf_token %}
+                   {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+    {% endif %}
               <div class="form-group pb-2 "  style="position: relative; z-index:50 ;  " >
                   <label for="username" style="font-size: 20px;"  >Name</label>
                   <input type="text" class="form-control" id="username" required name="username" placeholder="Enter your full name" style="margin-right: 200px;" >
@@ -33,32 +153,40 @@
                   <label for="password" style="font-size: 20px;" >Password</label>
                   <input type="password" required id="password" name="password" class="form-control" placeholder="Enter your password">
               </div>
-           
+
               <div class="form-group"  style="position: relative; z-index:50 ; "  >
               <button type="submit" class="btn btn-primary">Create Account</button>
               <p>Already have account? <a href="{% url 'login' %}" style="color: blue;" >Sign in</a></p> </div>
             </div>
             </form>
-            <div class="col div1 text-container " style="padding: 40px;  ;" > <h1 id="text" style="margin-top:100px ;" ></h1> </div>
+            <div class="col div1 text-container mx-1 mx-md-0 " style="padding: 40px;  ;" > <h1 id="text" style="margin-top:100px ;" ></h1> </div>
           </div>
         </div>
-        
-        
-        
+
+
+
         </div>
-        
-  
+
+
+      </div>
+    </div>
 
 
 
-    
+
+<div class=""   > <img src="/static/nwdt.png" style="object-fit:cover; width: 100vw; height: 30vh;  " ></div>
+<div class="container-fluid bg-dark text-center fixed-bottom">
+  <p class="text-white pt-1">
+       <div style="color: white;">@New World Disorder EST 2024. All rights reserved</div>
+      <a href="https://www.facebook.com/yourfacebookpage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-facebook" style="color: #316FF6;"></i></div> </a>
+      <a href="https://www.instagram.com/yourinstagrampage" style="text-decoration: none;" > <div class="social-icon" style="margin-right: 10px;"><i class="fa-brands fa-instagram" style="background: linear-gradient(90deg, #ffdf9e, #ffc273, #e56969, #c1558b, #8a49a1);"></i></div> </a>
+      <a href="https://twitter.com/yourtwitterpage" style="text-decoration: none;" > <div class="social-icon" style="margin-left: 10px; margin-right: 10px;"><i class="fa-brands fa-twitter" style="color: #1DA1F2;"></i></div> </a>
+      <a href="https://wa.me/yourwhatsappnumber" style="text-decoration: none;" ><div class="social-icon" style="margin-left: 10px;"><i class="fa-brands fa-whatsapp" style="color: #128C7E;"></i></div> </a>
+
+  </p>
+</div>
 
 
-
-<div class="container-fluid bg-dark  text-center fixed-bottom "  > <p class="text-white pt-1 "  > @New World Disorder EST 2024. All right reserved </p> </div>
-
- 
-    
 
 <script>
  const text = "Explore \n New \n Styles";

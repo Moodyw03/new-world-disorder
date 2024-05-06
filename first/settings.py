@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'first.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 # Firebase Configuration
-FIREBASE_CONFIG_FILE = 'C:\\Users\\Binary Bridges\\Desktop\\first\\firebase_config.json'
+FIREBASE_CONFIG_FILE = 'firebase_config.json'
 cred = credentials.Certificate(FIREBASE_CONFIG_FILE)
 firebase_admin.initialize_app(cred)
 DATABASES = {
