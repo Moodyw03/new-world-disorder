@@ -40,9 +40,10 @@
       background: beige;
     }
 
-    .btn-primary {
+    .btn-dark {
       background-color: black;
       border-color: black;
+      color:black;
       width: 100%;
     }
 
@@ -122,12 +123,12 @@
     </style>
 
 <body>
-    {% include 'check.html' with show_button=True %}
+    {% include 'check.html' with show_button=False %}
 
   <div style="position: relative;  width: 100vw; height: 100vh; " >  <img src="/static/nwdlogin.png" alt="" style=" object-fit: full; width: 100vw; height: 100%;  " >
 
 
-    <div style="position: absolute; left: 0; top: 20vh; width: 100vw; height: 100vh;  " >
+    <div style="position: absolute; left: 0; top: 15vh; width: 100vw; height: 100vh;  " >
 
 
       <div class="container-fluid">
@@ -155,7 +156,7 @@
               </div>
 
               <div class="form-group"  style="position: relative; z-index:50 ; "  >
-              <button type="submit" class="btn btn-primary">Create Account</button>
+              <button type="submit" class="btn btn-dark"  >Create Account</button>
               <p>Already have account? <a href="{% url 'login' %}" style="color: blue;" >Sign in</a></p> </div>
             </div>
             </form>
@@ -189,7 +190,7 @@
 
 
 <script>
- const text = "Explore \n New \n Styles";
+ const text = "Only 33 \n T-Shirts \n World Wide";
 let index = 0;
 let intervalId;
 

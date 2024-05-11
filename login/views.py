@@ -9,21 +9,29 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth.decorators import login_required
-
-
-from django.contrib.auth import authenticate
+from django.db import IntegrityError
+from django.db.models import Q
 
 def user_login(request):
     context = {
-        'username_error': '',  # Initialize username_error as an empty string
+        'username_error': '',
         'password_error': '',
         'error': ''
     }
 
     if request.method == 'POST':
-        username = request.POST.get('username')
+        username_or_email = request.POST.get('username_or_email')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+
+        # Check if the input is an email
+        if '@' in username_or_email:
+            user = User.objects.filter(email=username_or_email).first()
+        else:
+            user = User.objects.filter(username=username_or_email).first()
+
+        # Authenticate user with provided username or email
+        if user is not None:
+            user = authenticate(request, username=user.username, password=password)
 
         if user is not None:
             login(request, user)
@@ -31,10 +39,9 @@ def user_login(request):
         else:
             # Authentication failed
             context['error'] = 'Invalid Credentials'
-            context['username_error'] = 'Invalid Credentials.'  # Set username_error here
+            context['username_error'] = 'Invalid Credentials.'
 
     return render(request, 'login/login.html', context)
-
 
 
 def user_logout(request):
@@ -42,6 +49,7 @@ def user_logout(request):
     return redirect('list_printful_products')  # Redirect to login page after logout
 
 def user_register(request):
+    error_message = None
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -49,15 +57,17 @@ def user_register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
 
-            # Create a new user and save it to the database
-            new_user = User.objects.create_user(username=username, email=email, password=password)
-            new_user.save()
-
-            return redirect('login')  # Redirect to the login page after successful registration
+            try:
+                # Create a new user and save it to the database
+                new_user = User.objects.create_user(username=username, email=email, password=password)
+                new_user.save()
+                return redirect('login')  # Redirect to the login page after successful registration
+            except IntegrityError:
+                error_message = "Username already exists. Please choose a different one."
     else:
         form = RegistrationForm()
 
-    return render(request, 'login/register.html', {'form': form})
+    return render(request, 'login/register.html', {'form': form, 'error_message': error_message})
 def user_profile(request):
     return render(request, 'login/profile.html', {'user': request.user})
 
@@ -69,7 +79,7 @@ def update_profile(request):
         data = json.loads(request.body)
         username = data.get('username')
         email = data.get('email')
-        
+
         # Update user object
         user.username = username
         user.email = email
@@ -86,4 +96,3 @@ def update_profile(request):
 
 
 
-   
