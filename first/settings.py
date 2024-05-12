@@ -103,11 +103,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'AUTHENTICATION_BACKENDS ': {
-        'ENGINE': 'django_firebase_app.firebase',
-        'CREDENTIALS': cred,
-        'NAME': 'default',
-    }
+    # 'AUTHENTICATION_BACKENDS ': {
+    #     'ENGINE': 'django_firebase_app.firebase',
+    #     'CREDENTIALS': cred,
+    #     'NAME': 'default',
+    # }
 }
 
 

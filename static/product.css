@@ -1,3 +1,4 @@
+
 .centered {
 
     position: fixed;
@@ -191,7 +192,7 @@ background-color:white;
 @media (width: 853px) {
     .centered2 {
 
-      transform:translate(28%, -270%));
+      transform:translate(28%, -270%);
        background-color:white;
 
         width: 50px; /* Adjusted width */
@@ -293,11 +294,8 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 body {
-   /* Replace 'your-background-image.jpg' with the path to your image */
-   /* This ensures that the background image covers the entire body */
-   /* Prevents the background image from repeating */
-  /* You can add more CSS properties here to style the background */
-  font-family: 'Courier New', Courier, monospace;
+
+    font-family: 'Courier New', Courier, monospace;
   background: linear-gradient(270deg, #ede8eb, #271cba24, #edecfb, #ffffff);
     background-size: 800% 800%;
     animation: AnimationName 15s ease infinite;
@@ -305,6 +303,9 @@ body {
 
 
   }
+  .font{
+    font-family: 'Courier New', Courier, monospace;
+}
   @keyframes AnimationName {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
