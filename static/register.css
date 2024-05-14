@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container {
+    width: 100%; /* Make the container fill its parent */
+    max-width: 400px;
+
+    padding: 20px;
+
+
+    margin: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .one {
+    background: beige;
+  }
+
+  .btn-dark {
+    background-color: black;
+    border-color: black;
+    color:black;
+    width: 100%;
+  }
+
+  .btn-primary:hover {
+    background-color: #333;
+    border-color: #333;
+  }
+
+  .div1 {
+    background-color: black;
+  }
+
+  .text-container {
+    text-align: center;
+  }
+
+  #text {
+    color: whitesmoke;
+    font-size: 2em;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      flex-direction: column;
+    }
+
+    .row {
+      flex-direction: column;
+    }
+
+    .form-control, .btn-primary {
+      font-size: 16px;
+    }
+
+    #text {
+      font-size: 1.5em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .form-control, .btn-primary {
+      font-size: 14px;
+    }
+
+    #text {
+      font-size: 1.2em;
+      white-space: nowrap; /* Prevent text from wrapping */
+      overflow: hidden;
+    }
+  }
+  body {
+   font-family: 'Courier New', Courier, monospace;
+   background: linear-gradient(270deg, #ede8eb, #271cba24, #edecfb);
+     background-size: 800% 800%;
+     animation: AnimationName 15s ease infinite;
+   }
+   @keyframes AnimationName {
+     0%{background-position:0% 50%}
+     50%{background-position:100% 50%}
+     100%{background-position:0% 50%}
+   }
+
+  .glas{
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.1);
+
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}

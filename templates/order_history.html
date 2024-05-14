@@ -50,12 +50,6 @@
         </div>
     </div>
     <div class=" col-3 col-lg-4 mt-4  "> <div style="display: flex;" >
-
-
-            <!-- <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" style="margin: 5px; background-color: black; color: white; "  >Logout</button>
-            </form> -->
         </div> </div>
        </div>
        </div>
@@ -203,13 +197,12 @@
                                     <p class="card-text"><span class="fw-bold">Status:</span> {{ order.status }}</p>
                                     <p class="card-text"><span class="fw-bold">Shipping:</span> {{ order.shipping_service_name }}</p>
                                     <p class="card-text"> <span class="fw-bold" >  Recipient Name:</span> {{ order.recipient.name }}</p>
-                                    <!-- <p class="card-text">Recipient Address: {{ order.recipient.address1 }}, {{ order.recipient.city }}, {{ order.recipient.state_code }}, {{ order.recipient.zip }}, {{ order.recipient.country_name }}</p> -->
 
 
                                     <ul class="list-unstyled">
                                         {% for item in order.items %}
                                             <li>
-                                                <!--<p><span class="fw-bold" >Variant ID:</span> {{ item.variant_id }}</p>-->
+                                               
                                                 {% if item.files %}
                                                     {% for file in item.files %}
                                                         {% if file.type == "default" %}
