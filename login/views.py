@@ -25,9 +25,9 @@ def user_login(request):
 
         # Check if the input is an email
         if '@' in username_or_email:
-            user = User.objects.filter(email=username_or_email).first()
+            user = User.objects.filter(email=username_or_email).main_app()
         else:
-            user = User.objects.filter(username=username_or_email).first()
+            user = User.objects.filter(username=username_or_email).main_app()
 
         # Authenticate user with provided username or email
         if user is not None:
