@@ -86,7 +86,7 @@ The flowchart illustrates the process flow for the New World Disorder (NWD) e-co
 
 <details>
   <summary><span style="color: blue;">Click here to view the planning Flowchart</summary>
-  <a href="https://ibb.co/GQKkXKg"><img src="https://i.ibb.co/xqpGypV/diagram-export-13-05-2024-17-55-26.png" alt="diagram-export-13-05-2024-17-55-26" border="0"></a>
+ <a href="https://ibb.co/RvKD2Ym"><img src="https://i.ibb.co/5M3RTGy/flowchart-NWD-goodcopy.png" alt="flowchart-NWD-goodcopy" border="0"></a>
 </details>
 
 
