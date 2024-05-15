@@ -13,12 +13,7 @@ Welcome to **New World Disorder**, an innovative fashion project where exclusivi
 ## Repository
 
 [Find the project repository here.](https://github.com/Moodyw03/new-world-disorder)
-
-## Purpose of This Documentation
-
-This document is designed to provide a comprehensive overview of the New World Disorder project, including our business philosophy, operational strategies, design methodologies, and marketing tactics. It serves as a guide for our team members, collaborators, and stakeholders to understand the nuances of our operations and the ethos driving our brand.
-
-
+.
 
 ## The Concept
 
@@ -27,6 +22,39 @@ At New World Disorder, our vision is to redefine the norms of the fashion indust
 ##  Mission
 
 Our mission is to redefine the true essence of limited edition by crafting only a very select number of t-shirts. We strive to deliver unmatched quality and one-of-a-kind designs to the fashion-conscious individual who values true exclusivity and sustainability. Our goal is to cultivate a global community of customers who appreciate the uniqueness of fashion and are passionate about expressing themselves with our rare and exceptional pieces.
+
+### UX
+## User Experience
+
+#### As a New Visitor:
+I want to quickly understand the purpose and benefits of New World Disorder (NWD) so that I can decide whether it's the right place for me to shop. I should be able to navigate the site easily and intuitively to explore the products that NWD offers. I expect to find compelling reasons to register, such as unique designs, high-quality materials, and sustainable practices. I need to be able to contact the site administrators easily through a contact form for any inquiries or feedback.
+
+#### As a Registered User:
+I want a simple and secure sign-in process to access my personal account. I need to be able to browse and purchase t-shirts with minimal steps and organize my shopping with a cart or wishlist. I should be able to edit or delete items in my cart, reflecting changes in real-time. I want the ability to search through the product catalog using keywords or categories to find what I need quickly. I need a profile area where I can view my order history and update my account details or password as needed.
+
+#### As a Frequent User:
+I want features that support advanced shopping experiences, such as personalized recommendations and exclusive offers. I would appreciate having access to my order history and tracking information for my purchases.
+
+### UI
+## User Interface
+
+The user interface (UI) of New World Disorder (NWD) combines simplicity and user-friendliness with a distinct brutalist design aesthetic, ensuring that customers can easily navigate the site while enjoying a unique visual experience. The UI features a playful yet clean aesthetic with a dinosaur theme, adding a memorable touch to the shopping experience.
+
+Key design elements include:
+
+**Minimalistic Layout:** The clean interface avoids clutter, allowing customers to focus on browsing and purchasing t-shirts.
+
+**Intuitive Controls:** Common actions, such as adding items to the cart, checking out, and navigating to different pages, are prominently placed and easily accessible, promoting a smooth user experience.
+
+**Consistent Visual Elements:** Familiar icons and consistent color schemes help users quickly understand and utilize different functions on the site.
+
+**Brutalist Design:** The site employs a brutalist design approach, characterized by bold typography, stark contrasts, and a raw, unpolished look. This design choice sets NWD apart from more conventional e-commerce sites, appealing to customers who appreciate a more edgy and unconventional aesthetic.
+
+**Responsive Design:** The UI adjusts seamlessly across various devices, ensuring that the functionality and aesthetics are maintained on screens of all sizes.
+
+The design choices, including the use of playful dinosaur graphics and a pastel color palette, combined with the brutalist design elements, create a fun and engaging shopping environment. This thoughtful design approach aims to make the shopping process as enjoyable and efficient as possible for customers while providing a visually striking experience.
+
+
 
 
 
