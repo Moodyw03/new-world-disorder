@@ -86,7 +86,7 @@ The Entity Relationship Diagram (ERD) was created using Draw.io. The ERD is a vi
 
 <details>
   <summary>Click here to view the planning ERD</summary>
-  <img src="<a href="https://ibb.co/cCXfpJj"><img src="https://i.ibb.co/F0qZf6F/new-mockup-copy.png" alt="new-mockup-copy" border="0"></a>
+  <img img src="https://i.ibb.co/hm1B5QZ/diagram-export-13-05-2024-17-25-59.png" alt="diagram-export-13-05-2024-17-25-59" border="0"></a>
 </details>
 
 ## Features
