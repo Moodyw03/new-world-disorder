@@ -16,7 +16,7 @@ Welcome to **New World Disorder**, an innovative fashion project where exclusivi
 
 ## Purpose of This Documentation
 
-This document is designed to provide a comprehensive overview of the **New World Disorder** project, including our business philosophy, operational strategies, design methodologies, and marketing tactics. It serves as a guide for our team members, collaborators, and stakeholders to understand the nuances of our operations and the ethos driving our brand.
+This document is designed to provide a comprehensive overview of the New World Disorder project, including our business philosophy, operational strategies, design methodologies, and marketing tactics. It serves as a guide for our team members, collaborators, and stakeholders to understand the nuances of our operations and the ethos driving our brand.
 
 
 
