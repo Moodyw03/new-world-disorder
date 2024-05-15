@@ -1,10 +1,20 @@
+<h1 align="center">New World Disorder</h1>
+
+[View the live project here.](https://www.newworlddisorder.shop/)
+
 # Introduction
 
 Welcome to **New World Disorder**, an innovative fashion project where exclusivity meets creativity. In a world overwhelmed by mass-produced fashion, our brand stands out by offering something truly unique—limited edition t-shirts, with only 33 pieces of each design ever made. This concept is not just about wearing a piece of clothing; it's about adorning a rare piece of art.
 
+## Repository
+
+[Find the project repository here:](https://github.com/Moodyw03/MemoMingle)
+
 ## Purpose of This Documentation
 
 This document is designed to provide a comprehensive overview of the New World Disorder project, including our business philosophy, operational strategies, design methodologies, and marketing tactics. It serves as a guide for our team members, collaborators, and stakeholders to understand the nuances of our operations and the ethos driving our brand.
+
+
 
 ## The Concept
 
