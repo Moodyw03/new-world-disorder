@@ -14,9 +14,9 @@ At New World Disorder, our vision is to redefine the norms of the fashion indust
 
 Our mission is to redefine the true essence of limited edition by crafting only a very select number of t-shirts. We strive to deliver unmatched quality and one-of-a-kind designs to the fashion-conscious individual who values true exclusivity and sustainability. Our goal is to cultivate a global community of customers who appreciate the uniqueness of fashion and are passionate about expressing themselves with our rare and exceptional pieces.
 
-## Scope of This Project
 
-# Scope for Django E-Commerce Web Application - www.newworlddisorder.shop
+
+# Scope for Django E-Commerce Web Application "New World Disorder Brand"
 
 ## Project Overview
 The primary goal of this project is to develop an advanced e-commerce web application using Django, offering a seamless shopping experience for customers purchasing t-shirts. The website will leverage the Printful API for product fulfillment and Stripe for payment processing. Additionally, the site will feature a blog for customer engagement and a newsletter signup form for marketing purposes.
