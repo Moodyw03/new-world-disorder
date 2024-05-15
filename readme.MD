@@ -99,9 +99,7 @@ The primary goal of this project is to develop an advanced e-commerce web applic
 The scope of this project covers the development of a comprehensive e-commerce platform with robust features for user account management, product handling, order processing, customer engagement, and marketing integration. By leveraging advanced technologies and strategic practices, www.newworlddisorder.shop aims to provide an exceptional shopping experience for its customers while promoting sustainable and innovative fashion.
 By the end of this documentation, you will have a detailed understanding of every aspect of New World Disorder, from inception to delivery, and how we maintain our commitment to exclusivity and quality in every piece we create.
 
-<div align="center">
-<a href="https://ibb.co/T1yzLCd"><img src="https://i.ibb.co/hc0pfqw/memomingle-copy.jpg" alt="memomingle-copy" border="0"></a>
-</div>
+
 
 
 
