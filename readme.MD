@@ -35,6 +35,22 @@ Our mission is to redefine the true essence of limited edition by crafting only 
 ## Project Overview
 The primary goal of this project is to develop an advanced e-commerce web application using Django, offering a seamless shopping experience for customers purchasing t-shirts. The website will leverage the Printful API for product fulfillment and Stripe for payment processing. Additionally, the site will feature a blog for customer engagement and a newsletter signup form for marketing purposes.
 
+### Colour Scheme
+
+We utilize a minimalistic palette that emphasizes contrast and visual impact, supporting the thematic elements of our designs.
+
+### Typography
+
+Our choice in typography mirrors our brand's ethos—bold, clear, and forward-thinking, ensuring readability across all platforms.
+
+### Images and Post Content
+
+Images used on the site reflect the unique nature of each product, detailed to show the quality and design of the t-shirts. Post content is curated to resonate with our target audience, providing them with engaging stories behind each collection.
+
+### Wireframes
+
+Wireframes for the site were developed to ensure a user-friendly experience, allowing easy navigation and emphasizing the uniqueness of our products.
+
 ## Features
 
 ### User Accounts
@@ -94,6 +110,123 @@ The primary goal of this project is to develop an advanced e-commerce web applic
 ### Customer Engagement
 - **Personalized Experience**: Tailored recommendations and content based on user preferences.
 - **Interactive Features**: Enhanced engagement through reviews, comments, and social media interactions.
+
+
+
+# User Stories
+
+## Viewing and Navigation
+
+| User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
+|---------------|-------------|----------------------------------------------|------------------------------------------------------|
+| 1             | Shopper     | Browse through a catalog of products         | Choose products to buy                               |
+| 2             | Shopper     | Access a specific type of products           | Efficiently locate my interested products without browsing the entire catalog |
+| 3             | Shopper     | Examine the details of individual products   | Learn about the price, descriptions, ratings, and view product images |
+| 4             | Shopper     | Instantly spot promotions and discounts      | Gain benefits from discounts and special offers on my intended purchases |
+| 5             | Shopper     | Monitor my total shopping expenses anytime   | Control my expenditure                               |
+
+## Registration & User Accounts
+
+| User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
+|---------------|-------------|----------------------------------------------|------------------------------------------------------|
+| 6             | Site User   | Register for an account with ease            | Set up and view my personal profile                  |
+| 7             | Site User   | Log into or out of my account effortlessly   | Access and manage my personal account information    |
+| 8             | Site User   | Reset my forgotten password                  | Regain access to my profile                          |
+| 9             | Site User   | Get an email confirmation after registration | Confirm my registration was successful               |
+| 10            | Site User   | Customize my user profile                    | Access my order history, save payment information, and view order confirmations |
+
+## Sorting & Searching
+
+| User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
+|---------------|-------------|----------------------------------------------|------------------------------------------------------|
+| 11            | Shopper     | Organize the list of available products      | Identify top-rated, best-priced or sorted by category products |
+| 12            | Shopper     | Organize products within a specific category | Locate the best-priced or top-rated products or arrange them by name within the category |
+| 13            | Shopper     | Categorize multiple product types simultaneously | Discover the best-priced or top-rated items across major categories like clothing or homeware |
+| 14            | Shopper     | Search for a product by its name or description | Locate a particular product I wish to buy            |
+| 15            | Shopper     | Review my search results and their count     | Quickly determine the availability of a desired product |
+
+## Purchasing & Checkout
+
+| User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
+|---------------|-------------|----------------------------------------------|------------------------------------------------------|
+| 16            | Shopper     | Specify the quantity of a product before purchasing | Ensure the accuracy of my order details             |
+| 17            | Shopper     | Review items in my cart or wishlist          | Confirm the total cost and review items before purchase |
+| 18            | Shopper     | Modify the quantity of items in my cart      | Adjust my purchase details before finalizing the checkout |
+| 19            | Shopper     | Input my payment details easily              | Complete my purchase without difficulties            |
+| 20            | Shopper     | Trust the security of my personal and payment information | Shop with confidence knowing my data is secure     |
+| 21            | Shopper     | See an order summary after checkout          | Ensure there are no errors in my order               |
+| 22            | Shopper     | Get an email confirmation post-purchase      | Have a record of what I've bought                    |
+
+## Admin & Store Management
+
+| User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
+|---------------|-------------|----------------------------------------------|------------------------------------------------------|
+| 23            | Store Owner | Add new products to my store                 | Expand my store's inventory                          |
+| 24            | Store Owner | Modify existing product details              | Update prices, descriptions, and other details as needed |
+| 25            | Store Owner | Remove products from the store               | Discontinue sales of certain items                   |
+
+# Integration of Printful.com and Stripe APIs with Django for New World Disorder
+
+## Using Printful API
+
+Printful.com is an on-demand order fulfillment and warehousing service that supports businesses in printing and shipping products such as t-shirts directly to customers. Here's how Printful can be integrated into the Django project for "New World Disorder":
+
+### Product Sync
+- **Automatic Synchronization**: Automatically sync new t-shirt designs from the Django application to the Printful product catalog.
+
+### Order Fulfillment
+- **Automated Processing**: When a customer purchases a t-shirt, the order details are automatically sent from Django to Printful, which then handles the printing, packing, and shipping.
+
+### Stock Management
+- **Inventory Updates**: Use the Printful API to track and update inventory levels to ensure that no more than 33 pieces of each design are sold.
+
+### Shipping and Handling
+- **Logistics Integration**: Retrieve shipping options, calculate costs, and provide tracking information through the API.
+
+## Using Stripe API
+
+Stripe is a robust platform for handling online payments, which can be integrated into Django to facilitate secure and efficient transactions:
+
+### Payment Processing
+- **Multiple Payment Methods**: Handle payments through various methods, accommodating a wide range of customers.
+
+### Security
+- **Data Protection**: Stripe manages credit card data storage and processing, significantly reducing compliance burdens with PCI DSS.
+
+### Subscription Management
+- **Recurring Billing**: If subscriptions or priority ordering for repeat customers are offered, Stripe can manage these processes.
+
+## Implementation in Django
+
+Here's a general approach to implementing these APIs within a Django framework:
+
+### API Keys
+- Obtain API keys by registering with Printful and Stripe.
+
+### Install Libraries
+- Use pip to install necessary libraries like `printful`, `dj-stripe`, or `stripe`.
+
+### Configure Settings
+- Add configurations such as API keys in `settings.py` and set up webhook endpoints.
+
+### Create Models
+- Define models to store product, order, and transaction information. Extend pre-built models from `dj-stripe` as necessary.
+
+### Develop Views/Controllers
+- Implement views to handle API interactions like order creation, payment processing, or stock updates.
+
+### Secure Transactions
+- Ensure all transactions are secure and comply with web security standards.
+
+### Testing
+- Conduct thorough testing to confirm that all parts of the system (order processing, payments, and fulfillment) work correctly.
+
+### Deployment
+- Deploy the application after successful testing.
+
+By integrating Django with Printful and Stripe APIs, "New World Disorder" can automate significant parts of its sales and fulfillment processes, allowing the business to focus on design and marketing.
+
+
 
 ## Conclusion
 The scope of this project covers the development of a comprehensive e-commerce platform with robust features for user account management, product handling, order processing, customer engagement, and marketing integration. By leveraging advanced technologies and strategic practices, www.newworlddisorder.shop aims to provide an exceptional shopping experience for its customers while promoting sustainable and innovative fashion.
