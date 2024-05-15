@@ -30,7 +30,7 @@ Our mission is to redefine the true essence of limited edition by crafting only 
 
 
 
-# Scope for Django E-Commerce Web Application "New World Disorder Brand"
+## Scope for Django E-Commerce Web Application "New World Disorder Brand"
 
 ## Project Overview
 The primary goal of this project is to develop an advanced e-commerce web application using Django, offering a seamless shopping experience for customers purchasing t-shirts. The website will leverage the Printful API for product fulfillment and Stripe for payment processing. Additionally, the site will feature a blog for customer engagement and a newsletter signup form for marketing purposes.
