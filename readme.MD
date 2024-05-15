@@ -86,7 +86,7 @@ The flowchart illustrates the process flow for the New World Disorder (NWD) e-co
 
 <details>
   <summary><span style="color: blue;">Click here to view the planning Flowchart</summary>
- <a href="https://ibb.co/RvKD2Ym"><img src="https://i.ibb.co/5M3RTGy/flowchart-NWD-goodcopy.png" alt="flowchart-NWD-goodcopy" border="0"></a>
+ <a href="https://ibb.co/RvKD2Ym"><img src="https://i.ibb.co/5M3RTGy/flowchart-NWD-goodcopy.png" alt="flowchart-NWD-goodcopy" border="0" width="1000></a>
 </details>
 
 
@@ -96,7 +96,7 @@ The Entity Relationship Diagram (ERD) was created using Draw.io. The ERD is a vi
 
 <details>
   <summary><span style="color: blue;">Click here to view the planning ERD</summary>
-  <a href="https://ibb.co/4YgrGTZ"><img src="https://i.ibb.co/ZY1DP86/newd-2.png" alt="newd-2" border="0" width="800"></a>
+  <a href="https://ibb.co/4YgrGTZ"><img src="https://i.ibb.co/ZY1DP86/newd-2.png" alt="newd-2" border="0"></a>
 </details>
 
 ## Features
