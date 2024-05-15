@@ -8,7 +8,7 @@ Welcome to **New World Disorder**, an innovative fashion project where exclusivi
 
 ## Repository
 
-[Find the project repository here:](https://github.com/Moodyw03/MemoMingle)
+[Find the project repository here.]((https://github.com/Moodyw03/new-world-disorder))
 
 ## Purpose of This Documentation
 
