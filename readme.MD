@@ -80,6 +80,15 @@ Images used on the site reflect the unique nature of each product, detailed to s
 
 Wireframes for the site were developed to ensure a user-friendly experience, allowing easy navigation and emphasizing the uniqueness of our products.
 
+### Entity Relationship Diagram
+
+The Entity Relationship Diagram (ERD) was created using Draw.io. The ERD is a visual representation of the database structure. It shows the tables, the columns in each table, and the relationships between the tables. Here is the ERD from my planning:
+
+<details>
+  <summary>Click here to view the planning ERD</summary>
+  <img src="<a href="https://ibb.co/cCXfpJj"><img src="https://i.ibb.co/F0qZf6F/new-mockup-copy.png" alt="new-mockup-copy" border="0"></a>
+</details>
+
 ## Features
 
 ### User Accounts
