@@ -80,6 +80,16 @@ Images used on the site reflect the unique nature of each product, detailed to s
 
 Wireframes for the site were developed to ensure a user-friendly experience, allowing easy navigation and emphasizing the uniqueness of our products.
 
+### Flowchart
+
+The flowchart illustrates the process flow for the New World Disorder (NWD) e-commerce application. It provides a visual representation of the steps involved in various operations within the application. Here is the flowchart from my planning:
+
+<details>
+  <summary>Click here to view the planning Flowchart</summary>
+  <a href="https://ibb.co/GQKkXKg"><img src="https://i.ibb.co/xqpGypV/diagram-export-13-05-2024-17-55-26.png" alt="diagram-export-13-05-2024-17-55-26" border="0"></a>
+</details>
+
+
 ### Entity Relationship Diagram
 
 The Entity Relationship Diagram (ERD) was created using Draw.io. The ERD is a visual representation of the database structure. It shows the tables, the columns in each table, and the relationships between the tables. Here is the ERD from my planning:
