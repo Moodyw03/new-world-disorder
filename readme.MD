@@ -85,11 +85,11 @@ Wireframes for the site were developed to ensure a user-friendly experience, all
 The flowchart illustrates the process flow for the New World Disorder (NWD) e-commerce application. It provides a visual representation of the steps involved in various operations within the application. Here is the flowchart from my planning:
 
 <details>
-  <summary><span style="color: blue;">Click here to view the planning Flowchart</summary>
- ![Flowchart NWD Goodcopy](https://github.com/Moodyw03/new-world-disorder/blob/main/static/flowchart%20NWD%20goodcopy.png?raw=true)
+  <summary>Click here to view the planning Flowchart</summary>
+  
+  ![Flowchart NWD Goodcopy](https://github.com/Moodyw03/new-world-disorder/blob/main/static/flowchart%20NWD%20goodcopy.png?raw=true)
 
 </details>
-
 
 ### Entity Relationship Diagram
 
