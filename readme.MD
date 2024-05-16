@@ -98,7 +98,7 @@ The Entity Relationship Diagram (ERD) was created using Draw.io. The ERD is a vi
 <details>
   <summary>Click here to view the Entity-Relationship Diagram</summary>
   
-  ![Entity-Relationship Diagram](https://github.com/Moodyw03/new-world-disorder/blob/main/static/diagram-export-13-05-2024-17_25_59.png?raw=true)
+  ![Entity-Relationship Diagram](https://github.com/Moodyw03/new-world-disorder/blob/main/static/erd%20good.png?raw=true)
 
 </details>
 
