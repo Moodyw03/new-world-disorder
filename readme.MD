@@ -102,7 +102,7 @@ The Entity Relationship Diagram (ERD) was created using Draw.io. The ERD is a vi
 
 </details>
 
-# Sequence Diagram
+### Sequence Diagram
 
 The Sequence Diagram below represents the web store checkout process for the New World Disorder (NWD) e-commerce application. It outlines the interactions between different components during the checkout process.
 
