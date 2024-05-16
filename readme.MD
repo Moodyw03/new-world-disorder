@@ -96,8 +96,10 @@ The flowchart illustrates the process flow for the New World Disorder (NWD) e-co
 The Entity Relationship Diagram (ERD) was created using Draw.io. The ERD is a visual representation of the database structure. It shows the tables, the columns in each table, and the relationships between the tables. Here is the ERD from my planning:
 
 <details>
-  <summary><span style="color: blue;">Click here to view the planning ERD</summary>
-  <a href="https://ibb.co/4YgrGTZ"><img src="https://i.ibb.co/ZY1DP86/newd-2.png" alt="newd-2" border="0"></a>
+  <summary>Click here to view the Entity-Relationship Diagram</summary>
+  
+  ![Entity-Relationship Diagram](https://github.com/Moodyw03/new-world-disorder/blob/main/static/diagram-export-13-05-2024-17_25_59.png?raw=true)
+
 </details>
 
 ## Features
