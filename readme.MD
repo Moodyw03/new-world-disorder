@@ -86,7 +86,8 @@ The flowchart illustrates the process flow for the New World Disorder (NWD) e-co
 
 <details>
   <summary><span style="color: blue;">Click here to view the planning Flowchart</summary>
- https://github.com/Moodyw03/new-world-disorder/blob/main/static/flowchart%20NWD%20goodcopy.png?raw=true
+ ![Flowchart NWD Goodcopy](https://github.com/Moodyw03/new-world-disorder/blob/main/static/flowchart%20NWD%20goodcopy.png?raw=true)
+
 </details>
 
 
