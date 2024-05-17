@@ -66,7 +66,27 @@ The primary goal of this project is to develop an advanced e-commerce web applic
 
 ### Colour Scheme
 
-We utilize a minimalistic palette that emphasizes contrast and visual impact, supporting the thematic elements of our designs.
+Color Scheme and Background Design
+For the New World Disorder (NWD) website, we've chosen a carefully curated color scheme that aligns with the site's brutalist aesthetic while ensuring it doesn't interfere with the display of our t-shirts. The color palette features a gradient background that adds a dynamic and engaging element to the site. Here’s a detailed look at the selected colors and their purpose:
+
+Color Palette:
+E1DFF4: A soft, muted lavender that serves as the primary background color.
+E4E2F3: A slightly darker shade of lavender to create a subtle gradient effect.
+111111: A deep, rich black used for text and important accents to maintain high contrast and readability.
+E5E2F1: Another variant of light lavender to blend seamlessly in the gradient.
+3C3D43: A dark grey that complements the black, adding depth and neutrality.
+Gradient Background:
+The gradient background transitions smoothly from E1DFF4 to E5E2F1, providing a soft and subtle movement that adds a sense of dynamism and depth to the website. This gradient is designed to give the site a sense of movement without being overwhelming, ensuring that the focus remains on the t-shirt designs.
+
+Compatibility with T-Shirt Colors:
+The selected color scheme is neutral and non-intrusive, making sure that it does not clash with or overshadow the diverse colors and designs of the t-shirts. The soft lavender tones create a calming and unobtrusive backdrop, allowing the vibrant t-shirt designs to stand out prominently.
+
+Brutalist Style:
+The brutalist style of the NWD website is characterized by its stark, functional design, and the use of the 111111 black and 3C3D43 grey enhances this aesthetic. These colors are employed for text, borders, and other elements, maintaining the clean, bold, and utilitarian look that is a hallmark of brutalist design.
+
+By using this thoughtful color scheme and gradient background, we ensure that the NWD website remains visually appealing, dynamic, and true to its brutalist roots, while also providing an excellent showcase for our t-shirt collections.
+
+
 
 ### Typography
 
