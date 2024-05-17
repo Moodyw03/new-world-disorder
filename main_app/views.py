@@ -637,4 +637,16 @@ def stripe_webhook(request):
 
 
     return HttpResponse(status=200)
-
+# @csrf_exempt
+# def delete_user(request, user_id):
+#     if request.method == 'POST':
+#         user = get_object_or_404(User, id=user_id)
+        
+#         # Ensure the user cannot delete themselves
+#         if request.user != user:
+#             user.delete()
+#             return JsonResponse({'status': 'success', 'message': 'User deleted successfully'})
+#         else:
+#             return JsonResponse({'status': 'error', 'message': 'You cannot delete yourself'}, status=400)
+#     else:
+#         return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=400)

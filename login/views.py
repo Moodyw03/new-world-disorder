@@ -1,16 +1,14 @@
-from collections import UserDict
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-from .forms import RegistrationForm  # Import the RegistrationForm from forms.py
+from django.http import HttpResponse, JsonResponse
+from .forms import RegistrationForm
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.db.models import Q
+from django.shortcuts import redirect
 
 def user_login(request):
     context = {
@@ -23,21 +21,20 @@ def user_login(request):
         username_or_email = request.POST.get('username_or_email')
         password = request.POST.get('password')
 
-        # Check if the input is an email
-        if '@' in username_or_email:
-            user = User.objects.filter(email=username_or_email).main_app()
-        else:
-            user = User.objects.filter(username=username_or_email).main_app()
+        try:
+            # Use Q objects for combined query
+            user = User.objects.get(Q(username=username_or_email) | Q(email=username_or_email))
 
-        # Authenticate user with provided username or email
-        if user is not None:
+            # Authenticate user
             user = authenticate(request, username=user.username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('list_printful_products')
-        else:
-            # Authentication failed
+            if user is not None:
+                login(request, user)
+                return redirect('list_printful_products')
+            else:
+                context['error'] = 'Invalid Credentials'
+                context['password_error'] = 'Invalid Credentials.'
+        except User.DoesNotExist:
             context['error'] = 'Invalid Credentials'
             context['username_error'] = 'Invalid Credentials.'
 
@@ -46,7 +43,8 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('list_printful_products')  # Redirect to login page after logout
+    return redirect('list_printful_products')  # Redirect to the product list page after logout
+
 
 def user_register(request):
     error_message = None
@@ -68,8 +66,12 @@ def user_register(request):
         form = RegistrationForm()
 
     return render(request, 'login/register.html', {'form': form, 'error_message': error_message})
+
+
+@login_required
 def user_profile(request):
     return render(request, 'login/profile.html', {'user': request.user})
+
 
 @csrf_exempt
 @login_required
@@ -88,11 +90,11 @@ def update_profile(request):
         return JsonResponse({'status': 'success', 'message': 'Profile updated successfully'})
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
-
-
-
-
-
-
-
-
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        return JsonResponse({'status': 'success', 'message': 'Account deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)

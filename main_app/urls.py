@@ -22,6 +22,7 @@ from .views import send_order_to_printful
 
 from .views import payment_form
 from .views import place__cart_order
+# from .views import delete_user
 
 from . import views
 urlpatterns = [
@@ -36,6 +37,7 @@ urlpatterns = [
       path('api/proxy/countries/', proxy_to_external_api, name='proxy_countries'),
        path('api/proxy/states/<str:country_code>/', get_states_for_country, name='get_states_for_country'),
         path('order_history/', views.view_order_history, name='view_order_history'),
+        # path("/delete_user", views.delete_user, name="delete_user"),
 
         path('payment-form/', payment_form, name='payment_form'),
         path('cart_confirm_payment/', views.cart_confirm_payment, name='cart_confirm_payment'),

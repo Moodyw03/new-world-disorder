@@ -9,10 +9,6 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('login', '0002_remove_orderitem_order_delete_order_delete_orderitem'),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-    ]
 
     operations = [
         migrations.CreateModel(

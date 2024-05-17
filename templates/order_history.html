@@ -49,6 +49,10 @@
             <input type="text" id="email" name="email" value="{{ user.email }}"> <button onclick="saveChanges()" style="margin: 5px; background-color: black; color: white; "  >Save Changes</button>
         </div>
     </div>
+    <form id="deleteAccountForm" method="POST" action="{% url 'delete_account' %}">
+        {% csrf_token %}
+        <button type="button" id="deleteAccountButton" style=" background-color: black; color: white; " >Delete Account</button>
+    </form>
     <div class=" col-3 col-lg-4 mt-4  "> <div style="display: flex;" >
         </div> </div>
        </div>
@@ -88,7 +92,9 @@
             </div>
         </div>
         <div style="display: flex; justify-content: center; " >
-        <button id="showFormButton" class="my-2" style="background-color: black;"  >Change Your Details</button> </div>
+        <button id="showFormButton" class="my-2" style="background-color: black;"  >Change Your Details</button> 
+     
+    </div>
     </div>
     </div> </div>
 
@@ -129,6 +135,8 @@
     </div>
 
     <button type="submit" class="btn btn-primary" style="background-color: black;" >Save Address</button>
+    
+   
 </form> </div>
 
 
@@ -256,6 +264,28 @@
 
 
 <script>
+    document.getElementById('deleteAccountButton').addEventListener('click', function() {
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            fetch('{% url "delete_account" %}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    window.location.href = "{% url 'login' %}";
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    });
+
+
+    
  document.addEventListener('DOMContentLoaded', function() {
     // Fetch values from localStorage and populate the form fields
     var country = localStorage.getItem('country') || '';
