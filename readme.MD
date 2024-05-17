@@ -67,6 +67,9 @@ The primary goal of this project is to develop an advanced e-commerce web applic
 ### Colour Scheme
 
 Color Scheme and Background Design
+
+![NWD Color Scheme](https://github.com/Moodyw03/new-world-disorder/blob/main/static/nwd%20color%20%20copy.png?raw=true)
+
 For the New World Disorder (NWD) website, we've chosen a carefully curated color scheme that aligns with the site's brutalist aesthetic while ensuring it doesn't interfere with the display of our t-shirts. The color palette features a gradient background that adds a dynamic and engaging element to the site. Here’s a detailed look at the selected colors and their purpose:
 
 Color Palette:
