@@ -49,10 +49,7 @@
             <input type="text" id="email" name="email" value="{{ user.email }}"> <button onclick="saveChanges()" style="margin: 5px; background-color: black; color: white; "  >Save Changes</button>
         </div>
     </div>
-    <form id="deleteAccountForm" method="POST" action="{% url 'delete_account' %}">
-        {% csrf_token %}
-        <button type="button" id="deleteAccountButton" style=" background-color: black; color: white; " >Delete Account</button>
-    </form>
+   
     <div class=" col-3 col-lg-4 mt-4  "> <div style="display: flex;" >
         </div> </div>
        </div>
@@ -93,6 +90,13 @@
         </div>
         <div style="display: flex; justify-content: center; " >
         <button id="showFormButton" class="my-2" style="background-color: black;"  >Change Your Details</button> 
+     
+    </div>
+    <div style="display: flex; justify-content: center; " >
+        <form id="deleteAccountForm" method="POST" action="{% url 'delete_account' %}">
+            {% csrf_token %}
+            <button type="button" id="deleteAccountButton" style=" background-color: black; color: white; width: 224px; "  >Delete Account</button>
+        </form> 
      
     </div>
     </div>
