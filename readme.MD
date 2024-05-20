@@ -265,7 +265,7 @@ The Sequence Diagram below represents the web store checkout process for the New
 | 24            | Store Owner | Modify existing product details              | Update prices, descriptions, and other details as needed |
 | 25            | Store Owner | Remove products from the store               | Discontinue sales of certain items                   |
 
-# Integration of Printful.com and Stripe APIs with Django for New World Disorder
+## Integration of Printful.com and Stripe APIs with Django for New World Disorder
 
 ## Using Printful API
 
