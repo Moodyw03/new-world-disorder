@@ -433,11 +433,3 @@ By the end of this documentation, you will have a detailed understanding of ever
 
 
 
-
-`eval "$(ssh-agent -s)"`
-
-
-`ssh-add ~/.ssh/id_rsa`
-
-
-`git push -u origin main`
