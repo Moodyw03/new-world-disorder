@@ -221,9 +221,9 @@ The Sequence Diagram below represents the web store checkout process for the New
 
 
 
-### User Stories
+## User Stories
 
-## Viewing and Navigation
+### Viewing and Navigation
 
 | User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
 |---------------|-------------|----------------------------------------------|------------------------------------------------------|
@@ -233,7 +233,7 @@ The Sequence Diagram below represents the web store checkout process for the New
 | 4             | Shopper     | Instantly spot promotions and discounts      | Gain benefits from discounts and special offers on my intended purchases |
 | 5             | Shopper     | Monitor my total shopping expenses anytime   | Control my expenditure                               |
 
-## Registration & User Accounts
+### Registration & User Accounts
 
 | User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
 |---------------|-------------|----------------------------------------------|------------------------------------------------------|
@@ -243,7 +243,7 @@ The Sequence Diagram below represents the web store checkout process for the New
 | 9             | Site User   | Get an email confirmation after registration | Confirm my registration was successful               |
 | 10            | Site User   | Customize my user profile                    | Access my order history, save payment information, and view order confirmations |
 
-## Sorting & Searching
+### Sorting & Searching
 
 | User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
 |---------------|-------------|----------------------------------------------|------------------------------------------------------|
@@ -253,7 +253,7 @@ The Sequence Diagram below represents the web store checkout process for the New
 | 14            | Shopper     | Search for a product by its name or description | Locate a particular product I wish to buy            |
 | 15            | Shopper     | Review my search results and their count     | Quickly determine the availability of a desired product |
 
-## Purchasing & Checkout
+### Purchasing & Checkout
 
 | User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
 |---------------|-------------|----------------------------------------------|------------------------------------------------------|
@@ -265,7 +265,7 @@ The Sequence Diagram below represents the web store checkout process for the New
 | 21            | Shopper     | See an order summary after checkout          | Ensure there are no errors in my order               |
 | 22            | Shopper     | Get an email confirmation post-purchase      | Have a record of what I've bought                    |
 
-## Admin & Store Management
+### Admin & Store Management
 
 | User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
 |---------------|-------------|----------------------------------------------|------------------------------------------------------|
