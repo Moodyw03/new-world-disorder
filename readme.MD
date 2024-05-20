@@ -330,85 +330,133 @@ This document lists and describes the dependencies used in the "www.newworlddiso
 
 ## Dependencies
 
-### Asynchronous Programming
-- **anyio==4.3.0**: Asynchronous networking and concurrency library that provides an API for structured concurrency.
-- **async-lru==2.0.4**: Simple LRU cache for asyncio-based applications.
-- **asgiref==3.8.1**: ASGI (Asynchronous Server Gateway Interface) reference library that provides utilities for developing ASGI applications.
+<details>
+  <summary>Asynchronous Programming</summary>
+  
+  - **anyio==4.3.0**: Asynchronous networking and concurrency library that provides an API for structured concurrency.
+  - **async-lru==2.0.4**: Simple LRU cache for asyncio-based applications.
+  - **asgiref==3.8.1**: ASGI (Asynchronous Server Gateway Interface) reference library that provides utilities for developing ASGI applications.
+</details>
 
-### Authentication and Security
-- **argon2-cffi==23.1.0**: Secure password hashing library using the Argon2 algorithm.
-- **argon2-cffi-bindings==21.2.0**: Low-level bindings for the Argon2 password hashing algorithm.
-- **cryptography==42.0.5**: Cryptographic recipes and primitives to ensure the secure transmission of data.
-- **cffi==1.16.0**: Foreign Function Interface for Python calling C code.
+<details>
+  <summary>Authentication and Security</summary>
+  
+  - **argon2-cffi==23.1.0**: Secure password hashing library using the Argon2 algorithm.
+  - **argon2-cffi-bindings==21.2.0**: Low-level bindings for the Argon2 password hashing algorithm.
+  - **cryptography==42.0.5**: Cryptographic recipes and primitives to ensure the secure transmission of data.
+  - **cffi==1.16.0**: Foreign Function Interface for Python calling C code.
+</details>
 
-### Web Development
-- **Django==5.0.3**: High-level Python web framework that encourages rapid development and clean, pragmatic design.
-- **djangorestframework==3.15.1**: Powerful and flexible toolkit for building Web APIs in Django.
+<details>
+  <summary>Web Development</summary>
+  
+  - **Django==5.0.3**: High-level Python web framework that encourages rapid development and clean, pragmatic design.
+  - **djangorestframework==3.15.1**: Powerful and flexible toolkit for building Web APIs in Django.
+</details>
 
-### API Clients
-- **google-api-core==2.18.0**: Core library for Google API clients.
-- **google-api-python-client==2.123.0**: Client library for accessing Google APIs.
-- **google-auth==2.29.0**: Authentication library for Google APIs.
-- **stripe==8.9.0**: Python library for integrating Stripe payment processing services.
+<details>
+  <summary>API Clients</summary>
+  
+  - **google-api-core==2.18.0**: Core library for Google API clients.
+  - **google-api-python-client==2.123.0**: Client library for accessing Google APIs.
+  - **google-auth==2.29.0**: Authentication library for Google APIs.
+  - **stripe==8.9.0**: Python library for integrating Stripe payment processing services.
+</details>
 
-### Data Handling and Validation
-- **attrs==23.2.0**: Attributes package for Python for creating classes without boilerplate code.
-- **jsonschema==4.21.1**: JSON schema validation library.
-- **jsonschema-specifications==2023.12.1**: Specifications for the JSON schema.
-- **fastjsonschema==2.19.1**: Fast JSON schema validator for Python.
+<details>
+  <summary>Data Handling and Validation</summary>
+  
+  - **attrs==23.2.0**: Attributes package for Python for creating classes without boilerplate code.
+  - **jsonschema==4.21.1**: JSON schema validation library.
+  - **jsonschema-specifications==2023.12.1**: Specifications for the JSON schema.
+  - **fastjsonschema==2.19.1**: Fast JSON schema validator for Python.
+</details>
 
-### Database and ORM
-- **sqlparse==0.4.4**: Non-validating SQL parser for Python.
+<details>
+  <summary>Database and ORM</summary>
+  
+  - **sqlparse==0.4.4**: Non-validating SQL parser for Python.
+</details>
 
-### Testing and Debugging
-- **debugpy==1.8.1**: Debugging library for Python that integrates with Visual Studio Code.
-- **pytest==7.1.2**: Testing framework for Python.
-- **pytest-django==4.5.2**: Plugin for pytest that provides a set of useful tools for testing Django applications.
+<details>
+  <summary>Testing and Debugging</summary>
+  
+  - **debugpy==1.8.1**: Debugging library for Python that integrates with Visual Studio Code.
+  - **pytest==7.1.2**: Testing framework for Python.
+  - **pytest-django==4.5.2**: Plugin for pytest that provides a set of useful tools for testing Django applications.
+</details>
 
-### Networking
-- **requests==2.31.0**: Simple, yet elegant HTTP library for Python.
-- **urllib3==1.26.18**: Powerful, user-friendly HTTP client for Python.
+<details>
+  <summary>Networking</summary>
+  
+  - **requests==2.31.0**: Simple, yet elegant HTTP library for Python.
+  - **urllib3==1.26.18**: Powerful, user-friendly HTTP client for Python.
+</details>
 
-### Caching
-- **CacheControl==0.14.0**: HTTP caching library for requests.
-- **cachetools==5.3.3**: Extensible memoizing collections and decorators.
+<details>
+  <summary>Caching</summary>
+  
+  - **CacheControl==0.14.0**: HTTP caching library for requests.
+  - **cachetools==5.3.3**: Extensible memoizing collections and decorators.
+</details>
 
-### HTML and CSS
-- **beautifulsoup4==4.12.3**: Library for parsing HTML and XML documents.
-- **bleach==6.1.0**: HTML sanitizing library.
-- **tinycss2==1.2.1**: Low-level CSS parser library for Python.
+<details>
+  <summary>HTML and CSS</summary>
+  
+  - **beautifulsoup4==4.12.3**: Library for parsing HTML and XML documents.
+  - **bleach==6.1.0**: HTML sanitizing library.
+  - **tinycss2==1.2.1**: Low-level CSS parser library for Python.
+</details>
 
-### Date and Time
-- **arrow==1.3.0**: Better dates and times for Python.
-- **python-dateutil==2.9.0.post0**: Extensions to the standard Python datetime module.
-- **pytz==2024.1**: World timezone definitions, modern and historical.
+<details>
+  <summary>Date and Time</summary>
+  
+  - **arrow==1.3.0**: Better dates and times for Python.
+  - **python-dateutil==2.9.0.post0**: Extensions to the standard Python datetime module.
+  - **pytz==2024.1**: World timezone definitions, modern and historical.
+</details>
 
-### Logging and Monitoring
-- **prometheus_client==0.20.0**: Prometheus instrumentation library for Python applications.
-- **python-json-logger==2.0.7**: JSON log formatter for Python's logging library.
+<details>
+  <summary>Logging and Monitoring</summary>
+  
+  - **prometheus_client==0.20.0**: Prometheus instrumentation library for Python applications.
+  - **python-json-logger==2.0.7**: JSON log formatter for Python's logging library.
+</details>
 
-### Email
-- **httplib2==0.22.0**: Comprehensive HTTP client library.
-- **smtp**: Library for sending emails using Simple Mail Transfer Protocol.
+<details>
+  <summary>Email</summary>
+  
+  - **httplib2==0.22.0**: Comprehensive HTTP client library.
+  - **smtp**: Library for sending emails using Simple Mail Transfer Protocol.
+</details>
 
-### Widgets and UI
-- **ipywidgets==8.1.2**: Interactive HTML widgets for Jupyter notebooks and the IPython kernel.
-- **qtconsole==5.5.1**: Jupyter Qt console.
-- **widgetsnbextension==4.0.10**: Jupyter notebook extension for ipywidgets.
+<details>
+  <summary>Widgets and UI</summary>
+  
+  - **ipywidgets==8.1.2**: Interactive HTML widgets for Jupyter notebooks and the IPython kernel.
+  - **qtconsole==5.5.1**: Jupyter Qt console.
+  - **widgetsnbextension==4.0.10**: Jupyter notebook extension for ipywidgets.
+</details>
 
-### Miscellaneous
-- **Jinja2==3.1.3**: Template engine for Python.
-- **MarkupSafe==2.1.5**: Implements a XML/HTML/XHTML Markup safe string for Python.
+<details>
+  <summary>Miscellaneous</summary>
+  
+  - **Jinja2==3.1.3**: Template engine for Python.
+  - **MarkupSafe==2.1.5**: Implements a XML/HTML/XHTML Markup safe string for Python.
+</details>
 
-### Additional Libraries
-- **six==1.16.0**: Python 2 and 3 compatibility utilities.
-- **soupsieve==2.5**: CSS selector library designed to be used with BeautifulSoup.
+<details>
+  <summary>Additional Libraries</summary>
+  
+  - **six==1.16.0**: Python 2 and 3 compatibility utilities.
+  - **soupsieve==2.5**: CSS selector library designed to be used with BeautifulSoup.
+</details>
 
 ## Installation
 
 To install the dependencies listed above, you can use the `requirements.txt` file. Run the following command:
 
-
+```bash
 pip install -r requirements.txt
 
 
