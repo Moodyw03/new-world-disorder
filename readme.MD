@@ -408,7 +408,7 @@ This document lists and describes the dependencies used in the "www.newworlddiso
 
 To install the dependencies listed above, you can use the `requirements.txt` file. Run the following command:
 
-```bash
+bash
 pip install -r requirements.txt
 
 
