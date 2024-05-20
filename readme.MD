@@ -332,11 +332,11 @@ Here's a general approach to implementing these APIs within a Django framework:
 ### Deployment
 - Deploy the application after successful testing.
 
-# Project Dependencies
+## Project Dependencies
 
 This document lists and describes the dependencies used in the "www.newworlddisorder.shop" project. These dependencies are defined in the `requirements.txt` file and are essential for the project's functionality, including the integration with Printful API for order fulfillment and Stripe for payment processing.
 
-## Dependencies
+### Dependencies
 
 <details>
   <summary>Asynchronous Programming</summary>
