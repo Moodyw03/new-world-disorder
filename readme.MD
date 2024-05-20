@@ -108,8 +108,7 @@ Brutalism in web design is characterized by its raw, unadorned approach that foc
 2. **Simplicity and Directness**: The straightforward appearance of 'Courier New' aligns with the brutalist ethos of prioritizing content and user interaction over decorative elements. It communicates information clearly and directly, which is the core intention of brutalist design.
 3. **Cohesive Aesthetic**: By using 'Courier New', the website maintains a cohesive aesthetic that resonates with the brutalist philosophy. The font's mechanical and functional look integrates seamlessly with the overall design, enhancing the user experience by maintaining a consistent visual language.
 
-### Conclusion
-The decision to use 'Courier New', Courier, monospace in "www.newworlddisorder.shop" underscores a commitment to the principles of brutalist design. Its monospaced, legible, and retro characteristics contribute to a clear, functional, and visually striking website. This choice not only enhances readability and user experience but also firmly establishes the site’s aesthetic identity within the brutalist design paradigm.
+The decision to use 'Courier New', Courier, monospace in "newworlddisorder.shop" underscores a commitment to the principles of brutalist design. Its monospaced, legible, and retro characteristics contribute to a clear, functional, and visually striking website. This choice not only enhances readability and user experience but also firmly establishes the site’s aesthetic identity within the brutalist design paradigm.
 ### Images and Post Content
 
 Images used on the site reflect the unique nature of each product, detailed to show the quality and design of the t-shirts. Post content is curated to resonate with our target audience, providing them with engaging stories behind each collection.
