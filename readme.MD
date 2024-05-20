@@ -117,6 +117,14 @@ Images used on the site reflect the unique nature of each product, detailed to s
 
 Wireframes for the site were developed to ensure a user-friendly experience, allowing easy navigation and emphasizing the uniqueness of our products.
 
+<details>
+  <summary>Click to view the wireframe</summary>
+
+  ![Wireframe](https://github.com/Moodyw03/new-world-disorder/blob/main/static/nwd%20wireframe.png?raw=true)
+
+</details>
+
+
 ### Flowchart
 
 The flowchart illustrates the process flow for the New World Disorder (NWD) e-commerce application. It provides a visual representation of the steps involved in various operations within the application. Here is the flowchart from my planning:
