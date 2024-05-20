@@ -93,7 +93,7 @@ By using this thoughtful color scheme and gradient background, we ensure that th
 
 ### Typography
 
-In the design of "www.newworlddisorder.shop," the choice of font plays a crucial role in reinforcing the overall aesthetic and user experience. The selected font, 'Courier New', Courier, monospace, aligns perfectly with the brutalist design style adopted for the project. Here’s why this choice is effective:
+In the design of "newworlddisorder.shop," the choice of font plays a crucial role in reinforcing the overall aesthetic and user experience. The selected font, 'Courier New', Courier, monospace, aligns perfectly with the brutalist design style adopted for the project. Here’s why this choice is effective:
 
 #### Consistency with Brutalist Design
 Brutalism in web design is characterized by its raw, unadorned approach that focuses on functionality over form. This style often utilizes bold typography, minimalist layouts, and a stark, utilitarian appearance. 'Courier New', with its monospaced, typewriter-like appearance, embodies these principles by providing a straightforward, no-nonsense visual impact.
