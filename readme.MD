@@ -59,7 +59,7 @@ The design choices, including the use of playful dinosaur graphics and a pastel 
 
  
 
-## Project Overview
+### Project Overview
 **Scope for Django E-Commerce Web Application "New World Disorder Brand"**
 
 The primary goal of this project is to develop an advanced e-commerce web application using Django, offering a seamless shopping experience for customers purchasing t-shirts. The website will leverage the Printful API for product fulfillment and Stripe for payment processing. Additionally, the site will feature a blog for customer engagement and a newsletter signup form for marketing purposes.
@@ -159,7 +159,7 @@ The Sequence Diagram below represents the web store checkout process for the New
 </details>
 
 
-## Features
+### Features
 
 ### User Accounts
 - **Account Creation**: Users can create new accounts using email and password.
@@ -221,7 +221,7 @@ The Sequence Diagram below represents the web store checkout process for the New
 
 
 
-# User Stories
+### User Stories
 
 ## Viewing and Navigation
 
