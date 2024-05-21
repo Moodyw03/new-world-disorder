@@ -63,14 +63,14 @@ class TestUserViews(TestCase):
 
 ```
 
-##Test: User Login
+## Test: User Login
 This test checks if a user can successfully log in.
 ```
     def test_user_login(self):
         response = self.client.post(reverse('login'), {'username_or_email': 'testuser', 'password': 'password'})
         self.assertEqual(response.status_code, 302)  # Check if login is successful (redirects)
 ```
-##Test: User Logout
+## Test: User Logout
 This test checks if a user can successfully log out.
 ```
     def test_user_logout(self):
@@ -79,7 +79,7 @@ This test checks if a user can successfully log out.
         self.assertEqual(response.status_code, 302)  # Check if logout is successful (redirects)
 ```
 
-##Test: User Registration
+## Test: User Registration
 This test checks if a new user can successfully register
 ```
     def test_user_register(self):
@@ -87,7 +87,7 @@ This test checks if a new user can successfully register
         self.assertEqual(response.status_code, 302)  # Check if registration is successful (redirects)
 ```
 
-##Test: User Profile View
+## Test: User Profile View
 This test checks if a logged-in user can view their profile.
 ```
     def test_user_profile(self):
@@ -96,7 +96,7 @@ This test checks if a logged-in user can view their profile.
         self.assertEqual(response.status_code, 200)  # Check if profile page loads successfully
 ```
 
-##Test: Update Profile
+## Test: Update Profile
 ```
     def test_update_profile(self):
         self.client.login(username='testuser', password='password')
