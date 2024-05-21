@@ -107,5 +107,23 @@ This test checks if a logged-in user can view their profile.
         updated_user = User.objects.get(username='updateduser')
         self.assertEqual(updated_user.email, 'updated@example.com')
 ```
+# Stripe Payment Integration Tests
 
+This documentation provides an overview of the Stripe payment integration tests implemented in our application. The tests ensure that the payment process is correctly initialized and handled.
+
+## Overview
+
+The following JavaScript code integrates Stripe's payment elements into the application. It initializes the payment process, handles the submission of payment details, and manages the confirmation of payments.
+
+![JavaScript Code for Stripe Integration](https://github.com/Moodyw03/new-world-disorder/blob/main/static/Screenshot%202024-05-21%20at%2021.44.25.png?raw=true)
+
+## Code Explanation
+
+### Initialization
+
+The Stripe client is initialized with the publishable API key.
+
+```javascript
+var stripe = Stripe('pk_test_51IoWFQx8R99qnN14AgMtxKaSJeUEt01t4bKVWNKaevr8zbanpBfxvWc');
+```
 
