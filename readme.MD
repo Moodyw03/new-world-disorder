@@ -327,33 +327,7 @@ Here's a general approach to implementing these APIs within a Django framework:
 - Ensure all transactions are secure and comply with web security standards.
 
 ### Testing
-# Python and Django (PEP 8) Compliance
-
-I used the Code Institute PEP8 Validator to check that my Python code is PEP8 compliant. I validated any files that were either modified or created by me. Below is a table of the validated code, which shows the file validated, a screenshot, and a description of any warnings:
-
-## Validated Code
-
-<details>
-  <summary>Click to view the screenshot of settings.py validation</summary>
-
-  ![settings.py validation](https://github.com/Moodyw03/new-world-disorder/blob/main/static/settings%20test%20py.png?raw=true)
-
-</details>
-
-<details>
-  <summary>Click to view the screenshot of tests.py validation</summary>
-
-  ![tests.py validation](https://github.com/Moodyw03/new-world-disorder/blob/main/static/test%20tests%20py.png?raw=true)
-
-</details>
-
-| File          | Screenshot                                                                                             | Description of Warnings            |
-|---------------|--------------------------------------------------------------------------------------------------------|------------------------------------|
-| settings.py   | [View Screenshot](https://github.com/Moodyw03/new-world-disorder/blob/main/static/settings%20test%20py.png?raw=true) | No warnings                        |
-| tests.py      | [View Screenshot](https://github.com/Moodyw03/new-world-disorder/blob/main/static/test%20tests%20py.png?raw=true)   | No warnings                        |
-
-This documentation provides a clear view of the validation process and any issues that were identified and addressed during development to ensure the code adheres to PEP 8 standards.
-
+For more detailed testing information on "New World Disorder", please refer to the [testing documentation](https://github.com/Moodyw03/new-world-disorder/blob/main/Tests.md).
 
 ### Deployment
 - Deploy the application after successful testing.
