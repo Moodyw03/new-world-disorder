@@ -157,10 +157,11 @@ I used the Code Institute PEP8 Validator to check that my Python code is PEP8 co
 
 | File          | Screenshot                                                                                             | Description of Warnings            |
 |---------------|--------------------------------------------------------------------------------------------------------|------------------------------------|
-| settings.py   | [View Screenshot](https://github.com/Moodyw03/new-world-disorder/blob/main/static/settings%20test%20py.png?raw=true) | No warnings                        |
-| tests.py      | [View Screenshot](https://github.com/Moodyw03/new-world-disorder/blob/main/static/test%20tests%20py.png?raw=true)   | No warnings                        |
+| settings.py   | ![View Screenshot](https://github.com/Moodyw03/new-world-disorder/blob/main/static/settings%20test%20py.png?raw=true) | No warnings                        |
+| tests.py      | ![View Screenshot](https://github.com/Moodyw03/new-world-disorder/blob/main/static/test%20tests%20py.png?raw=true)   | No warnings                        |
 
 This documentation provides a clear view of the validation process and any issues that were identified and addressed during development to ensure the code adheres to PEP 8 standards.
+
 
 
 ### Initialization
