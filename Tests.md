@@ -163,12 +163,3 @@ I used the Code Institute PEP8 Validator to check that my Python code is PEP8 co
 This documentation provides a clear view of the validation process and any issues that were identified and addressed during development to ensure the code adheres to PEP 8 standards.
 
 
-
-### Initialization
-
-The Stripe client is initialized with the publishable API key.
-
-```javascript
-var stripe = Stripe('pk_test_51IoWFQx8R99qnN14AgMtxKaSJeUEt01t4bKVWNKaevr8zbanpBfxvWc');
-```
-
