@@ -70,7 +70,7 @@ Color Scheme and Background Design
 
 ![NWD Color Scheme](https://github.com/Moodyw03/new-world-disorder/blob/main/static/nwd%20color.png?raw=true)
 
-For the New World Disorder (NWD) website, we've chosen a carefully curated color scheme that aligns with the site's brutalist aesthetic while ensuring it doesn't interfere with the display of our t-shirts. The color palette features a gradient background that adds a dynamic and engaging element to the site. Here’s a detailed look at the selected colors and their purpose:
+For the New World Disorder (NWD) website, i've chosen a carefully curated color scheme that aligns with the site's brutalist aesthetic while ensuring it doesn't interfere with the display of our t-shirts. The color palette features a gradient background that adds a dynamic and engaging element to the site. Here’s a detailed look at the selected colors and their purpose:
 
 Color Palette:
 E1DFF4: A soft, muted lavender that serves as the primary background color.
@@ -187,11 +187,6 @@ The Sequence Diagram below represents the web store checkout process for the New
 - **Review Creation**: Users can leave reviews for purchased products.
 - **Review Update/Delete**: Users can edit or delete their reviews.
 
-### Blog
-- **Blog Post Creation**: Staff members can create new blog posts with tips and advice for customers.
-- **Blog Post Update/Delete**: Staff members can edit or delete blog posts.
-- **Commenting**: Users can comment on blog posts to engage in discussions.
-
 ### Newsletter Signup
 - **Email Collection**: Users can sign up for newsletters to receive updates and promotional content.
 - **Marketing Integration**: Collected emails will be used for marketing campaigns.
@@ -203,7 +198,7 @@ The Sequence Diagram below represents the web store checkout process for the New
 ## Additional Project Dimensions
 
 ### Design Innovation
-- **Unique Designs**: Collaboration with diverse artists to create inspiring t-shirt designs.
+- **Unique Designs**: creating new inspiring t-shirt designs.
 - **User Experience**: Focus on creating a visually appealing and user-friendly interface.
 
 ### Quality Manufacturing
@@ -243,16 +238,6 @@ The Sequence Diagram below represents the web store checkout process for the New
 | 9             | Site User   | Get an email confirmation after registration | Confirm my registration was successful               |
 | 10            | Site User   | Customize my user profile                    | Access my order history, save payment information, and view order confirmations |
 
-### Sorting & Searching
-
-| User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
-|---------------|-------------|----------------------------------------------|------------------------------------------------------|
-| 11            | Shopper     | Organize the list of available products      | Identify top-rated, best-priced or sorted by category products |
-| 12            | Shopper     | Organize products within a specific category | Locate the best-priced or top-rated products or arrange them by name within the category |
-| 13            | Shopper     | Categorize multiple product types simultaneously | Discover the best-priced or top-rated items across major categories like clothing or homeware |
-| 14            | Shopper     | Search for a product by its name or description | Locate a particular product I wish to buy            |
-| 15            | Shopper     | Review my search results and their count     | Quickly determine the availability of a desired product |
-
 ### Purchasing & Checkout
 
 | User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
@@ -263,14 +248,14 @@ The Sequence Diagram below represents the web store checkout process for the New
 | 19            | Shopper     | Input my payment details easily              | Complete my purchase without difficulties            |
 | 20            | Shopper     | Trust the security of my personal and payment information | Shop with confidence knowing my data is secure     |
 | 21            | Shopper     | See an order summary after checkout          | Ensure there are no errors in my order               |
-| 22            | Shopper     | Get an email confirmation post-purchase      | Have a record of what I've bought                    |
+
 
 ### Admin & Store Management
 
 | User Story ID | As a / An   | I wish to...                                 | So that I can...                                     |
 |---------------|-------------|----------------------------------------------|------------------------------------------------------|
 | 23            | Store Owner | Add new products to my store                 | Expand my store's inventory                          |
-| 24            | Store Owner | Modify existing product details              | Update prices, descriptions, and other details as needed |
+| 24            | Store Owner | Modify existing product details thru printful| Update prices, descriptions, and other details as needed |
 | 25            | Store Owner | Remove products from the store               | Discontinue sales of certain items                   |
 
 ## Integration of Printful.com and Stripe APIs with Django for New World Disorder
@@ -328,9 +313,6 @@ Here's a general approach to implementing these APIs within a Django framework:
 
 ## Testing
 For more detailed testing information on "New World Disorder", please refer to the [testing documentation](https://github.com/Moodyw03/new-world-disorder/blob/main/Tests.md).
-
-### Deployment
-- Deploy the application after successful testing.
 
 ## Project Dependencies
 
@@ -534,6 +516,7 @@ By forking the GitHub Repository, we make a copy of the original repository on o
 - **PEP8**: Used for Python code validation to ensure adherence to coding standards.
 - **W3C HTML Validator**: Used for HTML code validation.
 - **W3C CSS Validator**: Used for CSS code validation.
+- **Jshint**: Used for javascript code validation.
 
 These components together provide a comprehensive stack for developing and deploying the "New World Disorder" web application, ensuring robust functionality, maintainability, and scalability.
 
