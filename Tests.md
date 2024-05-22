@@ -41,9 +41,6 @@ These performance tests highlight the strengths and areas for improvement for th
 # CSS Validation Test
 
 This section provides an overview of the CSS validation test conducted for the "New World Disorder" website. The test was carried out using the W3C CSS Validation Service to ensure that the website's stylesheets conform to the standards set by the World Wide Web Consortium (W3C).
-
-## CSS Validation Test Results
-
 <details>
   <summary>Click to view the CSS validation test results image</summary>
 
