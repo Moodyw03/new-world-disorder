@@ -38,6 +38,27 @@ This section provides an overview of the performance tests conducted for the "Ne
 ### Conclusion
 These performance tests highlight the strengths and areas for improvement for the "New World Disorder" website. The high scores in accessibility and SEO are particularly encouraging, indicating a user-friendly and search-engine-friendly site. Focus on optimizing best practices and performance further, especially for the home page, can enhance the overall user experience.
 
+# CSS Validation Test
+
+This section provides an overview of the CSS validation test conducted for the "New World Disorder" website. The test was carried out using the W3C CSS Validation Service to ensure that the website's stylesheets conform to the standards set by the World Wide Web Consortium (W3C).
+
+## CSS Validation Test Results
+
+<details>
+  <summary>Click to view the CSS validation test results image</summary>
+
+  ![CSS Validation Test Results](https://github.com/Moodyw03/new-world-disorder/blob/main/static/Screenshot%202024-05-22%20at%2011.21.40.png?raw=true)
+
+</details>
+
+### Observations
+1. **Standards Compliance**: The validation results indicate that the website's CSS adheres to the W3C standards, ensuring cross-browser compatibility and maintainability.
+2. **Errors and Warnings**: The test highlights any errors or warnings that need to be addressed to improve the overall quality and robustness of the stylesheets.
+
+### Conclusion
+The CSS validation test confirms that the "New World Disorder" website's stylesheets are well-formed and comply with industry standards. Addressing any highlighted errors or warnings will further enhance the website's presentation and functionality across different browsers and devices.
+
+
 
 # User View Tests
 
