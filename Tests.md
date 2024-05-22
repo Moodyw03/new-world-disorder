@@ -141,19 +141,7 @@ I used the Code Institute PEP8 Validator to check that my Python code is PEP8 co
 
 ## Validated Code
 
-<details>
-  <summary>Click to view the screenshot of settings.py validation</summary>
 
-  ![settings.py validation](https://github.com/Moodyw03/new-world-disorder/blob/main/static/settings%20test%20py.png?raw=true)
-
-</details>
-
-<details>
-  <summary>Click to view the screenshot of tests.py validation</summary>
-
-  ![tests.py validation](https://github.com/Moodyw03/new-world-disorder/blob/main/static/test%20tests%20py.png?raw=true)
-
-</details>
 
 | File          | Screenshot                                                                                             | Description of Warnings            |
 |---------------|--------------------------------------------------------------------------------------------------------|------------------------------------|
