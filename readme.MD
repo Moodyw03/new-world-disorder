@@ -496,6 +496,55 @@ By forking the GitHub Repository, we make a copy of the original repository on o
 2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
+# Technologies, Libraries, and Frameworks Used in "New World Disorder"
+
+## Programming Languages
+- **Python**: The main programming language used for back-end development.
+- **JavaScript**: Used for client-side interactivity and functionality.
+- **HTML**: Used for structuring the web pages.
+- **CSS**: Used for styling the web pages.
+
+## Frameworks and Libraries
+- **Django**: A high-level Python web framework used to build the back-end of the application.
+- **Django REST Framework**: Used to build APIs (though not explicitly mentioned,  used with Django).
+- **Bootstrap**: front-end framework used for responsive design and pre-built UI components (evident from the CSS files like `checkout.css`, `login.css`, etc.).
+
+## Front-End Assets
+- **Static Files**: Includes various CSS files (`cart.css`, `checkout.css`, `navbar.css`, `login.css`, `order.css`, `product.css`, `register.css`, `style.css`) and JavaScript file (`checkout.js`).
+- **Images**: Contains images used in the project (e.g., `logo.png`, `nwd color.png`, `nwdt.png`).
+
+## Hosting and Database
+- **AWS**: used for online static file storage (common practice in web applications).
+- **PythonAnywhere**:  platform used for hosting the back-end of the application.
+- **PostgreSQL**: A relational database management system (commonly used with Django).
+- **ElephantSQL**: A Postgres database as a service, used for database management.
+- **SQLite**: as `db.sqlite3`, used for local development database.
+
+## Tools and Web Applications
+- **Stripe**: For online secure payments.
+- **Git**: Version control system for tracking changes in the codebase.
+- **GitHub**: Used for code repository hosting.
+- **Gitpod**: A cloud-based IDE for development.
+- **Figma**: Used for creating wireframes.
+- **Eraser**: Used to design the database diagram.
+
+## Configuration and Settings
+- **firebase_config.json**: use of Firebase for some functionality (e.g., authentication, real-time database).
+- **settings.py**: Configuration file for Django settings.
+
+
+## Code Validation
+- **PEP8**: Used for Python code validation to ensure adherence to coding standards.
+- **W3C HTML Validator**: Used for HTML code validation.
+- **W3C CSS Validator**: Used for CSS code validation.
+
+These components together provide a comprehensive stack for developing and deploying the "New World Disorder" web application, ensuring robust functionality, maintainability, and scalability.
+
+
+## Testing
+
+For more detailed testing information on Moodloop, please refer to the [testing documentation](https://github.com/Moodyw03/moodloop-final/blob/main/TESTING.md).
+
 
 
 ## Conclusion
