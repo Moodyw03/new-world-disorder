@@ -549,6 +549,24 @@ The scope of this project covers the development of a comprehensive e-commerce p
 By the end of this documentation, you will have a detailed understanding of every aspect of New World Disorder, from inception to delivery, and how we maintain our commitment to exclusivity and quality in every piece we create.
 By integrating Django with Printful and Stripe APIs, "New World Disorder" can automate significant parts of its sales and fulfillment processes, allowing the business to focus on design and marketing.
 
+Credits
+All Designs, T-shirts included were created by the developer.
+
+
+Acknowledgements
+Gratitude to fellow Code Institute students and alumni for their assistance.
+I'd like to extend my sincere gratitude to Manu Perez and Pasquale for their invaluable support and mentorship at Bristol College.
+
+Many thanks to the tutors and staff at the Code Institute for their unwavering support.
+A special thanks to the Code Institute London Community for their continuous encouragement and technical insights.
+
+Much gratitude to my family for their patience and understanding with me.
+
+Gabriel Pereira, 2024.
+
+Content
+All content was written by the developer.
+
 
 
 
