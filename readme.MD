@@ -509,16 +509,15 @@ By forking the GitHub Repository, we make a copy of the original repository on o
 - **Django REST Framework**: Used to build APIs (though not explicitly mentioned,  used with Django).
 - **Bootstrap**: front-end framework used for responsive design and pre-built UI components (evident from the CSS files like `checkout.css`, `login.css`, etc.).
 
+
 ## Front-End Assets
 - **Static Files**: Includes various CSS files (`cart.css`, `checkout.css`, `navbar.css`, `login.css`, `order.css`, `product.css`, `register.css`, `style.css`) and JavaScript file (`checkout.js`).
 - **Images**: Contains images used in the project (e.g., `logo.png`, `nwd color.png`, `nwdt.png`).
 
 ## Hosting and Database
-- **AWS**: used for online static file storage (common practice in web applications).
 - **PythonAnywhere**:  platform used for hosting the back-end of the application.
-- **PostgreSQL**: A relational database management system (commonly used with Django).
-- **ElephantSQL**: A Postgres database as a service, used for database management.
 - **SQLite**: as `db.sqlite3`, used for local development database.
+
 
 ## Tools and Web Applications
 - **Stripe**: For online secure payments.
