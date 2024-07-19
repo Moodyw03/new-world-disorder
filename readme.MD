@@ -1,6 +1,6 @@
 <h1 align="center">New World Disorder</h1>
 
-[View the live project here.] (https://huraira.pythonanywhere.com)
+[View the live project here.](https://huraira.pythonanywhere.com)
 
 # Introduction
 
